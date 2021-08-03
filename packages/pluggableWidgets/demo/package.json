@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "demo-web",
   "widgetName": "Demo",
   "version": "1.0.0",
   "description": "My widget description",
@@ -13,7 +13,7 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
-  "packagePath": "mendix",
+  "packagePath": "com.mendix.widget.ant.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",

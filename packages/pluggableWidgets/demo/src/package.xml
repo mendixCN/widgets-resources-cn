@@ -5,7 +5,7 @@
             <widgetFile path="Demo.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/demo"/>
+            <file path="com/mendix/widget/ant/demo"/>
         </files>
     </clientModule>
 </package>
