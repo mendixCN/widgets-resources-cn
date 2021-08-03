@@ -1,0 +1,19 @@
+{
+  "name": "cn-widget-resource",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "scripts": {
+    "i": "cnpm i",
+    "new": "yo @mendix/widget Demo",
+    "bootstrap": "lerna bootstrap"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@mendix/generator-widget": "^9.0.2",
+    "lerna": "^4.0.0",
+    "yo": "^4.3.0"
+  }
+}
