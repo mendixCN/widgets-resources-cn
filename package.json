@@ -5,8 +5,9 @@
   "main": "index.js",
   "dependencies": {},
   "scripts": {
-    "i": "cnpm i",
+    "i": "npm i",
     "new": "yo @mendix/widget Demo",
+    "release:marketplace": "lerna run release:marketplace",
     "bootstrap": "lerna bootstrap"
   },
   "author": "",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@mendix/generator-widget": "^9.0.2",
     "lerna": "^4.0.0",
+    "node-fetch": "^2.6.1",
     "yo": "^4.3.0"
   }
 }

@@ -26,7 +26,7 @@ export class BadgeSample extends Component<BadgeSampleProps> {
                 onClick={this.props.onClickAction}
                 ref={this.props.getRef}
                 style={this.props.style}
-            >
+            >12
                 {this.props.value || this.props.defaultValue}
             </span>
         );

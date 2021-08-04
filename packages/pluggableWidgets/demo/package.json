@@ -8,6 +8,10 @@
   "engines": {
     "node": ">=12"
   },
+  "marketplace": {
+    "minimumMXVersion": "9.0.5",
+    "marketplaceId": 117895
+  },
   "config": {
     "projectPath": "./tests/testProject/",
     "mendixHost": "http://localhost:8080",
@@ -24,7 +28,8 @@
     "test:e2e": "pluggable-widgets-tools test:e2e --url \"https://badge.mxapps.io\"",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e --debug",
     "prerelease": "npm run lint",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "license": "Apache-2.0",
   "devDependencies": {
