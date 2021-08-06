@@ -6,7 +6,7 @@
   "dependencies": {},
   "scripts": {
     "i": "npm i",
-    "new": "yo @mendix/widget Demo",
+    "new": "yo @mendix/widget packages/pluggableWidgets/Transfer",
     "release:marketplace": "lerna run release:marketplace",
     "bootstrap": "lerna bootstrap"
   },
