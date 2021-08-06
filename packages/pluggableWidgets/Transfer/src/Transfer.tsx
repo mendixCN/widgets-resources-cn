@@ -8,6 +8,6 @@ import "./ui/Transfer.css";
 
 export default class Transfer extends Component<TransferContainerProps> {
     render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText + "x2" : "World"} />;
+        return <HelloWorldSample isDisabled={this.props.isDisable} />;
     }
 }

@@ -12,6 +12,10 @@
                 <caption>Default value</caption>
                 <description>Sample text input</description>
             </property>
+            <property key="isDisable" type="boolean" defaultValue="false">
+              <caption>是否禁用</caption>
+              <description></description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>

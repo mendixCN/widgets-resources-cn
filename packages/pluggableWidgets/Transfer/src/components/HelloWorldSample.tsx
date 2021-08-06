@@ -3,7 +3,7 @@ import { Transfer } from "antd";
 
 
 export interface HelloWorldSampleProps {
-    sampleText?: string;
+    isDisabled?: boolean;
 }
 
 
@@ -44,6 +44,7 @@ export const HelloWorldSample = (props: HelloWorldSampleProps): ReactElement | n
     return (
         <Transfer
             dataSource={mockData}
+            disabled={props.isDisabled}
             titles={["Source", "Target"]}
             targetKeys={targetKeys}
             selectedKeys={selectedKeys}

@@ -11,10 +11,12 @@ export interface TransferContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     sampleText: string;
+    isDisable: boolean;
 }
 
 export interface TransferPreviewProps {
     class: string;
     style: string;
     sampleText: string;
+    isDisable: boolean;
 }
