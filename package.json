@@ -9,7 +9,7 @@
     "clean": "lerna clean",
     "start:transfer": "lerna run start --scope 'transfer'",
     "postinstall": "lerna bootstrap --hoist --strict",
-    "new": "yo @mendix/widget packages/pluggableWidgets/Transfer",
+    "new": "yo @mendix/widget packages/pluggableWidgets/Pie",
     "release:marketplace": "lerna run release:marketplace"
   },
   "author": "",
