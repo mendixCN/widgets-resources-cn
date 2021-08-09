@@ -2,5 +2,12 @@
 Place your custom CSS here
 */
 .widget-hello-world {
+}
 
+.widget-hello-world .ant-checkbox {
+    position: relative;
+}
+
+.widget-hello-world .ant-checkbox-inner {
+    position: absolute;
 }

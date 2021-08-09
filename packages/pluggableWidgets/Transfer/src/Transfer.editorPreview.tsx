@@ -1,12 +1,12 @@
 import { Component, ReactNode, createElement } from "react";
-import { HelloWorldSample } from "./components/HelloWorldSample";
+import { TransferContainer } from "./components/TransferContainer";
 import { TransferPreviewProps } from "../typings/TransferProps";
 
 declare function require(name: string): string;
 
 export class preview extends Component<TransferPreviewProps> {
     render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText} />;
+        return <TransferContainer targetKeys={undefined} onChange={() => { }} isShowSearch={true} data={[]} leftTitle={'Source'} rightTitle={'Target'} />;
     }
 }
 

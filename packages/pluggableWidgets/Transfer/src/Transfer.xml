@@ -1,20 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.transfer.Transfer" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="mendix.transfer.Transfer" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Transfer</name>
     <description>My widget description</description>
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
-            </property>
             <property key="isDisable" type="boolean" defaultValue="false">
-              <caption>是否禁用</caption>
-              <description></description>
+                <caption>是否禁用</caption>
+                <description></description>
+            </property>
+            <property key="isShowSearch" type="boolean" defaultValue="false">
+                <caption>是否开户搜索</caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Data Source">
+
+            <property key="options" type="datasource" required="true" isList="true">
+                <caption>数据源</caption>
+                <description></description>
+            </property>
+
+            <property key="keyAttribute" type="attribute" required="true" dataSource="options">
+                <caption>主键</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="Decimal" />
+                    <attributeType name="HashString" />
+                    <attributeType name="Integer" />
+                    <attributeType name="Long" />
+                    <attributeType name="AutoNumber" />
+                </attributeTypes>
+            </property>
+
+            <property key="titleAttribute" type="attribute" required="true" dataSource="options">
+                <caption>穿梭项标题</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+
+            <property key="checkedAttribute" type="attribute" required="true" dataSource="options">
+                <caption>checked</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="Boolean" />
+                </attributeTypes>
+            </property>
+
+            <property key="parentAttribute" type="attribute" required="false" dataSource="options">
+                <caption>parent key</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="Decimal" />
+                    <attributeType name="HashString" />
+                    <attributeType name="Integer" />
+                    <attributeType name="Long" />
+                    <attributeType name="AutoNumber" />
+                </attributeTypes>
+            </property>
+
+            <property key="rightTitle" type="textTemplate" required="false" multiline="false">
+                <caption>Text Template</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Target</translation>
+                </translations>
+            </property>
+
+            <property key="leftTitle" type="textTemplate" required="false" multiline="false">
+                <caption>Text Template</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Source</translation>
+                </translations>
+            </property>
+
+            <property key="targetKeys" type="attribute" required="true">
+                <caption>target keys</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Behavior">
+            <property key="onChange" type="action" required="true">
+                <caption>选项在两栏之间转移时的回调函数</caption>
+                <description></description>
             </property>
         </propertyGroup>
     </properties>
