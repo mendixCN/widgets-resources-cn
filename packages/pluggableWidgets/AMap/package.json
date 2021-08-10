@@ -9,9 +9,8 @@
     "node": ">=12"
   },
   "config": {
-    "projectPath": "./tests/testProject/",
-    "mendixHost": "http://localhost:8080",
-    "developmentPort": "3000"
+    "projectPath": "../../../testProject/",
+    "mendixHost": "http://localhost:8080"
   },
   "packagePath": "mendix",
   "scripts": {
