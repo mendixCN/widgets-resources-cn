@@ -1,6 +1,7 @@
 (function(config) {
     !function(global, factory) {
-        debugger
+        global.load_amap_sdk = console.log;
+        window.module = {};
         (global = global || self).AMap = factory()
     }(window, function() {
         "use strict";
@@ -685,6 +686,7 @@
             function stubFalse() {
                 return !1
             }
+            var module = {};
             var freeExports = "object" == typeof exports && exports && !exports.nodeType && exports
               , freeModule = freeExports && "object" == typeof module && module && !module.nodeType && module
               , moduleExports = freeModule && freeModule.exports === freeExports
