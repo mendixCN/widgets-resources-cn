@@ -35,7 +35,6 @@
     "antd": "^4.16.10",
     "classnames": "^2.2.6",
     "lodash-es": "4.17.21",
-    "@ant-design/icons-svg": "4.1.0",
-    "@uiw/react-baidu-map": "1.18.17"
+    "@ant-design/icons-svg": "4.1.0"
   }
 }

@@ -9,12 +9,13 @@
     "node": ">=12"
   },
   "config": {
-    "projectPath": "./tests/testProject/",
+    "projectPath": "../../../testProject/",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
   "packagePath": "mendix",
   "scripts": {
+    "i": "npm i",
     "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",

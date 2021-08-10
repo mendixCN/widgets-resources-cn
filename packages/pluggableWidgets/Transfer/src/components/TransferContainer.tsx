@@ -4,7 +4,6 @@ import "../ui/antd.css";
 import "../ui/Transfer.css";
 import zhCN from 'antd/lib/locale/zh_CN';
 import { TransferDirection, TransferItem } from "antd/lib/transfer";
-import { BaiduMap } from "./BaiduMap";
 
 export type TransferOnChangeEvent = (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void;
 
@@ -34,7 +33,6 @@ export const TransferContainer = (props: TransferContainerProps): ReactElement |
 
     return (
         <ConfigProvider locale={zhCN}>
-            <BaiduMap></BaiduMap>
             <Transfer
                 className="widget-hello-world"
                 showSearch={props.isShowSearch}
