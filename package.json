@@ -9,7 +9,7 @@
     "clean": "lerna clean",
     "start:transfer": "lerna run start --scope 'transfer'",
     "postinstall": "lerna bootstrap --hoist --strict",
-    "new": "yo @mendix/widget packages/pluggableWidgets/BaiduMap",
+    "new": "yo @mendix/widget packages/pluggableWidgets/AMap",
     "release:marketplace": "lerna run release:marketplace"
   },
   "author": "",
