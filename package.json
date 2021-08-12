@@ -8,6 +8,7 @@
     "i": "npm i",
     "clean": "lerna clean",
     "start:transfer": "lerna run start --scope 'transfer'",
+    "start:amap": "lerna run start --scope 'amap'",
     "postinstall": "lerna bootstrap --hoist --strict",
     "new": "yo @mendix/widget packages/pluggableWidgets/AMap",
     "release:marketplace": "lerna run release:marketplace"
@@ -16,11 +17,10 @@
   "license": "ISC",
   "devDependencies": {
     "@mendix/generator-widget": "^9.0.2",
-    "@mendix/pluggable-widgets-tools": "^9.0.0",
     "lerna": "^4.0.0",
     "node-fetch": "^2.6.1",
     "mendix-client": "^7.15.8",
-    "@types/big.js": "^6.0.0",
+    "@types/big.js": "^6.0.2",
     "@types/react-native": "~0.63.30",
     "react-native": "0.63.3",
     "@types/jest": "^26.0.15",

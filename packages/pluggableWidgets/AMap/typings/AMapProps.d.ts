@@ -4,6 +4,8 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
+import { ActionValue, EditableValue } from "mendix";
+import { Big } from "big.js";
 
 export interface AMapContainerProps {
     name: string;
@@ -11,10 +13,16 @@ export interface AMapContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     sampleText: string;
+    lat?: EditableValue<Big>;
+    lng?: EditableValue<Big>;
+    onChange?: ActionValue;
 }
 
 export interface AMapPreviewProps {
     class: string;
     style: string;
     sampleText: string;
+    lat: string;
+    lng: string;
+    onChange: {} | null;
 }

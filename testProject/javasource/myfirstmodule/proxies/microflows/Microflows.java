@@ -21,6 +21,12 @@ public class Microflows
 		params.put("TransferContext", _transferContext == null ? null : _transferContext.getMendixObject());
 		Core.microflowCall("MyFirstModule.Act_Transfer_Target_Change").withParams(params).execute(context);
 	}
+	public static void aMap_Change(IContext context, myfirstmodule.proxies.AMap _aMap)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("AMap", _aMap == null ? null : _aMap.getMendixObject());
+		Core.microflowCall("MyFirstModule.AMap_Change").withParams(params).execute(context);
+	}
 	public static myfirstmodule.proxies.TransferContext dS_Transfer(IContext context)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
