@@ -1,0 +1,16 @@
+---
+# Commands to start on workspace startup
+tasks:
+  - init: npm install && lerna add @mendix/generator-widget@^9.0.2 a packages/pluggableWidgets
+    before: npm run start:amap
+    command: docker-compose -f docker-compose-mysql.yml up
+# Ports to expose on workspace startup
+ports:
+  - port: 8080
+    onOpen: open-preview
+vscode:
+  extensions:
+  - ms-azuretools.vscode-docker
+  - github.vscode-pull-request-github
+  - eamodio.gitlens
+  - ms-python.python
