@@ -4,9 +4,11 @@ tasks:
   - name: test project
     init: |
       npm install
+      chmod +x ./scripts/gitpod/build.sh
+      ./scripts/gitpod/build.sh
       gp sync-done bundle
     command: |
-      docker-compose -f docker-compose-mysql.yml up
+      docker-compose --force-recreate -f docker-compose-mysql.yml up
   - name: pluggable widget
     init: gp sync-await bundle
     command: npm run start:amap
