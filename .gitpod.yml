@@ -2,8 +2,11 @@
 # Commands to start on workspace startup
 tasks:
   - init: npm install
-    before: npm run start:amap
-    command: docker-compose -f docker-compose-mysql.yml up
+    name: test project
+    command: |
+      docker-compose -f docker-compose-mysql.yml up
+  - name: pluggable widget
+    command: npm run start:amap
 # Ports to expose on workspace startup
 ports:
   - port: 8080
