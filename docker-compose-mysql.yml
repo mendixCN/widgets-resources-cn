@@ -2,7 +2,7 @@ version: "2.3"
 
 services:
     mendixapp:
-        image: mendix/mendix-buildpack:v3.2.0
+        image: engalar/widgets-resources-cn:v1.2
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost"]
             interval: 15s
