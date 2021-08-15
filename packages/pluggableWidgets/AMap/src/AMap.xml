@@ -6,31 +6,89 @@
     <description>高德地图</description>
     <icon/>
     <properties>
-        <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
-            </property>
-            <property key="lat" type="attribute" required="false">
-                <caption>地理纬度</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Long" />
-                    <attributeType name="Decimal" />
-                </attributeTypes>
-            </property>
-            <property key="lng" type="attribute" required="false">
-                <caption>地理经度</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Long" />
-                    <attributeType name="Decimal" />
-                </attributeTypes>
-            </property>
-            <property key="onChange" type="action">
-                <caption>change</caption>
-                <description></description>
-            </property>
+        <propertyGroup caption="通用">
+            <propertyGroup caption="开关">
+                <property key="enableLocationMode" type="boolean" defaultValue="false">
+                    <caption>坐标拾取模式开关</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="中心位置">
+                <property key="latCenter" type="attribute" required="false">
+                    <caption>地理纬度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="lngCenter" type="attribute" required="false">
+                    <caption>地理经度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="缩放级别">
+                <property key="zoomAttribute" type="attribute" required="false">
+                    <caption>缩放级别（2-20）</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="zoomConst" type="decimal" required="true" defaultValue="15">
+                    <caption>缩放级别（2-20）</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="点标记">
+            <propertyGroup caption="General">
+                <property key="enableMarker" type="boolean" defaultValue="false">
+                    <caption>启用标记</caption>
+                    <description></description>
+                </property>
+                <property key="displayMarker" type="boolean" defaultValue="true">
+                    <caption>是否显示标记</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="数据源">
+                <property key="markers" type="datasource" required="false" isList="true">
+                    <caption>标记数据源</caption>
+                    <description></description>
+                </property>
+                <property key="titleMarker" type="attribute" required="false" dataSource="markers">
+                    <caption>标记标题</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="lngMarker" type="attribute" required="false" dataSource="markers">
+                    <caption>标记经度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="latMarker" type="attribute" required="false" dataSource="markers">
+                    <caption>标记纬度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="事件">
+                <property key="markerSelect" type="action" dataSource="markers">
+                    <caption>标记选择事件</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

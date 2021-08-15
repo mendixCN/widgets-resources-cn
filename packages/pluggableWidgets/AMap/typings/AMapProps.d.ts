@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue } from "mendix";
+import { EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
 import { Big } from "big.js";
 
 export interface AMapContainerProps {
@@ -12,17 +12,33 @@ export interface AMapContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    sampleText: string;
-    lat?: EditableValue<Big>;
-    lng?: EditableValue<Big>;
-    onChange?: ActionValue;
+    enableLocationMode: boolean;
+    latCenter?: EditableValue<Big>;
+    lngCenter?: EditableValue<Big>;
+    zoomAttribute?: EditableValue<Big>;
+    zoomConst: Big;
+    enableMarker: boolean;
+    displayMarker: boolean;
+    markers?: ListValue;
+    titleMarker?: ListAttributeValue<string>;
+    lngMarker?: ListAttributeValue<Big>;
+    latMarker?: ListAttributeValue<Big>;
+    markerSelect?: ListActionValue;
 }
 
 export interface AMapPreviewProps {
     class: string;
     style: string;
-    sampleText: string;
-    lat: string;
-    lng: string;
-    onChange: {} | null;
+    enableLocationMode: boolean;
+    latCenter: string;
+    lngCenter: string;
+    zoomAttribute: string;
+    zoomConst: number | null;
+    enableMarker: boolean;
+    displayMarker: boolean;
+    markers: {} | { type: string } | null;
+    titleMarker: string;
+    lngMarker: string;
+    latMarker: string;
+    markerSelect: {} | null;
 }
