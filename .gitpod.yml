@@ -1,7 +1,7 @@
 ---
 # Commands to start on workspace startup
 tasks:
-  - init: npm install && lerna add @mendix/generator-widget@^9.0.2 a packages/pluggableWidgets
+  - init: npm install
     before: npm run start:amap
     command: docker-compose -f docker-compose-mysql.yml up
 # Ports to expose on workspace startup
