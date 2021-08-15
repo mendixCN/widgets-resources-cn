@@ -3,7 +3,9 @@ version: "2.3"
 services:
     mendixapp:
         # image: engalar/widgets-resources-cn:v1.2
-        image: mendix/mendix-buildpack:v1.4
+        image: mendix/mendix-buildpack:v1.5
+        volumes:
+            - ./packages/pluggableWidgets/AMap/dist/tmp/widgets/mendix/amap:/opt/mendix/build/web/widgets/mendix/amap
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost"]
             interval: 15s

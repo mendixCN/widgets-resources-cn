@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {},
   "scripts": {
-    "i": "npm i",
     "clean": "lerna clean",
     "start:transfer": "lerna run start --scope 'transfer'",
     "start:amap": "lerna run start --scope 'amap'",

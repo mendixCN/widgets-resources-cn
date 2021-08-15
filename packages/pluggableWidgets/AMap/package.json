@@ -14,7 +14,7 @@
   },
   "packagePath": "mendix",
   "scripts": {
-    "i": "cmd ../../../node_modules/.bin/cnpm.cmd i",
+    "i": "npm i",
     "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",

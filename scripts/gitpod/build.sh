@@ -6,6 +6,7 @@ BASEDIR=$(dirname "$0")
 ROOTDIR=$BASEDIR/../../
 
 cd $ROOTDIR
+rm -rf $ROOTDIR/docker-mendix-buildpack
 git clone --branch v3.3.1 --config core.autocrlf=false https://github.com/mendix/docker-mendix-buildpack
 
 cp -r $ROOTDIR/testProject/ $ROOTDIR/docker-mendix-buildpack/project
