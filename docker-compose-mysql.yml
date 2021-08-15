@@ -2,7 +2,8 @@ version: "2.3"
 
 services:
     mendixapp:
-        image: engalar/widgets-resources-cn:v1.2
+        # image: engalar/widgets-resources-cn:v1.2
+        image: mendix/mendix-buildpack:v1.4
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost"]
             interval: 15s
@@ -18,6 +19,9 @@ services:
             MXRUNTIME_DatabaseHost: db:3306
             MXRUNTIME_DatabaseName: mendix
             # DATABASE_URL: mysql://mendix:mendix@db:3306/mendix
+            LOGGING_CONFIG: '{"*": "TRACE"}'
+            # DEBUG_CONTAINER: 'true'
+            BUILDPACK_XTRACE: 'true'
         ports:
             - 8080:8080
         links:
