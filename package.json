@@ -17,13 +17,14 @@
   "license": "ISC",
   "devDependencies": {
     "@mendix/generator-widget": "^9.0.2",
-    "lerna": "^4.0.0",
-    "node-fetch": "^2.6.1",
-    "mendix-client": "^7.15.8",
     "@types/big.js": "^6.0.2",
-    "@types/react-native": "~0.63.30",
-    "react-native": "0.63.3",
     "@types/jest": "^26.0.15",
+    "@types/react-native": "~0.63.30",
+    "cnpm": "^7.0.0",
+    "lerna": "^4.0.0",
+    "mendix-client": "^7.15.8",
+    "node-fetch": "^2.6.1",
+    "react-native": "0.63.3",
     "yo": "^4.3.0"
   }
 }

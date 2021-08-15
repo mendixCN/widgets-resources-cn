@@ -4,3 +4,4 @@ packages/*/*/dist
 testProject/deployment
 
 docker-mendix-buildpack
+testProject8x/deployment

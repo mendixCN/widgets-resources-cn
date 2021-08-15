@@ -21,11 +21,30 @@ public class Microflows
 		params.put("TransferContext", _transferContext == null ? null : _transferContext.getMendixObject());
 		Core.microflowCall("MyFirstModule.Act_Transfer_Target_Change").withParams(params).execute(context);
 	}
-	public static void aMap_Change(IContext context, myfirstmodule.proxies.AMap _aMap)
+	public static void aMap_Change(IContext context, myfirstmodule.proxies.AMapPageContext _aMapPageContext)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("AMap", _aMap == null ? null : _aMap.getMendixObject());
+		params.put("AMapPageContext", _aMapPageContext == null ? null : _aMapPageContext.getMendixObject());
 		Core.microflowCall("MyFirstModule.AMap_Change").withParams(params).execute(context);
+	}
+	public static void aMap_Change_Center(IContext context, myfirstmodule.proxies.AMapMarkerDto _aMapMarkerDto, myfirstmodule.proxies.AMapPageContext _aMapPageContext)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("AMapMarkerDto", _aMapMarkerDto == null ? null : _aMapMarkerDto.getMendixObject());
+		params.put("AMapPageContext", _aMapPageContext == null ? null : _aMapPageContext.getMendixObject());
+		Core.microflowCall("MyFirstModule.AMap_Change_Center").withParams(params).execute(context);
+	}
+	public static myfirstmodule.proxies.AMapPageContext aMap_Datasource(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.AMap_Datasource").withParams(params).execute(context);
+		return result == null ? null : myfirstmodule.proxies.AMapPageContext.initialize(context, result);
+	}
+	public static void aMap_Marker_Selected(IContext context, myfirstmodule.proxies.AMapMarkerDto _aMapMarkerDto)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("AMapMarkerDto", _aMapMarkerDto == null ? null : _aMapMarkerDto.getMendixObject());
+		Core.microflowCall("MyFirstModule.AMap_Marker_Selected").withParams(params).execute(context);
 	}
 	public static myfirstmodule.proxies.TransferContext dS_Transfer(IContext context)
 	{
