@@ -4,11 +4,13 @@ tasks:
   - name: test project
     init: |
       npm install
+      ./node_modules/.bin/lerna run i --scope 'amap'
       chmod +x ./scripts/gitpod/build.sh
+      docker pull mysql:5.7
       ./scripts/gitpod/build.sh
       gp sync-done bundle
     command: |
-      docker-compose --force-recreate -f docker-compose-mysql.yml up
+      docker-compose -f docker-compose-mysql.yml up --force-recreate
   - name: pluggable widget
     init: gp sync-await bundle
     command: npm run start:amap

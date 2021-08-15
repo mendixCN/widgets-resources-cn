@@ -8,7 +8,7 @@
     "clean": "lerna clean",
     "start:transfer": "lerna run start --scope 'transfer'",
     "start:amap": "lerna run start --scope 'amap'",
-    "postinstall": "lerna bootstrap --hoist --strict && lerna add @mendix/generator-widget@^9.0.2 packages/pluggableWidgets",
+    "postinstall": "lerna bootstrap --hoist --strict",
     "new": "yo @mendix/widget packages/pluggableWidgets/AMap",
     "release:marketplace": "lerna run release:marketplace"
   },

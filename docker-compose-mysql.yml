@@ -1,4 +1,4 @@
-version: "2.3"
+version: "3.9"
 
 services:
     mendixapp:
@@ -7,7 +7,7 @@ services:
         volumes:
             - ./packages/pluggableWidgets/AMap/dist/tmp/widgets/mendix/amap:/opt/mendix/build/web/widgets/mendix/amap
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost"]
+            test: ["CMD", "curl", "-f", "http://localhost:8080"]
             interval: 15s
             retries: 2
             start_period: 10s
@@ -28,7 +28,9 @@ services:
             - 8080:8080
         links:
             - db
-        # restart: always
+        depends_on:
+            - db
+        restart: always
     db:
         image: mysql:5.7
         environment:
