@@ -1,11 +1,14 @@
 ---
 # Commands to start on workspace startup
 tasks:
-  - init: npm install
-    name: test project
+  - name: test project
+    init: |
+      npm install
+      gp sync-done bundle
     command: |
       docker-compose -f docker-compose-mysql.yml up
   - name: pluggable widget
+    init: gp sync-await bundle
     command: npm run start:amap
 # Ports to expose on workspace startup
 ports:
