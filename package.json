@@ -16,7 +16,7 @@
     "build": "lerna run build --ignore @mendix/custom-widgets-utils-internal",
     "start:transfer": "lerna run start --scope 'transfer'",
     "start:amap": "lerna run start --scope 'amap'",
-    "new": "yo @mendix/widget packages/pluggableWidgets/AMap",
+    "new": "yo @mendix/widget packages/pluggableWidgets/graph-web",
     "release:marketplace": "lerna run release:marketplace",
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
   },
