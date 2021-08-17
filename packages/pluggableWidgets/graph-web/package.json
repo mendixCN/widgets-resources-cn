@@ -9,7 +9,7 @@
     "node": ">=12"
   },
   "config": {
-    "projectPath": "./tests/testProject/",
+    "projectPath": "../../../testProject/",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
@@ -31,6 +31,9 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
+    "@antv/x6": "^1.25.3",
+    "antd": "^4.16.11",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6"
   }
 }

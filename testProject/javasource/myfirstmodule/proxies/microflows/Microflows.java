@@ -52,4 +52,24 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Transfer").withParams(params).execute(context);
 		return result == null ? null : myfirstmodule.proxies.TransferContext.initialize(context, result);
 	}
+	public static void x6_Change(IContext context, myfirstmodule.proxies.X6Context _x6Context, myfirstmodule.proxies.X6Node _x6Node)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("X6Context", _x6Context == null ? null : _x6Context.getMendixObject());
+		params.put("X6Node", _x6Node == null ? null : _x6Node.getMendixObject());
+		Core.microflowCall("MyFirstModule.X6_Change").withParams(params).execute(context);
+	}
+	public static myfirstmodule.proxies.X6Context x6_Context(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.X6_Context").withParams(params).execute(context);
+		return result == null ? null : myfirstmodule.proxies.X6Context.initialize(context, result);
+	}
+	public static void x6_Select(IContext context, myfirstmodule.proxies.X6Context _x6Context, myfirstmodule.proxies.X6Node _x6Node)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("X6Context", _x6Context == null ? null : _x6Context.getMendixObject());
+		params.put("X6Node", _x6Node == null ? null : _x6Node.getMendixObject());
+		Core.microflowCall("MyFirstModule.X6_Select").withParams(params).execute(context);
+	}
 }
