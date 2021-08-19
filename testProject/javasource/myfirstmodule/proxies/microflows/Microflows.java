@@ -52,6 +52,11 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_Transfer").withParams(params).execute(context);
 		return result == null ? null : myfirstmodule.proxies.TransferContext.initialize(context, result);
 	}
+	public static void select_Show(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("MyFirstModule.Select_Show").withParams(params).execute(context);
+	}
 	public static void x6_Change(IContext context, myfirstmodule.proxies.X6Context _x6Context, myfirstmodule.proxies.X6Node _x6Node)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();

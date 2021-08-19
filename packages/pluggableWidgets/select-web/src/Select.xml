@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.select.Select" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="mendix.select.Select" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Select</name>
     <description>My widget description</description>
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
+            <property key="options" type="datasource" required="true" isList="true">
+                <caption>选项数据源</caption>
+                <description></description>
+            </property>
+            <property key="value" type="attribute" required="true">
+                <caption>所选值</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+            <property key="valueLabel" type="attribute" required="true" dataSource="options">
+                <caption>选项值</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+            <property key="optionLabel" type="attribute" required="true" dataSource="options">
+                <caption>选项标签</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
             </property>
         </propertyGroup>
     </properties>

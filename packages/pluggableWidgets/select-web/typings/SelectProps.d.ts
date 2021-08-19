@@ -4,17 +4,24 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
+import { EditableValue, ListValue, ListAttributeValue } from "mendix";
 
 export interface SelectContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    sampleText: string;
+    options: ListValue;
+    value: EditableValue<string>;
+    valueLabel: ListAttributeValue<string>;
+    optionLabel: ListAttributeValue<string>;
 }
 
 export interface SelectPreviewProps {
     class: string;
     style: string;
-    sampleText: string;
+    options: {} | { type: string } | null;
+    value: string;
+    valueLabel: string;
+    optionLabel: string;
 }
