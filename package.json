@@ -17,7 +17,7 @@
     "build": "lerna run build --ignore @mendix/custom-widgets-utils-internal",
     "start:transfer": "lerna run start --scope 'transfer'",
     "start:amap": "lerna run start --scope 'amap'",
-    "new": "yo @mendix/widget packages/pluggableWidgets/graph-web",
+    "new": "yo @mendix/widget packages/pluggableWidgets/select-web",
     "release:marketplace": "lerna run release:marketplace",
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
   },
@@ -28,6 +28,7 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
     "@mendix/generator-widget": "^9.0.2",
+    "@mendix/pluggable-widgets-tools": "^9.0.0",
     "@types/big.js": "^6.0.2",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
