@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "lerna bootstrap --strict",
-    "reinstall": "git clean -dfx && npx lerna clean --yes && npm i",
+    "i": "npm install",
+    "postinstall": "npx lerna@^3.22.1 bootstrap --strict",
+    "reinstall": "git clean -dfx && npx lerna clean --yes && npm install",
     "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "lint": "npm run lint:src && lerna run lint --stream",
@@ -26,6 +27,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
+    "@mendix/generator-widget": "^9.0.2",
     "@types/big.js": "^6.0.2",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
@@ -58,8 +60,8 @@
     "mendix-client": "^7.15.8",
     "mime": "^2.4.6",
     "mini-css-extract-plugin": "^1.2.1",
-    "node-ip": "^0.1.2",
     "node-fetch": "^2.6.1",
+    "node-ip": "^0.1.2",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "react": "~17.0.1",
@@ -69,9 +71,10 @@
     "recursive-copy": "^2.0.11",
     "scheduler": "^0.20.1",
     "ts-node": "^9.0.0",
-    "zip-folder": "^1.0.0",
-    "@mendix/generator-widget": "^9.0.2",
-    "yo": "^4.3.0"
+    "xml2js": "^0.4.23",
+    "yeoman-doctor": "^5.0.0",
+    "yo": "^4.3.0",
+    "zip-folder": "^1.0.0"
   },
   "husky": {
     "hooks": {
