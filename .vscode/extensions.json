@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "connercharlebois.mendix-pluggable-widget-utilities",
+    "eg2.vscode-npm-script",
+    "esbenp.prettier-vscode",
+    "infeng.vscode-react-typescript",
+    "redhat.vscode-xml",
+    "dotjoshjohnson.xml"
+  ]
+}
