@@ -5,6 +5,7 @@ tasks:
     init: |
       npm install
       chmod +x ./scripts/gitpod/build.sh
+      mkdir -p packages/pluggableWidgets/select-web/dist/tmp/widgets/mendix/select
       docker pull mysql:5.7
       ./scripts/gitpod/build.sh
       gp sync-done bundle
