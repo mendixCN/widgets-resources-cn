@@ -6,6 +6,7 @@
     "esbenp.prettier-vscode",
     "infeng.vscode-react-typescript",
     "redhat.vscode-xml",
-    "dotjoshjohnson.xml"
+    "dotjoshjohnson.xml",
+    "dsznajder.es7-react-js-snippets"
   ]
 }
