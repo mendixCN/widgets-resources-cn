@@ -7,31 +7,54 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="options" type="datasource" required="true" isList="true">
-                <caption>选项数据源</caption>
-                <description></description>
-            </property>
-            <property key="value" type="attribute" required="true">
-                <caption>所选值</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="String" />
-                </attributeTypes>
-            </property>
-            <property key="valueLabel" type="attribute" required="true" dataSource="options">
-                <caption>选项值</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="String" />
-                </attributeTypes>
-            </property>
-            <property key="optionLabel" type="attribute" required="true" dataSource="options">
-                <caption>选项标签</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="String" />
-                </attributeTypes>
-            </property>
+            <propertyGroup caption="General">
+                <property key="options" type="datasource" required="true" isList="true">
+                    <caption>选项数据源</caption>
+                    <description></description>
+                </property>
+                <property key="value" type="attribute" required="true" onChange="onChange">
+                    <caption>所选值</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="optionValue" type="attribute" required="true" dataSource="options">
+                    <caption>选项值</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="optionLabel" type="attribute" required="true" dataSource="options">
+                    <caption>选项标签</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Behavior">
+                <property key="onChange" type="action">
+                    <caption>所选值变化</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="高级">
+            <propertyGroup caption="多选">
+                <property key="isMultiConst" type="boolean" defaultValue="false">
+                    <caption>多选</caption>
+                    <description></description>
+                </property>
+                <property key="isMutiAttribute" type="attribute" required="false">
+                    <caption>多选</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

@@ -3,16 +3,34 @@ import { createElement } from "react";
 import "../ui/antd.css";
 import { Select } from "antd";
 
-const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
+export interface SelectOption {
+    label: string;
+    value: string;
+}
 
-export default function SelectComponent() {
-    return (
-        <Select mode="multiple" placeholder="Inserted are removed" style={{ width: "100%" }}>
-            {OPTIONS.map(item => (
-                <Select.Option key={item} value={item}>
-                    {item}
+export interface SelectComponentProps {
+    options?: SelectOption[];
+    value?: string;
+    isMulti?: boolean;
+    onChange?: (value: string) => void;
+}
+
+export default function SelectComponent(props: SelectComponentProps) {
+    return props.options ? (
+        <Select
+            allowClear
+            value={props.value}
+            onChange={props.onChange}
+            mode={props.isMulti ? "multiple" : undefined}
+            style={{ width: "100%" }}
+        >
+            {props.options.map(item => (
+                <Select.Option key={item.value} value={item.value}>
+                    {item.label}
                 </Select.Option>
             ))}
         </Select>
+    ) : (
+        <Select loading></Select>
     );
 }
