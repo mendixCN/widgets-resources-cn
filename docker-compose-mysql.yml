@@ -5,7 +5,7 @@ services:
         # image: engalar/widgets-resources-cn:v1.2
         image: mendix/mendix-buildpack:v1.5
         volumes:
-            - ./packages/pluggableWidgets/AMap/dist/tmp/widgets/mendix/amap:/opt/mendix/build/web/widgets/mendix/amap
+            - ./packages/pluggableWidgets/select-web/dist/tmp/widgets/mendix/select:/opt/mendix/build/web/widgets/mendix/select
         healthcheck:
             test: ["CMD", "curl", "-f", "http://localhost:8080"]
             interval: 15s

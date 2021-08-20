@@ -4,7 +4,6 @@ tasks:
   - name: test project
     init: |
       npm install
-      ./node_modules/.bin/lerna run i --scope 'amap'
       chmod +x ./scripts/gitpod/build.sh
       docker pull mysql:5.7
       ./scripts/gitpod/build.sh
@@ -13,7 +12,7 @@ tasks:
       docker-compose -f docker-compose-mysql.yml up --force-recreate
   - name: pluggable widget
     init: gp sync-await bundle
-    command: npm run start:amap
+    command: cd packages/pluggableWidgets/select-web/ && npm run start
 # Ports to expose on workspace startup
 ports:
   - port: 8080
