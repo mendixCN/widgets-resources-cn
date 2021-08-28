@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.antmenu.AntMenu" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
-    <name>Ant Menu</name>
-    <description>My widget description</description>
-    <icon/>
-    <properties>
-        <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
-            </property>
-        </propertyGroup>
-    </properties>
+<widget id="mendix.antmenu.AntMenu" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+  xmlns="http://www.mendix.com/widget/1.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+  <name>Ant Menu</name>
+  <description>My widget description</description>
+  <icon/>
+  <properties>
+    <propertyGroup caption="General">
+      <property key="entity" type="string" required="true" multiline="false">
+        <caption>实体</caption>
+        <description>模块名.实体名。例如：AntMenu.Menu</description>
+      </property>
+      <property key="refName" type="string" required="true" multiline="false">
+        <caption>父级菜单引用属性名</caption>
+        <description>模块名.引用属性名。例如：AntMenu.Menu_Menu_Parent</description>
+      </property>
+      <property key="iconString" type="string" required="true" multiline="false">
+        <caption>菜单项的图标来源属性名</caption>
+        <description>https://www.iconfont.cn/</description>
+      </property>
+      <property key="title" type="string" required="true" multiline="false">
+        <caption>菜单标题属性名</caption>
+        <description></description>
+      </property>
+      <property key="isFolder" type="string" required="true" multiline="false">
+        <caption>是否为文件夹属性名</caption>
+        <description></description>
+      </property>
+    </propertyGroup>
+    <propertyGroup caption="Behavior">
+      <property key="onMenuItemClick" type="action">
+        <caption>菜单项点击事件</caption>
+        <description></description>
+      </property>
+    </propertyGroup>
+  </properties>
 </widget>

@@ -1,12 +1,18 @@
 import { Component, ReactNode, createElement } from "react";
-import { HelloWorldSample } from "./components/HelloWorldSample";
+import { AntMenuContainer } from "./components/AntMenuContainer";
 import { AntMenuPreviewProps } from "../typings/AntMenuProps";
 
 declare function require(name: string): string;
 
 export class preview extends Component<AntMenuPreviewProps> {
     render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText} />;
+        return (
+            <AntMenuContainer
+                getChildren={async () => {
+                    return [];
+                }}
+            />
+        );
     }
 }
 
