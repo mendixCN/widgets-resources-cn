@@ -29,11 +29,13 @@
     "@types/big.js": "^6.0.2",
     "@types/classnames": "^2.2.4",
     "@types/react": "~17.0.1",
-    "@types/react-dom": "~17.0.1"
+    "@types/react-dom": "~17.0.1",
+    "mendix-client": ""
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.3",
     "@mendix/piw-utils-internal": "^1.0.0",
+    "@jeltemx/mendix-react-widget-utils": "^0.9.0",
     "ahooks": "^2.10.9",
     "antd": "^4.16.13",
     "tree-model": "^1.0.7",

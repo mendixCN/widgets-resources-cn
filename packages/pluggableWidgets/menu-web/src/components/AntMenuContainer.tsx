@@ -13,6 +13,8 @@ const IconFont = createFromIconfontCN({
 
 export interface AntMenuContainerProps {
     getChildren: (node: TreeModel.Node<MenuItemData>) => Promise<MenuItemData[]>;
+    entity: string;
+    onMenuItemClick: string;
 }
 
 export interface MenuItemData {
@@ -80,6 +82,24 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
         });
     }, []);
 
+    const onClick = useCallback((guid: string) => {
+        // @ts-ignore
+        window.require(["mendix/lib/MxContext"], MxContext => {
+            const context = new MxContext();
+            context.setContext(props.entity, guid);
+
+            // @ts-ignore
+            window.mx.ui.action(props.onMenuItemClick, {
+                context,
+                progress: "modal",
+                // @ts-ignore
+                callback(result) {
+                    console.log("Engine started: " + result);
+                }
+            });
+        });
+    }, []);
+
     return (
         <Menu
             onOpenChange={keys => {
@@ -97,7 +117,7 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
             style={{ width: 256 }}
             mode={"inline"}
             onClick={info => {
-                console.log(info, openKeys);
+                onClick(nodeMap.get(info.key)!.model.guid);
             }}
         >
             {renderChildMenu(rootNode.data, loading, params[0])}

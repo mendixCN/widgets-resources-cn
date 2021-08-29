@@ -4,7 +4,6 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue } from "mendix";
 
 export interface AntMenuContainerProps {
     name: string;
@@ -16,7 +15,7 @@ export interface AntMenuContainerProps {
     iconString: string;
     title: string;
     isFolder: string;
-    onMenuItemClick?: ActionValue;
+    onMenuItemClick: string;
 }
 
 export interface AntMenuPreviewProps {
@@ -27,5 +26,5 @@ export interface AntMenuPreviewProps {
     iconString: string;
     title: string;
     isFolder: string;
-    onMenuItemClick: {} | null;
+    onMenuItemClick: string;
 }

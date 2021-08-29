@@ -51,5 +51,5 @@ export const AntMenu = (props: AntMenuContainerProps) => {
         []
     );
 
-    return <AntMenuContainer getChildren={getChildren} />;
+    return <AntMenuContainer onMenuItemClick={props.onMenuItemClick} entity={props.entity} getChildren={getChildren} />;
 };

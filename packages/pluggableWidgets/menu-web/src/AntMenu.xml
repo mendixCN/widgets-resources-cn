@@ -29,9 +29,9 @@
       </property>
     </propertyGroup>
     <propertyGroup caption="Behavior">
-      <property key="onMenuItemClick" type="action">
+      <property key="onMenuItemClick" type="string" required="true" multiline="false">
         <caption>菜单项点击事件</caption>
-        <description></description>
+        <description>微流名称（模块名.微流名）。例如 AntMenu.Act_Open_Menu</description>
       </property>
     </propertyGroup>
   </properties>
