@@ -26,6 +26,8 @@ export interface MenuItemData {
 }
 
 export const AntMenuContainer = (props: AntMenuContainerProps) => {
+    const nodeMap = useMemo(() => new Map<string, TreeModel.Node<MenuItemData>>(), []);
+    const loadSet = useMemo(() => new Set<string>(), []);
     const treeModel = useMemo(() => new TreeModel(), []);
     const [rootNode, setRootNode] = useState({
         data: treeModel.parse<MenuItemData>({ isFolder: true, title: "", icon: "", guid: "", children: [] })
@@ -40,9 +42,11 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
     useEffect(() => {
         if (data) {
             const [parentNode] = params;
+            loadSet.add(parentNode.model.guid);
 
             data?.forEach(item => {
-                parentNode.addChild(treeModel.parse(item));
+                const node = parentNode.addChild(treeModel.parse(item));
+                nodeMap.set(node.model.guid, node);
             });
             if (data.length > 0) {
                 setRootNode({ data: rootNode.data });
@@ -79,7 +83,12 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
     return (
         <Menu
             onOpenChange={keys => {
-                run(rootNode.data.children[0]);
+                if (keys.length > 0) {
+                    const node = nodeMap.get(keys[keys.length - 1].toString());
+                    if (node && !loadSet.has(node.model.guid)) {
+                        run(node);
+                    }
+                }
                 setOpenKeys(keys);
             }}
             onSelect={e => {
