@@ -31,21 +31,24 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
         data: treeModel.parse<MenuItemData>({ isFolder: true, title: "", icon: "", guid: "", children: [] })
     });
     const { run, loading, data, params } = useRequest(props.getChildren, {
-        manual: true
+        manual: true,
+        loadingDelay: 600,
+        cacheTime: 0
     });
     const [openKeys, setOpenKeys] = useState<Key[]>();
 
     useEffect(() => {
         if (data) {
             const [parentNode] = params;
+
             data?.forEach(item => {
                 parentNode.addChild(treeModel.parse(item));
             });
-            if (parentNode.children.length > 0) {
+            if (data.length > 0) {
                 setRootNode({ data: rootNode.data });
             }
         }
-    }, [data, params]);
+    }, [data]);
 
     useEffect(() => {
         run(rootNode.data);
