@@ -65,7 +65,7 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
 
         return parentNode.children.map(node => {
             return node.model.isFolder ? (
-                <SubMenu key={node.model.guid} title={node.model.title} icon={<IconFont type="icon-tuichu" />}>
+                <SubMenu key={node.model.guid} title={node.model.title} icon={<IconFont type={node.model.icon} />}>
                     {node === currentNode && loading ? (
                         <Skeleton active></Skeleton>
                     ) : (
@@ -73,7 +73,7 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
                     )}
                 </SubMenu>
             ) : (
-                <Menu.Item icon={<IconFont type="icon-tuichu" />} key={node.model.guid}>
+                <Menu.Item icon={<IconFont type={node.model.icon} />} key={node.model.guid}>
                     {node.model.title}
                 </Menu.Item>
             );
