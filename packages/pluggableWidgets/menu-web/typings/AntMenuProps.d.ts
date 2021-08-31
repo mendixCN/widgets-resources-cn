@@ -10,6 +10,7 @@ export interface AntMenuContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    datasourceMicroflow: string;
     entity: string;
     refName: string;
     iconString: string;
@@ -21,6 +22,7 @@ export interface AntMenuContainerProps {
 export interface AntMenuPreviewProps {
     class: string;
     style: string;
+    datasourceMicroflow: string;
     entity: string;
     refName: string;
     iconString: string;

@@ -7,8 +7,12 @@
   <icon/>
   <properties>
     <propertyGroup caption="General">
+      <property key="datasourceMicroflow" type="string" required="false" multiline="false">
+        <caption>实体数据源</caption>
+        <description>可选，如有则优先按本逻辑取数;参数1，父菜单（可选，empty表示获取第一级菜单）；返回菜单列表。</description>
+      </property>
       <property key="entity" type="string" required="true" multiline="false">
-        <caption>实体</caption>
+        <caption>菜单实体</caption>
         <description>模块名.实体名。例如：AntMenu.Menu</description>
       </property>
       <property key="refName" type="string" required="true" multiline="false">
