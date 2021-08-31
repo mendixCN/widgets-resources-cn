@@ -20,3 +20,7 @@ Place your custom CSS here
     margin: 0 !important;
     background-color: #24276c;
 }
+
+.ant-skeleton {
+    background-color: #24276c;
+}
