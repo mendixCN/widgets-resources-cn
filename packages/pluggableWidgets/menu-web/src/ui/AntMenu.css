@@ -1,6 +1,22 @@
 /*
 Place your custom CSS here
 */
-.widget-hello-world {
+.ant-menu-submenu-inline {
+    color: #fff;
+    border-color: #171946;
+    background-color: #24276c;
+    font-size: 14px;
+}
 
+.ant-menu {
+    color: #fff;
+    border-color: #171946;
+    background-color: #24276c;
+    font-size: 14px;
+}
+
+.ant-menu .ant-menu-item,
+.ant-menu-submenu-title {
+    margin: 0 !important;
+    background-color: #24276c;
 }

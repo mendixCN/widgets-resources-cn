@@ -1,5 +1,6 @@
 import { createElement, useState, Key, useEffect, useMemo, useCallback } from "react";
 import "../ui/antd.css";
+import "../ui/AntMenu.css";
 
 import { Menu, Skeleton } from "antd";
 import TreeModel from "tree-model";
@@ -114,7 +115,6 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
             onSelect={e => {
                 console.log(e);
             }}
-            style={{ width: 256 }}
             mode={"inline"}
             onClick={info => {
                 onClick(nodeMap.get(info.key)!.model.guid);
