@@ -12,6 +12,10 @@
 		"prepare": "npm run build",
 		"test": "pluggable-widgets-tools test:unit:web"
 	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"access": "public"
+	},
 	"devDependencies": {
 		"@mendix/pluggable-widgets-tools": "^9.0.0",
 		"eslint": "^7.20.0",
