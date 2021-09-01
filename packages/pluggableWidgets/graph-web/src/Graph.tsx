@@ -2,7 +2,7 @@ import { createElement, useCallback, useEffect, useMemo, useRef, useState } from
 import "./components/Trick";
 import { Graph as Graph2 } from "@antv/x6";
 import { ValueStatus } from "mendix";
-import { executeAction, debounce } from "@mendix/piw-utils-internal";
+import { executeAction, debounce } from "@mendix-cn/piw-utils-internal";
 
 import { GraphContainerProps } from "../typings/GraphProps";
 
