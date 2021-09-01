@@ -35,11 +35,9 @@ jobs:
                   seperator: "-v"
             - name: "Installing dependencies"
               run: npm install
-            - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
+            - name: "Build and publish pluggale widget ${{ steps.variables.outputs.tag }}"
               run:
-                  "TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }}
-                  MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release -- --scope '${{
-                  steps.scope.outputs._0 }}'"
+                  "npm run release -- --scope '${{ steps.scope.outputs._0 }}'"
             - name: "Release MPK Files"
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
