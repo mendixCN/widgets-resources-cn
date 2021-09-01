@@ -5,6 +5,7 @@ import { AntMenuContainerProps } from "../typings/AntMenuProps";
 
 import "./ui/AntMenu.css";
 import TreeModel from "tree-model/types";
+import { useLockFn } from "ahooks";
 
 export const AntMenu = (props: AntMenuContainerProps) => {
     const getChildren = useCallback(
@@ -66,25 +67,26 @@ export const AntMenu = (props: AntMenuContainerProps) => {
         []
     );
 
-    const onClick = useCallback(
-        (guid: string) => {
-            // @ts-ignore
-            window.require(["mendix/lib/MxContext"], MxContext => {
-                const context = new MxContext();
-                context.setContext(props.entity, guid);
-
+    const onClick = useLockFn(
+        (guid: string) =>
+            new Promise<void>(resolve => {
                 // @ts-ignore
-                window.mx.ui.action(props.onMenuItemClick, {
-                    context,
-                    progress: "modal",
+                window.require(["mendix/lib/MxContext"], MxContext => {
+                    const context = new MxContext();
+                    context.setContext(props.entity, guid);
+
                     // @ts-ignore
-                    callback(result) {
-                        console.log("Engine started: " + result);
-                    }
+                    window.mx.ui.action(props.onMenuItemClick, {
+                        context,
+                        progress: "modal",
+                        // @ts-ignore
+                        callback(result) {
+                            console.log("Engine started: " + result);
+                            resolve();
+                        }
+                    });
                 });
-            });
-        },
-        [props.onMenuItemClick]
+            })
     );
 
     return (

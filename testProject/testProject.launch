@@ -8,14 +8,14 @@
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
 <mapEntry key="M2EE_ADMIN_PASS" value="1"/>
-<mapEntry key="M2EE_ADMIN_PORT" value="8090"/>
+<mapEntry key="M2EE_ADMIN_PORT" value="8091"/>
 <mapEntry key="M2EE_CONSOLE_PATH" value="C:/Program Files/Mendix/9.4.0.24572/modeler/MendixConsoleLog.exe"/>
 <mapEntry key="MX_INSTALL_PATH" value="C:/Program Files/Mendix/9.4.0.24572"/>
 <mapEntry key="MXCONSOLE_BASE_PATH" value="C:/d/repo/widgets-resources-cn/testProject/deployment"/>
 <mapEntry key="MXCONSOLE_RUNTIME_PATH" value="C:/Program Files/Mendix/9.4.0.24572/runtime"/>
-<mapEntry key="MXCONSOLE_RUNTIME_PORT" value="8080"/>
+<mapEntry key="MXCONSOLE_RUNTIME_PORT" value="8081"/>
 <mapEntry key="MXCONSOLE_RUNTIME_LISTEN_ADDRESSES" value="*"/>
-<mapEntry key="MXCONSOLE_SERVER_URL" value="http://127.0.0.1:8090/"/>
+<mapEntry key="MXCONSOLE_SERVER_URL" value="http://127.0.0.1:8091/"/>
 </mapAttribute>
 <stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"/>
 <stringAttribute key="org.eclipse.debug.core.source_locator_memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;sourceLookupDirector&gt;&#13;&#10;&lt;sourceContainers duplicates=&quot;false&quot;&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;javaProject name=&amp;quot;testProject&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.jdt.launching.sourceContainer.javaProject&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;default/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.default&quot;/&gt;&#13;&#10;&lt;/sourceContainers&gt;&#13;&#10;&lt;/sourceLookupDirector&gt;&#13;&#10;"/>
