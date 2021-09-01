@@ -1,5 +1,5 @@
 {
-  "name": "tree",
+  "name": "ant-tree-web",
   "widgetName": "Tree",
   "version": "1.0.0",
   "description": "My widget description",
@@ -9,7 +9,7 @@
     "node": ">=12"
   },
   "config": {
-    "projectPath": "./tests/testProject/",
+    "projectPath": "../../../testProject/",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
@@ -31,6 +31,9 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
+    "ahooks": "^2.10.9",
+    "antd": "^4.16.13",
+    "@mendix-cn/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6"
   }
 }
