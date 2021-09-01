@@ -1,4 +1,4 @@
-const base = require("./packages/pluggableWidgets/AMap/node_modules/@mendix/pluggable-widgets-tools/configs/prettier.base.json");
+const base = require("./packages/pluggableWidgets/amap-web/node_modules/@mendix/pluggable-widgets-tools/configs/prettier.base.json");
 
 module.exports = {
     ...base,

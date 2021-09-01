@@ -5,7 +5,7 @@ declare function require(name: string): string;
 
 export class preview extends Component<BaiduMapPreviewProps> {
     render(): ReactNode {
-        return <span>hello baidu map</span>
+        return <span>hello baidu map</span>;
     }
 }
 

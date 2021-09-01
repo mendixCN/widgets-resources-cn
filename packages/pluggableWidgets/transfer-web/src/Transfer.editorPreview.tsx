@@ -6,7 +6,16 @@ declare function require(name: string): string;
 
 export class preview extends Component<TransferPreviewProps> {
     render(): ReactNode {
-        return <TransferContainer targetKeys={undefined} onChange={() => { }} isShowSearch={true} data={[]} leftTitle={'Source'} rightTitle={'Target'} />;
+        return (
+            <TransferContainer
+                targetKeys={undefined}
+                onChange={() => console.log}
+                isShowSearch
+                data={[]}
+                leftTitle={"Source"}
+                rightTitle={"Target"}
+            />
+        );
     }
 }
 

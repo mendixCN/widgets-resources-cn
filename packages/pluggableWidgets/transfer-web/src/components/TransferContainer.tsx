@@ -2,14 +2,14 @@ import { createElement, ReactElement, useEffect, useState } from "react";
 import { ConfigProvider, Transfer } from "antd";
 import "../ui/antd.css";
 import "../ui/Transfer.css";
-import zhCN from 'antd/lib/locale/zh_CN';
+import zhCN from "antd/lib/locale/zh_CN";
 import { TransferDirection, TransferItem } from "antd/lib/transfer";
 
 export type TransferOnChangeEvent = (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void;
 
 export interface TransferContainerProps {
-    leftTitle: string;
-    rightTitle: string;
+    leftTitle?: string;
+    rightTitle?: string;
     isDisabled?: boolean;
     data: TransferItem[];
     isShowSearch: boolean;
@@ -18,18 +18,24 @@ export interface TransferContainerProps {
 }
 
 export const TransferContainer = (props: TransferContainerProps): ReactElement | null => {
-
     const [targetKeys, setTargetKeys] = useState<string[] | undefined>(undefined);
 
     useEffect(() => {
-        setTargetKeys(props.targetKeys !== null && props.targetKeys !== undefined && props.targetKeys.length > 0 ? props.targetKeys.split(',') : undefined);
-        return () => {
-        }
+        setTargetKeys(
+            props.targetKeys !== null && props.targetKeys !== undefined && props.targetKeys.length > 0
+                ? props.targetKeys.split(",")
+                : undefined
+        );
     }, [props.targetKeys]);
 
-    console.log(props.data, 'target');
+    console.log(props.data, "target");
 
-    props.data = [{ "key": "1", "title": "1" }, { "key": "2", "title": "2" }, { "key": "3", "title": "3" }, { "key": "4", "title": "label-4" }];
+    props.data = [
+        { key: "1", title: "1" },
+        { key: "2", title: "2" },
+        { key: "3", title: "3" },
+        { key: "4", title: "label-4" }
+    ];
 
     return (
         <ConfigProvider locale={zhCN}>
@@ -38,7 +44,7 @@ export const TransferContainer = (props: TransferContainerProps): ReactElement |
                 showSearch={props.isShowSearch}
                 dataSource={props.data}
                 disabled={props.isDisabled}
-                titles={[props.leftTitle, props.rightTitle]}
+                titles={[props.leftTitle || "[empty left title", props.rightTitle || "[empty right title"]}
                 targetKeys={targetKeys}
                 onChange={(targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => {
                     setTargetKeys(targetKeys);

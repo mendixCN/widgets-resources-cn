@@ -1,8 +1,8 @@
 {
-  "name": "transfer",
-  "widgetName": "Transfer",
+  "name": "amap-web",
+  "widgetName": "AMap",
   "version": "1.0.0",
-  "description": "My widget description",
+  "description": "高德地图",
   "copyright": "2020 Mendix Technology BV",
   "author": "John",
   "engines": {
@@ -10,8 +10,7 @@
   },
   "config": {
     "projectPath": "../../../testProject/",
-    "mendixHost": "http://localhost:8080",
-    "developmentPort": "3000"
+    "mendixHost": "http://localhost:8080"
   },
   "packagePath": "mendix",
   "scripts": {
@@ -32,10 +31,8 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
-    "@ant-design/icons-svg": "4.1.0",
+    "@uiw/react-amap": "^1.7.11",
     "@mendix-cn/piw-utils-internal": "^1.0.0",
-    "antd": "^4.16.10",
-    "classnames": "^2.2.6",
-    "lodash-es": "4.17.21"
+    "classnames": "^2.2.6"
   }
 }

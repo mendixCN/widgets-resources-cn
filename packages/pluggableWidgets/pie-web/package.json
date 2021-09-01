@@ -1,8 +1,8 @@
 {
-  "name": "amap",
-  "widgetName": "AMap",
+  "name": "pie-web",
+  "widgetName": "Pie",
   "version": "1.0.0",
-  "description": "高德地图",
+  "description": "My widget description",
   "copyright": "2020 Mendix Technology BV",
   "author": "John",
   "engines": {
@@ -10,7 +10,8 @@
   },
   "config": {
     "projectPath": "../../../testProject/",
-    "mendixHost": "http://localhost:8080"
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
   },
   "packagePath": "mendix",
   "scripts": {
@@ -31,7 +32,6 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
-    "@uiw/react-amap": "^1.7.11",
     "@mendix-cn/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6"
   }

@@ -17,6 +17,13 @@ jobs:
               uses: actions/checkout@v2
               with:
                   submodules: false
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Defining Environment Variables"
               id: variables
               run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
@@ -31,6 +38,14 @@ jobs:
             - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
               run:
                   "TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }}
-                  MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{
+                  MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release -- --scope '${{
                   steps.scope.outputs._0 }}'"
-       
+            - name: "Release MPK Files"
+              uses: "marvinpinto/action-automatic-releases@latest"
+              with:
+                  repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                  automatic_release_tag: "${{ steps.variables.outputs.tag }}"
+                  prerelease: false
+                  title: "MPK Files"
+                  files: |
+                      packages/pluggableWidgets/${{ steps.scope.outputs._0 }}/dist/${{ steps.scope.outputs._1 }}/*.mpk

@@ -42,7 +42,6 @@ export default function Select(props: SelectContainerProps) {
         if (props.value.status === ValueStatus.Available) {
             setValue(props.value.value);
         }
-        return () => {};
     }, [props.value]);
 
     return <SelectComponent isMulti={isMulti} value={value} options={options} onChange={onChange}></SelectComponent>;

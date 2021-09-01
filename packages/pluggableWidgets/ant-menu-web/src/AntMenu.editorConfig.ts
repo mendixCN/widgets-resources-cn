@@ -1,4 +1,4 @@
-import { Problem, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { Problem, Properties, StructurePreviewProps } from "@mendix-cn/piw-utils-internal";
 
 import { AntMenuPreviewProps } from "../typings/AntMenuProps";
 

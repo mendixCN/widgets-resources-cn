@@ -54,11 +54,10 @@ export default function Graph(props: GraphContainerProps) {
                 setGraph(myGraph);
             }
         }
-        return () => {};
     }, [refContainer, props.isEditable]);
 
     const onChange = useCallback(
-        debounce(({ e, x, y, node, view }) => {
+        debounce(({ /* e, x, y,  */ node /* , view */ }) => {
             console.log(node, "xx");
 
             if (
@@ -109,7 +108,6 @@ export default function Graph(props: GraphContainerProps) {
                 graph.on("node:resized", onChange);
             }
         }
-        return () => {};
     }, [graph, props.datasource]);
 
     // graph.on('node:click', ({ e, x, y, node, view }) => { })
@@ -123,7 +121,6 @@ export default function Graph(props: GraphContainerProps) {
             console.log(props.bg.value.uri);
             graph?.drawBackground({ image: props.bg.value.uri, size: "contain" });
         }
-        return () => {};
     }, [graph, props.bg]);
 
     useEffect(() => {
@@ -138,7 +135,6 @@ export default function Graph(props: GraphContainerProps) {
                 data: idx
             });
         });
-        return () => {};
     }, [graph, nodes]);
 
     return <div className="app-content" ref={refContainer} />;

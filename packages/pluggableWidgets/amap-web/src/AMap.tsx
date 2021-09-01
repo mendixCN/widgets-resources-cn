@@ -11,7 +11,7 @@ import Big from "big.js";
 export function AMap(props: AMapContainerProps) {
     const [isLoading, setIsLoading] = useState(false);
     const zoom = useMemo(() => {
-        if (props.zoomAttribute == undefined) {
+        if (props.zoomAttribute === undefined) {
             return props.zoomConst.toNumber();
         }
         if (props.zoomAttribute && props.zoomAttribute.status === ValueStatus.Available) {
