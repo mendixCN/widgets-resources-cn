@@ -1,4 +1,4 @@
-import { createElement, useState, Key, useEffect, useMemo, useCallback } from "react";
+import { createElement, useState, useEffect, useMemo, useCallback } from "react";
 import "../ui/antd.css";
 import "../ui/AntMenu.css";
 
@@ -15,7 +15,7 @@ const IconFont = createFromIconfontCN({
 export interface AntMenuContainerProps {
     getChildren: (node: TreeModel.Node<MenuItemData>) => Promise<MenuItemData[]>;
     entity: string;
-    onMenuItemClick: string;
+    onMenuItemClick?: (guid: string) => void;
 }
 
 export interface MenuItemData {
@@ -40,7 +40,6 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
         loadingDelay: 600,
         cacheTime: 0
     });
-    const [openKeys, setOpenKeys] = useState<Key[]>();
 
     useEffect(() => {
         if (data) {
@@ -83,23 +82,14 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
         });
     }, []);
 
-    const onClick = useCallback((guid: string) => {
-        // @ts-ignore
-        window.require(["mendix/lib/MxContext"], MxContext => {
-            const context = new MxContext();
-            context.setContext(props.entity, guid);
-
-            // @ts-ignore
-            window.mx.ui.action(props.onMenuItemClick, {
-                context,
-                progress: "modal",
-                // @ts-ignore
-                callback(result) {
-                    console.log("Engine started: " + result);
-                }
-            });
-        });
-    }, []);
+    const onClick = useCallback(
+        (guid: string) => {
+            if (props.onMenuItemClick) {
+                props.onMenuItemClick(guid);
+            }
+        },
+        [props.onMenuItemClick]
+    );
 
     return (
         <Menu
@@ -110,7 +100,6 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
                         run(node);
                     }
                 }
-                setOpenKeys(keys);
             }}
             onSelect={e => {
                 console.log(e);

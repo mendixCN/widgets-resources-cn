@@ -11,6 +11,7 @@ export class preview extends Component<AntMenuPreviewProps> {
                 getChildren={async () => {
                     return [];
                 }}
+                entity={""}
             />
         );
     }

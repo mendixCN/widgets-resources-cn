@@ -66,5 +66,26 @@ export const AntMenu = (props: AntMenuContainerProps) => {
         []
     );
 
-    return <AntMenuContainer onMenuItemClick={props.onMenuItemClick} entity={props.entity} getChildren={getChildren} />;
+    const onClick = useCallback(
+        (guid: string) => {
+            // @ts-ignore
+            window.require(["mendix/lib/MxContext"], MxContext => {
+                const context = new MxContext();
+                context.setContext(props.entity, guid);
+
+                // @ts-ignore
+                window.mx.ui.action(props.onMenuItemClick, {
+                    context,
+                    progress: "modal",
+                    // @ts-ignore
+                    callback(result) {
+                        console.log("Engine started: " + result);
+                    }
+                });
+            });
+        },
+        [props.onMenuItemClick]
+    );
+
+    return <AntMenuContainer onMenuItemClick={onClick} entity={props.entity} getChildren={getChildren} />;
 };
