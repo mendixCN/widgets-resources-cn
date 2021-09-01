@@ -16,6 +16,7 @@ export interface AntMenuContainerProps {
     getChildren: (node: TreeModel.Node<MenuItemData>) => Promise<MenuItemData[]>;
     entity: string;
     onMenuItemClick?: (guid: string) => void;
+    mode?: "vertical" | "horizontal" | "inline";
 }
 
 export interface MenuItemData {
@@ -104,7 +105,7 @@ export const AntMenuContainer = (props: AntMenuContainerProps) => {
             onSelect={e => {
                 console.log(e);
             }}
-            mode={"inline"}
+            mode={props.mode || "inline"}
             onClick={info => {
                 onClick(nodeMap.get(info.key)!.model.guid);
             }}

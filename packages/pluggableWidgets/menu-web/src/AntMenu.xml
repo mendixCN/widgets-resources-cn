@@ -6,7 +6,7 @@
   <description>My widget description</description>
   <icon/>
   <properties>
-    <propertyGroup caption="General">
+    <propertyGroup caption="常规">
       <property key="datasourceMicroflow" type="string" required="false" multiline="false">
         <caption>实体数据源</caption>
         <description>可选，如有则优先按本逻辑取数;参数1，父菜单（可选，empty表示获取第一级菜单）；返回菜单列表。</description>
@@ -32,7 +32,18 @@
         <description></description>
       </property>
     </propertyGroup>
-    <propertyGroup caption="Behavior">
+    <propertyGroup caption="高级">
+      <property key="menuMode" type="enumeration" defaultValue="inline" required="true">
+        <caption>菜单模式</caption>
+        <description></description>
+        <enumerationValues>
+          <enumerationValue key="vertical">垂直</enumerationValue>
+          <enumerationValue key="horizontal">水平</enumerationValue>
+          <enumerationValue key="inline">内联</enumerationValue>
+        </enumerationValues>
+      </property>
+    </propertyGroup>
+    <propertyGroup caption="行为">
       <property key="onMenuItemClick" type="string" required="true" multiline="false">
         <caption>菜单项点击事件</caption>
         <description>微流名称（模块名.微流名）。例如 AntMenu.Act_Open_Menu</description>

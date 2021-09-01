@@ -5,6 +5,8 @@
  */
 import { CSSProperties } from "react";
 
+export type MenuModeEnum = "vertical" | "horizontal" | "inline";
+
 export interface AntMenuContainerProps {
     name: string;
     class: string;
@@ -16,6 +18,7 @@ export interface AntMenuContainerProps {
     iconString: string;
     title: string;
     isFolder: string;
+    menuMode: MenuModeEnum;
     onMenuItemClick: string;
 }
 
@@ -28,5 +31,6 @@ export interface AntMenuPreviewProps {
     iconString: string;
     title: string;
     isFolder: string;
+    menuMode: MenuModeEnum;
     onMenuItemClick: string;
 }
