@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@ant-design/icons-svg": "4.1.0",
-    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix-cn/piw-utils-internal": "^1.0.0",
     "antd": "^4.16.10",
     "classnames": "^2.2.6",
     "lodash-es": "4.17.21"

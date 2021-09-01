@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "antd": "^4.16.12",
-    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix-cn/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6"
   }
 }

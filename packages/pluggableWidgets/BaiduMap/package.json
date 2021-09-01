@@ -32,7 +32,7 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
-    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix-cn/piw-utils-internal": "^1.0.0",
     "@uiw/react-baidu-map": "1.18.17",
     "classnames": "^2.2.6"
   }

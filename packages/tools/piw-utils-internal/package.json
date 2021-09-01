@@ -1,5 +1,5 @@
 {
-	"name": "@mendix/piw-utils-internal",
+	"name": "@mendix-cn/piw-utils-internal",
 	"version": "1.0.0",
 	"description": "Tools and helper functions for PIW",
 	"private": true,

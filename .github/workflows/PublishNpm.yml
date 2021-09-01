@@ -5,6 +5,7 @@ on:
     tags:
       - "pluggable-widgets-tools-v*"
       - "generator-widget-v*"
+      - "piw-utils-internal-v*"
 
 jobs:
   publish:
@@ -32,4 +33,10 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           package: "./packages/tools/generator-widget/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
+      - name: "Targeting Pluggable Widgets piw"
+        if: contains(steps.variables.outputs.tag, 'piw-utils-internal-v')
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "./packages/tools/piw-utils-internal/package.json"
           token: ${{ secrets.NPM_TOKEN }}

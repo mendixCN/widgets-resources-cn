@@ -1,14 +1,12 @@
 import { createElement, useCallback, useMemo, useState } from "react";
 import { AMapComponent, AMarker } from "./components/AMapComponent";
-import { ValueStatus } from 'mendix';
-import { executeAction } from "@mendix/piw-utils-internal";
-import { debounce } from "@mendix/piw-utils-internal";
+import { ValueStatus } from "mendix";
+import { executeAction, debounce } from "@mendix-cn/piw-utils-internal";
 
 import { AMapContainerProps } from "../typings/AMapProps";
 
 import "./ui/AMap.css";
 import Big from "big.js";
-
 
 export function AMap(props: AMapContainerProps) {
     const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +48,7 @@ export function AMap(props: AMapContainerProps) {
                 props.lngCenter.setValue(new Big(lng));
             }
         },
-        [props.latCenter, props.lngCenter],
+        [props.latCenter, props.lngCenter]
     );
     const onZoomChange = useCallback(
         debounce((e: number) => {
@@ -58,12 +56,16 @@ export function AMap(props: AMapContainerProps) {
                 props.zoomAttribute?.setValue(Big(e));
             }
         }, 300),
-        [props.zoomAttribute],
+        [props.zoomAttribute]
     );
 
     const marks = useMemo<AMarker[]>(() => {
         if (props.enableMarker && props.displayMarker && props.markers?.status === ValueStatus.Available) {
-            return props.markers!.items!.map<AMarker>(item => ({ title: props.titleMarker!.get(item).value!, lat: props.latMarker!.get(item).value!.toNumber(), lng: props.lngMarker!.get(item).value!.toNumber() }))
+            return props.markers!.items!.map<AMarker>(item => ({
+                title: props.titleMarker!.get(item).value!,
+                lat: props.latMarker!.get(item).value!.toNumber(),
+                lng: props.lngMarker!.get(item).value!.toNumber()
+            }));
         } else {
             return [];
         }
@@ -71,13 +73,27 @@ export function AMap(props: AMapContainerProps) {
 
     console.log(marks);
 
-    const onDblClick = useCallback((event: AMap.MapsEvent, idx: number) => {
-        console.log(event);
-        if (props.markerSelect && props.markers && props.markers.status === ValueStatus.Available) {
-            const myAction = props.markerSelect.get(props!.markers!.items![idx]);
-            executeAction(myAction);
-        }
-    }, [props.markerSelect, props.markers]);
-    return isLoading ? <span>isLoading</span> : <AMapComponent onDblClick={onDblClick} marks={marks} onZoomChange={onZoomChange} zoom={zoom} lat={lat} lng={lng} change={onChange} />;
+    const onDblClick = useCallback(
+        (event: AMap.MapsEvent, idx: number) => {
+            console.log(event);
+            if (props.markerSelect && props.markers && props.markers.status === ValueStatus.Available) {
+                const myAction = props.markerSelect.get(props!.markers!.items![idx]);
+                executeAction(myAction);
+            }
+        },
+        [props.markerSelect, props.markers]
+    );
+    return isLoading ? (
+        <span>isLoading</span>
+    ) : (
+        <AMapComponent
+            onDblClick={onDblClick}
+            marks={marks}
+            onZoomChange={onZoomChange}
+            zoom={zoom}
+            lat={lat}
+            lng={lng}
+            change={onChange}
+        />
+    );
 }
-
