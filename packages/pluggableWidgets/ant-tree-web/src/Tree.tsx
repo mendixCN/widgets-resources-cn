@@ -52,7 +52,9 @@ export const Tree = (props: TreeContainerProps) => {
                     // @ts-ignore
                     window.require(["mendix/lib/MxContext"], MxContext => {
                         const context = new MxContext();
-                        if (key) context.setContext(props.entity, key);
+                        if (key) {
+                            context.setContext(props.entity, key);
+                        }
 
                         // @ts-ignore
                         window.mx.ui.action(props.datasourceMicroflow, {
