@@ -10,11 +10,19 @@ export interface TreeContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    sampleText: string;
+    datasourceMicroflow: string;
+    entity: string;
+    refName: string;
+    isLeaf: string;
+    title: string;
 }
 
 export interface TreePreviewProps {
     class: string;
     style: string;
-    sampleText: string;
+    datasourceMicroflow: string;
+    entity: string;
+    refName: string;
+    isLeaf: string;
+    title: string;
 }
