@@ -8,6 +8,7 @@ export class preview extends Component<TreePreviewProps> {
     render(): ReactNode {
         return (
             <TreeContainer
+                defaultExpandedKeys={["0-0"]}
                 treeData={[
                     {
                         title: "parent 1",
@@ -47,5 +48,5 @@ export class preview extends Component<TreePreviewProps> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Tree.css");
+    return require("./ui/antd.css");
 }

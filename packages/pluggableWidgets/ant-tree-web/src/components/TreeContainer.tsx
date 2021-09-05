@@ -1,7 +1,7 @@
 import { useControllableValue, useWhyDidYouUpdate } from "ahooks";
 import { Tree } from "antd";
 import { DataNode, EventDataNode } from "antd/lib/tree";
-import { createElement, ReactElement } from "react";
+import { createElement, Key, ReactElement } from "react";
 import "../ui/antd.css";
 
 export interface TreeNode {
@@ -16,6 +16,7 @@ export interface TreeContainerProps {
     loadData?: (treeNode: EventDataNode) => Promise<void>;
     checkedKeys?: string[];
     onChange?: (keys: string[]) => void;
+    defaultExpandedKeys?: Key[];
 }
 
 export const TreeContainer = (props: TreeContainerProps): ReactElement => {
@@ -27,6 +28,7 @@ export const TreeContainer = (props: TreeContainerProps): ReactElement => {
 
     return (
         <Tree
+            defaultExpandedKeys={props.defaultExpandedKeys}
             checkedKeys={checkedKeys}
             onCheck={(checked, info) => {
                 console.dir(checked, info);
