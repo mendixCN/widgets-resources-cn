@@ -33,6 +33,8 @@ function updateTreeData(list: DataNode[], key: Key, children: DataNode[]): DataN
 export const Tree = (props: TreeContainerProps): ReactElement => {
     useWhyDidYouUpdate("Tree", { ...props });
 
+    const [checkedKeys, setCheckedKeys] = useState<string[]>();
+
     const [treeData, setTreeData] = useState<DataNode[]>([]);
 
     const [ref, widget] = useMxWidget();
@@ -73,10 +75,11 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
                                     const dataNodes = handleData(objs);
                                     if (key) {
                                         setTreeData(origin => updateTreeData(origin, key, dataNodes));
-                                        resolve();
                                     } else {
                                         setTreeData(dataNodes);
                                     }
+                                    setCheckedKeys(["16044073672507393", "16044073672507394", "16044073672507395"]);
+                                    resolve();
                                 },
                                 error(error: Error) {
                                     global.mx.ui.error("error", error);
@@ -114,7 +117,12 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
 
     return (
         <div ref={ref}>
-            <TreeContainer loadData={onLoadData} treeData={treeData}></TreeContainer>
+            <TreeContainer
+                checkedKeys={checkedKeys}
+                onChange={setCheckedKeys}
+                loadData={onLoadData}
+                treeData={treeData}
+            ></TreeContainer>
         </div>
     );
 };
