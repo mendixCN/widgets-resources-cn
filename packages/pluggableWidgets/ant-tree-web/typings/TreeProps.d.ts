@@ -15,6 +15,8 @@ export interface TreeContainerProps {
     refName: string;
     isLeaf: string;
     title: string;
+    onSelectMicroflow: string;
+    contextRefTreeNodeName: string;
 }
 
 export interface TreePreviewProps {
@@ -25,4 +27,6 @@ export interface TreePreviewProps {
     refName: string;
     isLeaf: string;
     title: string;
+    onSelectMicroflow: string;
+    contextRefTreeNodeName: string;
 }

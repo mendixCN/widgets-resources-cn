@@ -1,6 +1,6 @@
 import { createElement, useCallback, useEffect, useState, Key, ReactElement } from "react";
 
-import { useWhyDidYouUpdate } from "ahooks";
+import { useDebounceFn, useWhyDidYouUpdate } from "ahooks";
 
 import { TreeContainerProps } from "../typings/TreeProps";
 
@@ -8,6 +8,7 @@ import "./ui/Tree.css";
 import { TreeContainer } from "./components/TreeContainer";
 import { DataNode } from "antd/lib/tree";
 import useMxWidget from "./useMxWidget";
+import { useMxCache } from "./mx/data";
 
 const _require = window.require as any;
 
@@ -31,16 +32,16 @@ function updateTreeData(list: DataNode[], key: Key, children: DataNode[]): DataN
 }
 
 export const Tree = (props: TreeContainerProps): ReactElement => {
-    useWhyDidYouUpdate("Tree", { ...props });
-
     const [checkedKeys, setCheckedKeys] = useState<string[]>();
 
     const [treeData, setTreeData] = useState<DataNode[]>([]);
 
     const [ref, widget] = useMxWidget();
 
+    const [restore, cacheMxobject] = useMxCache();
+
     const onLoadData = useCallback(
-        ({ key, children }: any) =>
+        ({ key: guid, children }: any) =>
             new Promise<void>(resolve => {
                 if (children) {
                     resolve();
@@ -48,78 +49,101 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
                 }
 
                 function handleData(objs: any[]): DataNode[] {
-                    return objs.map<DataNode>(obj => ({
-                        title: obj.get(props.title),
-                        isLeaf: obj.get(props.isLeaf),
-                        key: obj.getGuid()
-                    }));
+                    return objs
+                        ? objs.map<DataNode>(obj => ({
+                              title: obj.get(props.title),
+                              isLeaf: obj.get(props.isLeaf),
+                              key: obj.getGuid()
+                          }))
+                        : [];
                 }
 
                 if (props.datasourceMicroflow) {
-                    _require(["mendix/lib/MxContext", "dojo/global"], (MxContext: any, global: any) => {
-                        if (widget) {
-                            const context = new MxContext();
-                            if (key) {
-                                context.setContext(props.entity, key);
-                            }
-
-                            global.mx.data.action({
-                                params: {
-                                    applyto: "none",
-                                    actionname: props.datasourceMicroflow
-                                    // guids: ["16044073672507393", "16044073672507394", "16044073672507395"],
-                                },
-                                context,
-                                origin: widget.mxform,
-                                callback(objs: any[]) {
-                                    const dataNodes = handleData(objs);
-                                    if (key) {
-                                        setTreeData(origin => updateTreeData(origin, key, dataNodes));
-                                    } else {
-                                        setTreeData(dataNodes);
-                                    }
-                                    setCheckedKeys(["16044073672507393", "16044073672507394", "16044073672507395"]);
-                                    resolve();
-                                },
-                                error(error: Error) {
-                                    global.mx.ui.error("error", error);
+                    if (widget) {
+                        const context = widget.mxcontext;
+                        restore.current(guid);
+                        (window as any).mx.data.action({
+                            params: {
+                                applyto: guid ? "selection" : "none",
+                                actionname: props.datasourceMicroflow,
+                                guids: guid ? [guid] : []
+                            },
+                            context,
+                            origin: widget.mxform,
+                            callback(objs: any[]) {
+                                const dataNodes = handleData(objs);
+                                if (guid) {
+                                    setTreeData(origin => updateTreeData(origin, guid, dataNodes));
+                                } else {
+                                    setTreeData(dataNodes);
                                 }
-                            });
+                                cacheMxobject(objs);
+                                resolve();
+                            },
+                            error(error: Error) {
+                                (window as any).mx.ui.error(error.message);
+                            }
+                        });
+                    }
+                }
+            }),
+        [widget, props.datasourceMicroflow, props.entity, props.isLeaf, props.title, cacheMxobject, restore]
+    );
+
+    const onSelect = useCallback(
+        (guids: string[] | undefined) => {
+            _require(["dojo/global"], (global: any) => {
+                if (widget && props.onSelectMicroflow) {
+                    global.mx.data.action({
+                        params: {
+                            applyto: "selection",
+                            actionname: props.onSelectMicroflow,
+                            guids
+                        },
+                        origin: widget.mxform,
+                        callback(objs: any) {
+                            console.log(objs);
+                        },
+                        error(error: Error) {
+                            global.mx.ui.error("error", error.message);
                         }
                     });
                 }
-            }),
-        [widget, props.datasourceMicroflow, props.entity, props.isLeaf, props.title]
+            });
+        },
+        [widget, props.onSelectMicroflow]
     );
 
     useEffect(() => {
-        _require(["dojo/global"], (global: any) => {
-            if (widget) {
-                global.mx.data.action({
-                    params: {
-                        applyto: "selection",
-                        actionname: "AntTree.Act_Multiple_Select",
-                        guids: ["16044073672507393", "16044073672507394", "16044073672507395"]
-                    },
-                    origin: widget.mxform,
-                    callback(objs: any) {
-                        console.log(objs);
-                        global.mx.ui.info(`ok with ${objs.length} objs`, false);
-                    },
-                    error(error: Error) {
-                        global.mx.ui.error("error", error);
-                    }
-                });
-            }
-        });
-        onLoadData({});
-    }, [widget, onLoadData]);
+        if (widget) {
+            onLoadData({});
+        }
+    }, [widget]);
+
+    const { run } = useDebounceFn(
+        () => {
+            onSelect(checkedKeys);
+        },
+        {
+            wait: 500
+        }
+    );
+
+    const onChange = useCallback(
+        (keys: string[]) => {
+            setCheckedKeys(keys);
+            run();
+        },
+        [setCheckedKeys, run]
+    );
+
+    useWhyDidYouUpdate("Tree", { ...props, restore, cacheMxobject });
 
     return (
         <div ref={ref}>
             <TreeContainer
                 checkedKeys={checkedKeys}
-                onChange={setCheckedKeys}
+                onChange={onChange}
                 loadData={onLoadData}
                 treeData={treeData}
             ></TreeContainer>

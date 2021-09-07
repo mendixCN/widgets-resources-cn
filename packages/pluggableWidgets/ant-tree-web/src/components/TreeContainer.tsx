@@ -30,9 +30,15 @@ export const TreeContainer = (props: TreeContainerProps): ReactElement => {
         <Tree
             defaultExpandedKeys={props.defaultExpandedKeys}
             checkedKeys={checkedKeys}
-            onCheck={(checked, info) => {
-                console.dir(checked, info);
-                setCheckedKeys(checked);
+            onCheck={(_, info) => {
+                const keys = [];
+                let sortedNodes = info.checkedNodesPositions!.sort((a, b) => a.pos.localeCompare(b.pos));
+                while (sortedNodes.length > 0) {
+                    const item = sortedNodes[0];
+                    keys.push(item.node.key);
+                    sortedNodes = sortedNodes.filter(d => !d.pos.startsWith(item.pos));
+                }
+                setCheckedKeys(keys);
             }}
             checkable
             loadData={props.loadData}

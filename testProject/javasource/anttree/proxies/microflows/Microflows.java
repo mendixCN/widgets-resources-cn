@@ -15,7 +15,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class Microflows
 {
 	// These are the microflows for the AntTree module
-	public static java.util.List<anttree.proxies.TreeNode> act_Multiple_Select(IContext context, java.util.List<anttree.proxies.TreeNode> _treeNodeList, anttree.proxies.TreeNode _treeNode)
+	public static void act_Multiple_Select(IContext context, java.util.List<anttree.proxies.TreeNode> _treeNodeList, anttree.proxies.TreeNode _treeNode)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		java.util.ArrayList<IMendixObject> listparam_treeNodeList = null;
@@ -28,15 +28,7 @@ public class Microflows
 		params.put("TreeNodeList", listparam_treeNodeList);
 
 		params.put("TreeNode", _treeNode == null ? null : _treeNode.getMendixObject());
-		java.util.List<IMendixObject> objs = Core.microflowCall("AntTree.Act_Multiple_Select").withParams(params).execute(context);
-		java.util.List<anttree.proxies.TreeNode> result = null;
-		if (objs != null)
-		{
-			result = new java.util.ArrayList<>();
-			for (IMendixObject obj : objs)
-				result.add(anttree.proxies.TreeNode.initialize(context, obj));
-		}
-		return result;
+		Core.microflowCall("AntTree.Act_Multiple_Select").withParams(params).execute(context);
 	}
 	public static java.util.List<anttree.proxies.TreeNode> dS_Tree(IContext context, anttree.proxies.TreeNode _treeNode)
 	{

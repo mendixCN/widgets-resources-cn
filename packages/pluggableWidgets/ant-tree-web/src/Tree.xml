@@ -27,6 +27,14 @@
                 <caption>节点标题属性名</caption>
                 <description></description>
             </property>
+            <property key="onSelectMicroflow" type="string" required="false" multiline="false">
+                <caption>选择事件微流名称</caption>
+                <description></description>
+            </property>
+            <property key="contextRefTreeNodeName" type="string" required="false" multiline="false">
+                <caption>上下文引用节点名</caption>
+                <description></description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
