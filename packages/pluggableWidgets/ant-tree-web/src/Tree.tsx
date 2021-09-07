@@ -92,24 +92,23 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
 
     const onSelect = useCallback(
         (guids: string[] | undefined) => {
-            _require(["dojo/global"], (global: any) => {
-                if (widget && props.onSelectMicroflow) {
-                    global.mx.data.action({
-                        params: {
-                            applyto: "selection",
-                            actionname: props.onSelectMicroflow,
-                            guids
-                        },
-                        origin: widget.mxform,
-                        callback(objs: any) {
-                            console.log(objs);
-                        },
-                        error(error: Error) {
-                            global.mx.ui.error("error", error.message);
-                        }
-                    });
-                }
-            });
+            if (widget && props.onSelectMicroflow) {
+                restore.current(guids);
+                (window as any).mx.data.action({
+                    params: {
+                        applyto: "selection",
+                        actionname: props.onSelectMicroflow,
+                        guids
+                    },
+                    origin: widget.mxform,
+                    callback(objs: any) {
+                        console.log(objs);
+                    },
+                    error(error: Error) {
+                        (window as any).mx.ui.error("error", error.message);
+                    }
+                });
+            }
         },
         [widget, props.onSelectMicroflow]
     );

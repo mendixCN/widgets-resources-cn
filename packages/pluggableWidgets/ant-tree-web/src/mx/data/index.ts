@@ -25,7 +25,7 @@ export function useMxCache() {
     const [map, { set, setAll, remove, reset, get }] = useMap<string, any>();
 
     const restore = useCallback(
-        (guids: string | string[]) => {
+        (guids: string | string[] | undefined) => {
             if (!guids) {
                 guids = [];
             }
