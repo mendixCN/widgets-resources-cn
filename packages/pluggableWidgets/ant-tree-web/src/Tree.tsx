@@ -10,8 +10,6 @@ import { DataNode } from "antd/lib/tree";
 import useMxWidget from "./useMxWidget";
 import { useMxCache } from "./mx/data";
 
-const _require = window.require as any;
-
 // It's just a simple demo. You can use tree map to optimize update perf.
 function updateTreeData(list: DataNode[], key: Key, children: DataNode[]): DataNode[] {
     return list.map(node => {
@@ -60,7 +58,6 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
 
                 if (props.datasourceMicroflow) {
                     if (widget) {
-                        const context = widget.mxcontext;
                         restore.current(guid);
                         (window as any).mx.data.action({
                             params: {
@@ -68,7 +65,7 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
                                 actionname: props.datasourceMicroflow,
                                 guids: guid ? [guid] : []
                             },
-                            context,
+                            context: widget.mxcontext,
                             origin: widget.mxform,
                             callback(objs: any[]) {
                                 const dataNodes = handleData(objs);
@@ -100,6 +97,7 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
                         actionname: props.onSelectMicroflow,
                         guids
                     },
+                    context: widget.mxcontext,
                     origin: widget.mxform,
                     callback(objs: any) {
                         console.log(objs);

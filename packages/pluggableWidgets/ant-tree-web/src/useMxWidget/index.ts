@@ -3,6 +3,7 @@ import { useRef, useState, MutableRefObject } from "react";
 const _require = window.require as any;
 
 export default (): [MutableRefObject<any>, any, any, any] => {
+    // TODO monitor context change
     const ref = useRef<any>();
     const [widget, setWidget] = useState<any>();
     const [mxContext, setMxContext] = useState<any>();
@@ -16,8 +17,10 @@ export default (): [MutableRefObject<any>, any, any, any] => {
                 if (widget2) {
                     setWidget(widget2);
                     setMxContext(widget2.mxform.getContext());
-                    setMxobj(widget2.mxform.getContext().getObject());
+                    setMxobj(widget2.mxcontext.getObject());
                     setInterval(null);
+
+                    // (window as any).mx.data.subscribe({guid:mxobj.getGuid(),callback:console.log});
                 }
             });
         },

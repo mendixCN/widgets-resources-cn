@@ -22,7 +22,7 @@ export function removeMxObjects(guids: string[]) {
 }
 
 export function useMxCache() {
-    const [map, { set, setAll, remove, reset, get }] = useMap<string, any>();
+    const [, { set, get }] = useMap<string, any>();
 
     const restore = useCallback(
         (guids: string | string[] | undefined) => {
