@@ -11,22 +11,16 @@ export interface TreeContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     datasourceMicroflow: string;
-    entity: string;
-    refName: string;
     isLeaf: string;
     title: string;
     onSelectMicroflow: string;
-    contextRefTreeNodeName: string;
 }
 
 export interface TreePreviewProps {
     class: string;
     style: string;
     datasourceMicroflow: string;
-    entity: string;
-    refName: string;
     isLeaf: string;
     title: string;
     onSelectMicroflow: string;
-    contextRefTreeNodeName: string;
 }

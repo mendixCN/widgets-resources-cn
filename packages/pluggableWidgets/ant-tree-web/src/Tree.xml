@@ -7,17 +7,9 @@
     <icon/>
     <properties>
         <propertyGroup caption="常规">
-            <property key="datasourceMicroflow" type="string" required="false" multiline="false">
+            <property key="datasourceMicroflow" type="string" required="true" multiline="false">
                 <caption>实体数据源</caption>
-                <description>可选，如有则优先按本逻辑取数;参数1，父节点（可选，empty表示获取第一级节点）；返回节点列表。</description>
-            </property>
-            <property key="entity" type="string" required="true" multiline="false">
-                <caption>节点实体</caption>
-                <description>模块名.实体名。例如：AntTree.TreeNode</description>
-            </property>
-            <property key="refName" type="string" required="true" multiline="false">
-                <caption>节点引用属性名</caption>
-                <description>模块名.属性名。例如：AntTree.TreeNode_TreeNode_Parent</description>
+                <description>参数1，父节点（可选，empty表示获取第一级节点）；返回节点列表。</description>
             </property>
             <property key="isLeaf" type="string" required="true" multiline="false">
                 <caption>节点类型属性名</caption>
@@ -29,10 +21,6 @@
             </property>
             <property key="onSelectMicroflow" type="string" required="false" multiline="false">
                 <caption>选择事件微流名称</caption>
-                <description></description>
-            </property>
-            <property key="contextRefTreeNodeName" type="string" required="false" multiline="false">
-                <caption>上下文引用节点名</caption>
                 <description></description>
             </property>
         </propertyGroup>

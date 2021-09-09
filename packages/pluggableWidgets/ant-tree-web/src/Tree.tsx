@@ -84,7 +84,7 @@ export const Tree = (props: TreeContainerProps): ReactElement => {
                     }
                 }
             }),
-        [widget, props.datasourceMicroflow, props.entity, props.isLeaf, props.title, cacheMxobject, restore]
+        [widget, props.datasourceMicroflow, props.isLeaf, props.title, cacheMxobject, restore]
     );
 
     const onSelect = useCallback(
