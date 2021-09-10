@@ -23,9 +23,9 @@ $ npm install
 ```json
 {
 //other
-"scripts":{
-"new":  "yo @mendix/widget packages/pluggableWidgets/{your-widget-name}-web"
-}
+  "scripts":{
+    "new":  "yo @mendix/widget packages/pluggableWidgets/{your-widget-name}-web"
+  }
 //other
 }
 ```
