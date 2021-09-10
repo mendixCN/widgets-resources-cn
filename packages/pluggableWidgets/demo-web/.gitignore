@@ -1,0 +1,5 @@
+dist/
+node_modules/
+C:\\d\\repo\\widgets-resources-cn\\testProject/
+*.log
+.env
