@@ -2,6 +2,7 @@ import { createElement } from "react";
 
 import "../ui/antd.css";
 import { Select } from "antd";
+import { useWhyDidYouUpdate } from "ahooks";
 
 export interface SelectOption {
     label: string;
@@ -13,24 +14,30 @@ export interface SelectComponentProps {
     value?: string;
     isMulti?: boolean;
     onChange?: (value: string) => void;
+    onPopupScroll?: (offset: number, pageSize: number) => void;
+    loading?: boolean;
+    onDropdownVisibleChange?: (open: boolean) => void;
 }
 
 export default function SelectComponent(props: SelectComponentProps) {
-    return props.options ? (
+    useWhyDidYouUpdate("SelectComponent", { ...props });
+
+    return (
         <Select
             allowClear
+            loading={props.loading}
             value={props.value}
+            listItemHeight={32}
             onChange={props.onChange}
+            onDropdownVisibleChange={props.onDropdownVisibleChange}
+            onPopupScroll={e => {
+                if (props.onPopupScroll) {
+                    props.onPopupScroll(Math.floor(e.currentTarget.scrollTop / 32), e.currentTarget.clientHeight / 32);
+                }
+            }}
             mode={props.isMulti ? "multiple" : undefined}
             style={{ width: "100%" }}
-        >
-            {props.options.map(item => (
-                <Select.Option key={item.value} value={item.value}>
-                    {item.label}
-                </Select.Option>
-            ))}
-        </Select>
-    ) : (
-        <Select loading></Select>
+            options={props.options}
+        ></Select>
     );
 }

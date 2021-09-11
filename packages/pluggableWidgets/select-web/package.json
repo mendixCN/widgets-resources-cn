@@ -31,8 +31,10 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
-    "antd": "^4.16.12",
+    "ahooks": "^2.10.9",
+    "antd": "^4.16.13",
     "@mendix-cn/piw-utils-internal": "^1.0.0",
+    "@mendix-cn/pluggable-widget-utils": "^1.0.0",
     "classnames": "^2.2.6"
   }
 }

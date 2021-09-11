@@ -24,6 +24,7 @@
                     <description></description>
                     <attributeTypes>
                         <attributeType name="String" />
+                        <attributeType name="Integer" />
                     </attributeTypes>
                 </property>
                 <property key="optionLabel" type="attribute" required="true" dataSource="options">
