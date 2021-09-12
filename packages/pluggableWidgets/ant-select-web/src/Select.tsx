@@ -7,6 +7,8 @@ import SelectComponent, { SelectOption } from "./components/SelectComponent";
 import "./ui/Select.css";
 import { useDebounceFn, useMount, usePrevious } from "ahooks";
 
+const LOADING_STRING = "_-_";
+
 export default function Select(props: SelectContainerProps) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     useMount(() => {
@@ -15,11 +17,20 @@ export default function Select(props: SelectContainerProps) {
     });
     const onChange = useCallback(
         (value: string) => {
-            if (props.value.status === ValueStatus.Available) {
-                props.value.setValue(value);
+            if (value.startsWith(LOADING_STRING)) {
+                return;
+            }
+            const selectedObjectItem = props.options.items?.find(d => d.id === value);
+            if (selectedObjectItem) {
+                if (props.value && props.value.status === ValueStatus.Available) {
+                    props.value.setValue(props.optionValue.get(selectedObjectItem).value?.toString());
+                }
+                if (props.onChange && props.options.status === ValueStatus.Available) {
+                    props.onChange?.get(selectedObjectItem).execute();
+                }
             }
         },
-        [props.value]
+        [props.value, props.options]
     );
 
     const isMulti = useMemo(() => {
@@ -35,11 +46,11 @@ export default function Select(props: SelectContainerProps) {
 
     const options = useMemo(() => {
         if (props.options.status === ValueStatus.Available) {
-            const loadingOption: SelectOption = { value: "-", label: "加载中。。。" };
+            const loadingOption: SelectOption = { value: LOADING_STRING, label: "加载中。。。" };
 
             const page = props.options.items?.map<SelectOption>(item => ({
                 label: props.optionLabel.get(item).value!,
-                value: props.optionValue.get(item).value!.toString()
+                value: item.id
             }));
 
             const leftOptions = Array(props.options.offset).fill(loadingOption);
@@ -51,7 +62,13 @@ export default function Select(props: SelectContainerProps) {
             return leftOptions
                 .concat(page)
                 .concat(rightOptions)
-                .map((v, i) => ({ label: v.label, value: i.toString() }));
+                .map((v, i) => {
+                    if (v.value === LOADING_STRING) {
+                        return { label: v.label, value: LOADING_STRING + i.toString() };
+                    } else {
+                        return v;
+                    }
+                });
         }
     }, [props.options]);
 
@@ -60,7 +77,7 @@ export default function Select(props: SelectContainerProps) {
     const [value, setValue] = useState<string>();
 
     useEffect(() => {
-        if (props.value.status === ValueStatus.Available) {
+        if (props.value && props.value.status === ValueStatus.Available) {
             setValue(props.value.value);
         }
     }, [props.value]);

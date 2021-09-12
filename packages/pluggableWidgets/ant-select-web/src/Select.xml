@@ -12,7 +12,7 @@
                     <caption>选项数据源</caption>
                     <description></description>
                 </property>
-                <property key="value" type="attribute" required="true" onChange="onChange">
+                <property key="value" type="attribute" required="false">
                     <caption>所选值</caption>
                     <description></description>
                     <attributeTypes>
@@ -36,7 +36,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Behavior">
-                <property key="onChange" type="action">
+                <property key="onChange" type="action" dataSource="options">
                     <caption>所选值变化</caption>
                     <description></description>
                 </property>

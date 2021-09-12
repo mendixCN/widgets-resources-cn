@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue, ListValue, ListAttributeValue } from "mendix";
+import { EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
 import { Big } from "big.js";
 
 export interface SelectContainerProps {
@@ -13,10 +13,10 @@ export interface SelectContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     options: ListValue;
-    value: EditableValue<string>;
+    value?: EditableValue<string>;
     optionValue: ListAttributeValue<string | Big>;
     optionLabel: ListAttributeValue<string>;
-    onChange?: ActionValue;
+    onChange?: ListActionValue;
     isMultiConst: boolean;
     isMutiAttribute?: EditableValue<boolean>;
 }

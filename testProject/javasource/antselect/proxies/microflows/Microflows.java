@@ -15,15 +15,15 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class Microflows
 {
 	// These are the microflows for the AntSelect module
-	public static void act_Random_100000(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("AntSelect.Act_Random_100000").withParams(params).execute(context);
-	}
 	public static void act_Random_300(IContext context)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		Core.microflowCall("AntSelect.Act_Random_300").withParams(params).execute(context);
+	}
+	public static void act_Random_50000(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("AntSelect.Act_Random_50000").withParams(params).execute(context);
 	}
 	public static void act_Random_Data(IContext context, java.lang.Long _radomCount)
 	{
@@ -37,10 +37,11 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("AntSelect.DS_Select").withParams(params).execute(context);
 		return result == null ? null : antselect.proxies.SelectContext.initialize(context, result);
 	}
-	public static void onSelect(IContext context, antselect.proxies.SelectContext _selectContext)
+	public static void onSelect(IContext context, antselect.proxies.SelectContext _selectContext, antselect.proxies.Option _option)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		params.put("SelectContext", _selectContext == null ? null : _selectContext.getMendixObject());
+		params.put("Option", _option == null ? null : _option.getMendixObject());
 		Core.microflowCall("AntSelect.OnSelect").withParams(params).execute(context);
 	}
 }
