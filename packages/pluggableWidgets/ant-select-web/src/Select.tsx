@@ -12,7 +12,7 @@ const LOADING_STRING = "_-_";
 export default function Select(props: SelectContainerProps) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     useMount(() => {
-        props.options.setLimit(10);
+        props.options.setLimit(100);
         props.options.requestTotalCount(true);
     });
     const onChange = useCallback(

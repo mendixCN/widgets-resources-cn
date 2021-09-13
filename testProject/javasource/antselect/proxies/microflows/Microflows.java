@@ -20,10 +20,15 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		Core.microflowCall("AntSelect.Act_Random_300").withParams(params).execute(context);
 	}
-	public static void act_Random_50000(IContext context)
+	public static void act_Random_5K(IContext context)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("AntSelect.Act_Random_50000").withParams(params).execute(context);
+		Core.microflowCall("AntSelect.Act_Random_5K").withParams(params).execute(context);
+	}
+	public static void act_Random_5M(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("AntSelect.Act_Random_5M").withParams(params).execute(context);
 	}
 	public static void act_Random_Data(IContext context, java.lang.Long _radomCount)
 	{
