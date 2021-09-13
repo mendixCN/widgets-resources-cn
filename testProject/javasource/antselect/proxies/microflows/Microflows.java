@@ -15,15 +15,15 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 public class Microflows
 {
 	// These are the microflows for the AntSelect module
+	public static void act_Random_20K(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("AntSelect.Act_Random_20K").withParams(params).execute(context);
+	}
 	public static void act_Random_300(IContext context)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		Core.microflowCall("AntSelect.Act_Random_300").withParams(params).execute(context);
-	}
-	public static void act_Random_5K(IContext context)
-	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("AntSelect.Act_Random_5K").withParams(params).execute(context);
 	}
 	public static void act_Random_5M(IContext context)
 	{
