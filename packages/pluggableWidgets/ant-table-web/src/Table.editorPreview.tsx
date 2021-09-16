@@ -1,5 +1,4 @@
 import { TablePreviewProps } from "../typings/TableProps";
-import TableComponent from "./components/TableComponent";
 import { Tag, Space } from "antd";
 import {
     Component,
@@ -13,6 +12,7 @@ import {
     ReactNodeArray,
     ReactPortal
 } from "react";
+import TableWrapper from "./components/TableWrapper";
 declare function require(name: string): string;
 
 const data: any[] = [
@@ -105,7 +105,7 @@ const columns = [
 
 export class preview extends Component<TablePreviewProps> {
     render(): ReactNode {
-        return <TableComponent columns={columns} dataSource={data}></TableComponent>;
+        return <TableWrapper enablePaging={this.props.enablePaging} columns={columns} dataSource={data}></TableWrapper>;
     }
 }
 

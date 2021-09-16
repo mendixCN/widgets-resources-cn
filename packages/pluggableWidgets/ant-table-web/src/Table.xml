@@ -115,6 +115,10 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="行配置">
+                <property key="enablePaging" type="boolean" defaultValue="true">
+                    <caption>是否开启分页</caption>
+                    <description></description>
+                </property>
                 <property key="pageSize" type="integer" defaultValue="20">
                     <caption>Page size</caption>
                     <description/>

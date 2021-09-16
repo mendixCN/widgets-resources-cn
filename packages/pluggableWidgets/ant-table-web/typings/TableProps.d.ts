@@ -56,6 +56,7 @@ export interface TableContainerProps {
     tabIndex?: number;
     datasource: ListValue;
     columns: ColumnsType[];
+    enablePaging: boolean;
     pageSize: number;
 }
 
@@ -64,5 +65,6 @@ export interface TablePreviewProps {
     style: string;
     datasource: {} | { type: string } | null;
     columns: ColumnsPreviewType[];
+    enablePaging: boolean;
     pageSize: number | null;
 }

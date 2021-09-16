@@ -1,7 +1,7 @@
-import "../ui/index.scss";
 import { Table } from "antd";
 import { createElement } from "react";
 import { ColumnsType } from "antd/lib/table";
+import { useWhyDidYouUpdate } from "ahooks";
 
 export interface TableComponentProps {
     columns: ColumnsType<any>;
@@ -9,6 +9,7 @@ export interface TableComponentProps {
 }
 
 function TableComponent(props: TableComponentProps) {
+    useWhyDidYouUpdate("TableComponent", { ...props });
     return <Table columns={props.columns} dataSource={props.dataSource} />;
 }
 

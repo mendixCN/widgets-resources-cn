@@ -15,6 +15,7 @@
   },
   "packagePath": "mendix",
   "scripts": {
+    "i": "npm i",
     "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
@@ -28,11 +29,13 @@
     "@types/big.js": "^6.0.2",
     "@types/classnames": "^2.2.4",
     "@types/react": "~17.0.1",
-    "@types/react-dom": "~17.0.1"
+    "@types/react-dom": "~17.0.1",
+    "@types/react-window": "^1.8.5"
   },
   "dependencies": {
     "@mendix-cn/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
+    "react-window": "^1.8.6",
     "antd": "^4.16.13",
     "ahooks": "^2.10.9"
   }

@@ -15,6 +15,9 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
+    if (!values.enablePaging) {
+        hidePropertyIn(defaultProperties, values, "pageSize");
+    }
     values.columns.forEach((column, index) => {
         if (column.showContentAs !== "dynamicText") {
             hidePropertyIn(defaultProperties, values, "columns", index, "dynamicText");

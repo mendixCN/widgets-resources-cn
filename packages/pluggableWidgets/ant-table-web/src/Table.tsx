@@ -1,29 +1,40 @@
 import { ColumnsType } from "antd/lib/table";
 import { createElement, ReactNode, useEffect, useMemo } from "react";
-import { ValueStatus } from "mendix";
 
 import { TableContainerProps } from "../typings/TableProps";
 
-import TableComponent from "./components/TableComponent";
+import TableWrapper from "./components/TableWrapper";
 
 export default function Table(props: TableContainerProps) {
-    console.log(props);
-
     useEffect(() => {
         props.datasource.requestTotalCount(true);
-        props.datasource.setLimit(props.pageSize);
-    }, [props.datasource, props.pageSize]);
+        if (props.enablePaging) {
+            props.datasource.setLimit(props.pageSize);
+        }
+    }, [props.datasource, props.pageSize, props.enablePaging]);
 
     const columns: ColumnsType = useMemo(() => {
         return props.columns.map(c => {
             return {
                 title: c.header?.value,
-                render: (_, record: any, index: number): ReactNode => {
+                render: (_, record: any, _2: number): ReactNode => {
+                    if (c.showContentAs === "customContent") {
+                        return c.content!.get(record);
+                    }
+                    if (c.showContentAs === "dynamicText") {
+                        return c.dynamicText!.get(record).value;
+                    }
                     return <span>{c.attribute?.get(record).value?.toString()}</span>;
                 }
             };
         });
     }, [props.columns]);
 
-    return <TableComponent dataSource={props.datasource.items} columns={columns}></TableComponent>;
+    return (
+        <TableWrapper
+            enablePaging={props.enablePaging}
+            dataSource={props.datasource.items}
+            columns={columns}
+        ></TableWrapper>
+    );
 }
