@@ -10,7 +10,7 @@ export interface TableComponentProps {
 
 function TableComponent(props: TableComponentProps) {
     useWhyDidYouUpdate("TableComponent", { ...props });
-    return <Table columns={props.columns} dataSource={props.dataSource} />;
+    return <Table rowKey="id" columns={props.columns} dataSource={props.dataSource} />;
 }
 
 export default TableComponent;

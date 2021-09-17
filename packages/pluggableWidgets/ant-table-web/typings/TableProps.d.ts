@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { DynamicValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 import { Big } from "big.js";
 
 export type ShowContentAsEnum = "attribute" | "dynamicText" | "customContent";
@@ -58,6 +58,7 @@ export interface TableContainerProps {
     columns: ColumnsType[];
     enablePaging: boolean;
     pageSize: number;
+    onRowSelect?: ListActionValue;
 }
 
 export interface TablePreviewProps {
@@ -67,4 +68,5 @@ export interface TablePreviewProps {
     columns: ColumnsPreviewType[];
     enablePaging: boolean;
     pageSize: number | null;
+    onRowSelect: {} | null;
 }

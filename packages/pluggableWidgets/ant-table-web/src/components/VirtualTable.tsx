@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef, createElement, Key } from "react";
+import React, { useState, useEffect, useRef, createElement } from "react";
 import { GridItemKeySelector, VariableSizeGrid as Grid } from "react-window";
 import ResizeObserver from "rc-resize-observer";
 import classNames from "classnames";
 import { Table } from "antd";
 
-const itemKey: GridItemKeySelector = ({ columnIndex: _1, rowIndex: _2, data }) => data.getGuid() as Key;
+const itemKey: GridItemKeySelector = ({ columnIndex, rowIndex, data }) => {
+    return (data[rowIndex] as any).id + ":" + columnIndex;
+};
 
 export function VirtualTable(props: Parameters<typeof Table>[0]) {
     const { columns, scroll } = props;
@@ -53,6 +55,7 @@ export function VirtualTable(props: Parameters<typeof Table>[0]) {
         return (
             <Grid
                 ref={gridRef}
+                itemData={rawData}
                 itemKey={itemKey}
                 className="virtual-grid"
                 columnCount={mergedColumns.length}
