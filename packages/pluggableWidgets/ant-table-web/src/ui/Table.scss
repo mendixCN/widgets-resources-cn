@@ -1,9 +1,9 @@
-/*
-Place your custom CSS here
-*/
-.widget-hello-world {
+.form-group {
+    margin-bottom: unset;
 }
-
-body {
-    background: red;
+.form-control {
+    padding: unset;
+}
+input[type="checkbox"] {
+    position: absolute !important;
 }
