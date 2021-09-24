@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendix.unity.Unity" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Unity</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="unityModelPath" type="string" required="false" multiline="false">
+                <caption>unity webgl path</caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Behavior">
+            <propertyGroup caption="输入">
+                <property key="inputs" type="object" isList="true" required="false">
+                    <caption>输入</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="gameObjectName" type="string" required="true" multiline="false">
+                                <caption>游戏对象名称</caption>
+                                <description></description>
+                            </property>
+                            <property key="methodName" type="string" required="false" multiline="false">
+                                <caption>方法名称</caption>
+                                <description></description>
+                            </property>
+                            <property key="paramType" type="enumeration" defaultValue="pt_string" required="true">
+                                <caption>参数类型</caption>
+                                <description></description>
+                                <enumerationValues>
+                                    <enumerationValue key="pt_string">string</enumerationValue>
+                                    <enumerationValue key="pt_number">number</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="stringValue" type="string" required="true" multiline="false">
+                                <caption>字符值</caption>
+                                <description></description>
+                            </property>
+                            <property key="numberValue" type="integer" defaultValue="1" required="true">
+                                <caption>数字值</caption>
+                                <description></description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="输出">
+                <property key="outputs" type="object" isList="true" required="false">
+                    <caption>输出</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="eventName" type="string" required="true" multiline="false">
+                                <caption>事件名称</caption>
+                                <description></description>
+                            </property>
+                            <property key="paramType" type="enumeration" defaultValue="pt_string" required="true">
+                                <caption>参数类型</caption>
+                                <description></description>
+                                <enumerationValues>
+                                    <enumerationValue key="pt_string">string</enumerationValue>
+                                    <enumerationValue key="pt_number">number</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="stringValue" type="string" required="true" multiline="false">
+                                <caption>字符值</caption>
+                                <description></description>
+                            </property>
+                            <property key="numberValue" type="integer" defaultValue="1" required="true">
+                                <caption>数字值</caption>
+                                <description></description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

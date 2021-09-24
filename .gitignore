@@ -6,3 +6,5 @@ testProject/deployment
 docker-mendix-buildpack
 testProject8x/deployment
 testProject/testProject.mpr.lock
+
+testProject/releases
