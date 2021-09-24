@@ -14,6 +14,11 @@ import com.mendix.systemwideinterfaces.core.IContext;
 public class Microflows
 {
 	// These are the microflows for the AntTable module
+	public static void act_Ramdom_TableDataItem(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("AntTable.Act_Ramdom_TableDataItem").withParams(params).execute(context);
+	}
 	public static void act_Table_Row_Select(IContext context, anttable.proxies.TableDataItem _tableDataItem)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();

@@ -1,4 +1,5 @@
 import { Tag, Space } from "antd";
+import { SizeType } from "antd/lib/config-provider/SizeContext";
 import { createElement, Fragment } from "react";
 import TableWrapper from "./TableWrapper";
 
@@ -74,6 +75,15 @@ const columns = [
     }
 ];
 
-export default function PreviewComponent(props: { enablePaging: boolean }) {
-    return <TableWrapper enablePaging={props.enablePaging} columns={columns} dataSource={data}></TableWrapper>;
+export default function PreviewComponent(props: { enablePaging: boolean; size: SizeType; fillContainer: boolean }) {
+    return (
+        <TableWrapper
+            fillContainer={props.fillContainer}
+            name="preview"
+            size="large"
+            enablePaging={props.enablePaging}
+            columns={columns}
+            dataSource={data}
+        ></TableWrapper>
+    );
 }

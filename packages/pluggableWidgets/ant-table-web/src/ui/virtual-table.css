@@ -23,3 +23,7 @@
     background: #e6f7ff;
     border-color: #00000008;
 }
+
+.virtual-table-row-selected.virtual-table-row-hover {
+    background: #dcf4ff;
+}

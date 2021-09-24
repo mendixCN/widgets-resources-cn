@@ -7,6 +7,8 @@ import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 import { Big } from "big.js";
 
+export type SizeEnum = "small" | "middle" | "large";
+
 export type ShowContentAsEnum = "attribute" | "dynamicText" | "customContent";
 
 export type HidableEnum = "yes" | "hidden" | "no";
@@ -55,18 +57,22 @@ export interface TableContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     datasource: ListValue;
+    size: SizeEnum;
     columns: ColumnsType[];
     enablePaging: boolean;
     pageSize: number;
     onRowSelect?: ListActionValue;
+    fillContainer: boolean;
 }
 
 export interface TablePreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
+    size: SizeEnum;
     columns: ColumnsPreviewType[];
     enablePaging: boolean;
     pageSize: number | null;
     onRowSelect: {} | null;
+    fillContainer: boolean;
 }

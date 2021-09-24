@@ -12,6 +12,15 @@
                     <caption>Data source</caption>
                     <description/>
                 </property>
+                <property key="size" type="enumeration" defaultValue="large">
+                    <caption>表格大小</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="small">小</enumerationValue>
+                        <enumerationValue key="middle">中</enumerationValue>
+                        <enumerationValue key="large">大</enumerationValue>
+                    </enumerationValues>
+                </property>
             </propertyGroup>
             <propertyGroup caption="列配置">
                 <property key="columns" type="object" isList="true">
@@ -130,6 +139,14 @@
                 <property key="onRowSelect" type="action" dataSource="datasource">
                     <caption>行选择事件</caption>
                     <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="布局">
+            <propertyGroup caption="滚动">
+                <property key="fillContainer" type="boolean" defaultValue="false">
+                    <caption>填充容器</caption>
+                    <description>表格高度跟随容器高度</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
