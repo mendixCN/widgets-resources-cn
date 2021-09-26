@@ -6,7 +6,7 @@ declare function require(name: string): string;
 
 export function preview(props: UnityPreviewProps) {
     console.log(props);
-    return <UnityFC modelPath={props.unityModelPath} class={props.class}></UnityFC>;
+    return <UnityFC name={""} hoverMethod="" modelPath={props.unityModelPath} class={props.class}></UnityFC>;
 }
 
 export function getPreviewCss(): string {

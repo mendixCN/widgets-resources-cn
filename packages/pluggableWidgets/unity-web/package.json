@@ -9,7 +9,7 @@
     "node": ">=12"
   },
   "config": {
-    "projectPath": "C:/Users/eg/Documents/GitHub/BigScreenForZhonghang",
+    "projectPath": "../../../testProject/",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
