@@ -9,7 +9,7 @@
 1. Clone this repository
 
 ```sh
-$ git clone --recursive https://github.com/mendix/widgets-resources.git
+$ git clone --recursive https://github.com/mendixCN/widgets-resources-cn.git
 $ cd widgets-resources
 ```
 
