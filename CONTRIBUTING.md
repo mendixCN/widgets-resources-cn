@@ -10,7 +10,7 @@
 
 ```sh
 $ git clone --recursive https://github.com/mendixCN/widgets-resources-cn.git
-$ cd widgets-resources
+$ cd widgets-resources-cn
 ```
 
 2. Install and link dependencies
