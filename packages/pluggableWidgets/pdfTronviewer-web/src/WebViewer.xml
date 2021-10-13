@@ -9,14 +9,14 @@
     <properties>
         <propertyGroup caption="General">
              <property key="urlAttribute" type="attribute">
-                <caption>Attribute (path)</caption>
+                <caption>File URL</caption>
                 <description/>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
              <property key="fileName" type="attribute">
-                <caption>FileName Attribute</caption>
+                <caption>FileName</caption>
                 <description>Should choose System.FileDocument/Name if inherited from that</description>
                 <attributeTypes>
                     <attributeType name="String"/>
