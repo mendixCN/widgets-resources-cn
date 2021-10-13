@@ -1,0 +1,35 @@
+{
+  "name": "webviewer",
+  "widgetName": "WebViewer",
+  "version": "1.0.0",
+  "description": "Document viewer for office and pdf file types. Thanks to pdfTron, we get inspiration from their initiative work",
+  "copyright": "2021 Mendix",
+  "author": "Wen Yunlong",
+  "config": {
+    "projectPath": "../..//",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "packagePath": "pdftron",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "license": "",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^8.14.0",
+    "@types/big.js": "^4.0.5",
+    "@types/classnames": "^2.2.4",
+    "@types/react": "~16.9.0",
+    "@types/react-dom": "~16.9.0"
+  },
+  "dependencies": {
+    "@pdftron/webviewer": "^7.1.0",
+    "classnames": "^2.2.6"
+  }
+}
