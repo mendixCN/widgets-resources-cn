@@ -6,7 +6,7 @@ declare function require(name: string): string;
 
 export class preview extends Component<FileViewerPreviewProps> {
     render(): ReactNode {
-        return <PDFViewer mendixProps={this.props} />;
+        return <PDFViewer />;
     }
 }
 
