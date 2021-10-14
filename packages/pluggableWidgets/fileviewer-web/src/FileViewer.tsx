@@ -9,10 +9,10 @@ export default function FileViewer(props: FileViewerContainerProps) {
     const [fileName, setFileName] = useState<string | undefined>();
 
     useEffect(() => {
-        if (props.urlAttribute.status == ValueStatus.Available) {
+        if (props.urlAttribute.status === ValueStatus.Available) {
             setPath(props.urlAttribute.value?.toString());
         }
-        if (props.fileName.status == ValueStatus.Available) {
+        if (props.fileName.status === ValueStatus.Available) {
             setFileName(props.fileName.value?.toString());
         }
     }, [props.fileName, props.urlAttribute]);
