@@ -13,6 +13,7 @@ export function preview(props: AntIconPreviewProps) {
             icon={props.datasourceType === "addon" ? props.value : props.buildInIcon}
             class={props.class}
             style={parseStyle(props.style)}
+            spin={props.spin}
         />
     );
 }

@@ -8,8 +8,9 @@ export interface AntIconComponentProps {
     class: string;
     style?: CSSProperties | undefined;
     tabIndex?: number;
-    icon: string;
+    icon?: string;
     iconSourceList?: string[];
+    spin?: boolean;
 }
 
 export default function AntIconComponent(props: AntIconComponentProps) {
@@ -21,6 +22,7 @@ export default function AntIconComponent(props: AntIconComponentProps) {
             className={props.class}
             style={props.style}
             tabIndex={props.tabIndex}
+            spin={props.spin}
         />
     );
 }

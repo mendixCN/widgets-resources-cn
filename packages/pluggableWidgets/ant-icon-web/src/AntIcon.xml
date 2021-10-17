@@ -155,6 +155,10 @@
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
+                <property key="spin" type="boolean" defaultValue="false">
+                    <caption>是否旋转</caption>
+                    <description></description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="图标源">
                 <property key="iconSourceList" type="object" isList="true" required="false">

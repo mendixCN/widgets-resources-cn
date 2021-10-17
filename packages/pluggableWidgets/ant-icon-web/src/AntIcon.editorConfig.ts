@@ -29,6 +29,9 @@ export function getProperties(
     } else {
         hidePropertiesIn(defaultProperties, values, ["value", "iconSourceList"]);
     }
+    if (values.valueAttribute) {
+        hidePropertiesIn(defaultProperties, values, ["value", "buildInIcon"]);
+    }
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
@@ -58,7 +61,11 @@ export const getPreview = (values: AntIconPreviewProps): StructurePreviewProps =
             },
             {
                 type: "Text",
-                content: values.datasourceType === "addon" ? values.value : values.buildInIcon
+                content: values.valueAttribute
+                    ? `{{绑定属性 ${values.valueAttribute}}}`
+                    : values.datasourceType === "addon"
+                    ? values.value
+                    : values.buildInIcon
             }
         ]
     };
@@ -70,7 +77,7 @@ export const getPreview = (values: AntIconPreviewProps): StructurePreviewProps =
 
 export function check(values: AntIconPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (values.datasourceType === "addon" && values.value === "") {
+    if (values.datasourceType === "addon" && !values.valueAttribute && values.value === "") {
         errors.push({
             message: "图标代码不能为空"
         });
