@@ -1,8 +1,8 @@
 import { createElement, CSSProperties } from "react";
-import create from "./IconFont";
+import create, { BuildinIconScriptUrl } from "./IconFont";
 
 const IconFont = create({
-    scriptUrl: "widgets/resources/font_8d5l8fzk5b87iudi.js"
+    scriptUrl: BuildinIconScriptUrl
 });
 
 export interface AntIconComponentProps {

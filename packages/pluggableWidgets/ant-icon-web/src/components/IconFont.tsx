@@ -1,6 +1,9 @@
 import { createElement, forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from "react";
 import Icon, { IconBaseProps } from "./Icon";
+import "./font_8d5l8fzk5b87iudi";
 
+// scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js"
+export const BuildinIconScriptUrl = "widgets/resources/font_8d5l8fzk5b87iudi.js";
 const customCache = new Set<string>();
 
 export interface CustomIconOptions {
@@ -16,7 +19,7 @@ function isValidCustomScriptUrl(scriptUrl: string): boolean {
     return Boolean(typeof scriptUrl === "string" && scriptUrl.length && !customCache.has(scriptUrl));
 }
 
-function createScriptUrlElements(scriptUrls: string[], index: number = 0): void {
+function createScriptUrlElements(scriptUrls: string[], index = 0): void {
     const currentScriptUrl = scriptUrls[index];
     if (isValidCustomScriptUrl(currentScriptUrl)) {
         const script = document.createElement("script");
