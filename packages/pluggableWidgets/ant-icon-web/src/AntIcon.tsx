@@ -1,12 +1,18 @@
-import { Component, ReactNode, createElement } from "react";
-import { HelloWorldSample } from "./components/HelloWorldSample";
+import { createElement } from "react";
 
 import { AntIconContainerProps } from "../typings/AntIconProps";
+import AntIconComponent from "./components/AntIconComponent";
 
-import "./ui/AntIcon.css";
+import "./ui/AntIcon.scss";
 
-export default class AntIcon extends Component<AntIconContainerProps> {
-    render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} />;
-    }
+export default function AntIcon(props: AntIconContainerProps) {
+    return (
+        <AntIconComponent
+            class={props.class}
+            style={props.style}
+            name={props.name}
+            tabIndex={props.tabIndex}
+            icon={props.buildInIcon}
+        ></AntIconComponent>
+    );
 }
