@@ -1,9 +1,7 @@
 import { createElement, CSSProperties } from "react";
-import create, { BuildinIconScriptUrl } from "./IconFont";
+import create, { BuildinIconScriptUrl, loadIconLib } from "./IconFont";
 
-const IconFont = create({
-    scriptUrl: BuildinIconScriptUrl
-});
+const IconFont = create();
 
 export interface AntIconComponentProps {
     name?: string;
@@ -11,9 +9,11 @@ export interface AntIconComponentProps {
     style?: CSSProperties | undefined;
     tabIndex?: number;
     icon: string;
+    iconSourceList?: string[];
 }
 
 export default function AntIconComponent(props: AntIconComponentProps) {
+    loadIconLib(props.iconSourceList ? props.iconSourceList : BuildinIconScriptUrl);
     return (
         <IconFont
             type={"icon-" + props.icon}

@@ -8,133 +8,168 @@
     <studioCategory>AntDesign</studioCategory>
     <properties>
         <propertyGroup caption="General">
-            <property key="buildInIcon" type="enumeration" defaultValue="tuichu" required="true">
-                <caption>内置图标选择</caption>
-                <description></description>
-                <enumerationValues>
-                    <enumerationValue key="tuichu">退出</enumerationValue>
-                    <enumerationValue key= "fanhui">返回</enumerationValue>
-                    <enumerationValue key= "facebook">脸书</enumerationValue>
-                    <enumerationValue key= "twitter">推特</enumerationValue>
-                    <enumerationValue key= "xiangyou">xiangyou</enumerationValue>
-                    <enumerationValue key= "right">right</enumerationValue>
-                    <enumerationValue key= "fanhui1">fanhui1</enumerationValue>
-                    <enumerationValue key= "fenxiang">fenxiang</enumerationValue>
-                    <enumerationValue key= "xiangxia">xiangxia</enumerationValue>
-                    <enumerationValue key= "xiangxia1">xiangxia1</enumerationValue>
-                    <enumerationValue key= "xiangxia2">xiangxia2</enumerationValue>
-                    <enumerationValue key= "suofang">suofang</enumerationValue>
-                    <enumerationValue key= "chexiao">chexiao</enumerationValue>
-                    <enumerationValue key= "esc">esc</enumerationValue>
-                    <enumerationValue key= "chexiao1">chexiao1</enumerationValue>
-                    <enumerationValue key= "iconfont">iconfont</enumerationValue>
-                    <enumerationValue key= "suoding">suoding</enumerationValue>
-                    <enumerationValue key= "bianji">bianji</enumerationValue>
-                    <enumerationValue key= "shoucang2">shoucang2</enumerationValue>
-                    <enumerationValue key= "xinjian">xinjian</enumerationValue>
-                    <enumerationValue key= "shoucang1">shoucang1</enumerationValue>
-                    <enumerationValue key= "gongkai">gongkai</enumerationValue>
-                    <enumerationValue key= "gouwuche1">gouwuche1</enumerationValue>
-                    <enumerationValue key= "zhongwen">zhongwen</enumerationValue>
-                    <enumerationValue key= "shangchuan">shangchuan</enumerationValue>
-                    <enumerationValue key= "yingwen">yingwen</enumerationValue>
-                    <enumerationValue key= "gouwuche2">gouwuche2</enumerationValue>
-                    <enumerationValue key= "shanchu">shanchu</enumerationValue>
-                    <enumerationValue key= "xiazai">xiazai</enumerationValue>
-                    <enumerationValue key= "sousuo">sousuo</enumerationValue>
-                    <enumerationValue key= "dashang">dashang</enumerationValue>
-                    <enumerationValue key= "xiangmu">xiangmu</enumerationValue>
-                    <enumerationValue key= "fuzhidaima1">fuzhidaima1</enumerationValue>
-                    <enumerationValue key= "wofaqi">wofaqi</enumerationValue>
-                    <enumerationValue key= "xiangmuchengyuan">xiangmuchengyuan</enumerationValue>
-                    <enumerationValue key= "gengduo">gengduo</enumerationValue>
-                    <enumerationValue key= "wocanyu">wocanyu</enumerationValue>
-                    <enumerationValue key= "lishi">lishi</enumerationValue>
-                    <enumerationValue key= "piliang">piliang</enumerationValue>
-                    <enumerationValue key= "shijian">shijian</enumerationValue>
-                    <enumerationValue key= "gonggao">gonggao</enumerationValue>
-                    <enumerationValue key= "weixin">weixin</enumerationValue>
-                    <enumerationValue key= "weibo">weibo</enumerationValue>
-                    <enumerationValue key= "gerenzhanghu">gerenzhanghu</enumerationValue>
-                    <enumerationValue key= "tianjiachengyuan">tianjiachengyuan</enumerationValue>
-                    <enumerationValue key= "soutubiao">soutubiao</enumerationValue>
-                    <enumerationValue key= "souren">souren</enumerationValue>
-                    <enumerationValue key= "yuzhanghao">yuzhanghao</enumerationValue>
-                    <enumerationValue key= "biaoqing">biaoqing</enumerationValue>
-                    <enumerationValue key= "qq">qq</enumerationValue>
-                    <enumerationValue key= "weibo1">weibo1</enumerationValue>
-                    <enumerationValue key= "zuoxuan">zuoxuan</enumerationValue>
-                    <enumerationValue key= "fangda2">fangda2</enumerationValue>
-                    <enumerationValue key= "zuo2">zuo2</enumerationValue>
-                    <enumerationValue key= "suoxiao">suoxiao</enumerationValue>
-                    <enumerationValue key= "you2">you2</enumerationValue>
-                    <enumerationValue key= "suoxiao2">suoxiao2</enumerationValue>
-                    <enumerationValue key= "youxuan2">youxuan2</enumerationValue>
-                    <enumerationValue key= "zuo">zuo</enumerationValue>
-                    <enumerationValue key= "zuoxuan2">zuoxuan2</enumerationValue>
-                    <enumerationValue key= "shang">shang</enumerationValue>
-                    <enumerationValue key= "shang2">shang2</enumerationValue>
-                    <enumerationValue key= "youxuan">youxuan</enumerationValue>
-                    <enumerationValue key= "xia2">xia2</enumerationValue>
-                    <enumerationValue key= "fangda">fangda</enumerationValue>
-                    <enumerationValue key= "xia">xia</enumerationValue>
-                    <enumerationValue key= "you">you</enumerationValue>
-                    <enumerationValue key= "zhuanrang">zhuanrang</enumerationValue>
-                    <enumerationValue key= "dianzan">dianzan</enumerationValue>
-                    <enumerationValue key= "huifu">huifu</enumerationValue>
-                    <enumerationValue key= "saoyisao">saoyisao</enumerationValue>
-                    <enumerationValue key= "shuoming">shuoming</enumerationValue>
-                    <enumerationValue key= "jinggao">jinggao</enumerationValue>
-                    <enumerationValue key= "jieshi">jieshi</enumerationValue>
-                    <enumerationValue key= "youxiang">youxiang</enumerationValue>
-                    <enumerationValue key= "guanbi">guanbi</enumerationValue>
-                    <enumerationValue key= "qunzhu">qunzhu</enumerationValue>
-                    <enumerationValue key= "fuzhichenggong">fuzhichenggong</enumerationValue>
-                    <enumerationValue key= "weijiaru">weijiaru</enumerationValue>
-                    <enumerationValue key= "daishenhe">daishenhe</enumerationValue>
-                    <enumerationValue key= "shenhetongguo">shenhetongguo</enumerationValue>
-                    <enumerationValue key= "shenhejujue">shenhejujue</enumerationValue>
-                    <enumerationValue key= "xinjiantubiaoku">xinjiantubiaoku</enumerationValue>
-                    <enumerationValue key= "tubiaoku">tubiaoku</enumerationValue>
-                    <enumerationValue key= "gouwuche">gouwuche</enumerationValue>
-                    <enumerationValue key= "huidingbu">huidingbu</enumerationValue>
-                    <enumerationValue key= "dianzan1">dianzan1</enumerationValue>
-                    <enumerationValue key= "morentouxiang">morentouxiang</enumerationValue>
-                    <enumerationValue key= "paixu">paixu</enumerationValue>
-                    <enumerationValue key= "wenjian">wenjian</enumerationValue>
-                    <enumerationValue key= "github">github</enumerationValue>
-                    <enumerationValue key= "yuzhanghao1">yuzhanghao1</enumerationValue>
-                    <enumerationValue key= "weibo2">weibo2</enumerationValue>
-                    <enumerationValue key= "you1">you1</enumerationValue>
-                    <enumerationValue key= "zuo1">zuo1</enumerationValue>
-                    <enumerationValue key= "shang1">shang1</enumerationValue>
-                    <enumerationValue key= "iconfont1">iconfont1</enumerationValue>
-                    <enumerationValue key= "gonggaodayi">gonggaodayi</enumerationValue>
-                    <enumerationValue key= "gongnengjieshao">gongnengjieshao</enumerationValue>
-                    <enumerationValue key= "tubiaohuizhi">tubiaohuizhi</enumerationValue>
-                    <enumerationValue key= "daimayingyong">daimayingyong</enumerationValue>
-                    <enumerationValue key= "zhifubao">zhifubao</enumerationValue>
-                    <enumerationValue key= "alibaba">alibaba</enumerationValue>
-                    <enumerationValue key= "xiaomi">xiaomi</enumerationValue>
-                    <enumerationValue key= "zhongguodianxin">zhongguodianxin</enumerationValue>
-                    <enumerationValue key= "tianmao">tianmao</enumerationValue>
-                    <enumerationValue key= "alimama">alimama</enumerationValue>
-                    <enumerationValue key= "zhubajie">zhubajie</enumerationValue>
-                    <enumerationValue key= "tengxunwang">tengxunwang</enumerationValue>
-                    <enumerationValue key= "aliyun">aliyun</enumerationValue>
-                    <enumerationValue key= "taobaowang">taobaowang</enumerationValue>
-                    <enumerationValue key= "anzhuo">anzhuo</enumerationValue>
-                    <enumerationValue key= "ios">ios</enumerationValue>
-                    <enumerationValue key= "pcduan">pcduan</enumerationValue>
-                    <enumerationValue key= "qingchu">qingchu</enumerationValue>
-                    <enumerationValue key= "huizhiguize">huizhiguize</enumerationValue>
-                    <enumerationValue key= "zhizuoliucheng">zhizuoliucheng</enumerationValue>
-                    <enumerationValue key= "fuzhidaima">fuzhidaima</enumerationValue>
-                    <enumerationValue key= "fankui1">fankui1</enumerationValue>
-                    <enumerationValue key= "weitijiao">weitijiao</enumerationValue>
-                    <enumerationValue key= "chexiao2">chexiao2</enumerationValue>
-                </enumerationValues>
-            </property>
+            <propertyGroup caption="General">
+                <property key="datasourceType" type="enumeration" defaultValue="buildin" required="true">
+                    <caption>数据源</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="buildin">内置图标</enumerationValue>
+                        <enumerationValue key="addon">外置图标</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="buildInIcon" type="enumeration" defaultValue="tuichu" required="true">
+                    <caption>内置图标选择</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="tuichu">退出</enumerationValue>
+                        <enumerationValue key= "fanhui">返回</enumerationValue>
+                        <enumerationValue key= "facebook">脸书</enumerationValue>
+                        <enumerationValue key= "twitter">推特</enumerationValue>
+                        <enumerationValue key= "xiangyou">xiangyou</enumerationValue>
+                        <enumerationValue key= "right">right</enumerationValue>
+                        <enumerationValue key= "fanhui1">fanhui1</enumerationValue>
+                        <enumerationValue key= "fenxiang">fenxiang</enumerationValue>
+                        <enumerationValue key= "xiangxia">xiangxia</enumerationValue>
+                        <enumerationValue key= "xiangxia1">xiangxia1</enumerationValue>
+                        <enumerationValue key= "xiangxia2">xiangxia2</enumerationValue>
+                        <enumerationValue key= "suofang">suofang</enumerationValue>
+                        <enumerationValue key= "chexiao">chexiao</enumerationValue>
+                        <enumerationValue key= "esc">esc</enumerationValue>
+                        <enumerationValue key= "chexiao1">chexiao1</enumerationValue>
+                        <enumerationValue key= "iconfont">iconfont</enumerationValue>
+                        <enumerationValue key= "suoding">suoding</enumerationValue>
+                        <enumerationValue key= "bianji">bianji</enumerationValue>
+                        <enumerationValue key= "shoucang2">shoucang2</enumerationValue>
+                        <enumerationValue key= "xinjian">xinjian</enumerationValue>
+                        <enumerationValue key= "shoucang1">shoucang1</enumerationValue>
+                        <enumerationValue key= "gongkai">gongkai</enumerationValue>
+                        <enumerationValue key= "gouwuche1">gouwuche1</enumerationValue>
+                        <enumerationValue key= "zhongwen">zhongwen</enumerationValue>
+                        <enumerationValue key= "shangchuan">shangchuan</enumerationValue>
+                        <enumerationValue key= "yingwen">yingwen</enumerationValue>
+                        <enumerationValue key= "gouwuche2">gouwuche2</enumerationValue>
+                        <enumerationValue key= "shanchu">shanchu</enumerationValue>
+                        <enumerationValue key= "xiazai">xiazai</enumerationValue>
+                        <enumerationValue key= "sousuo">sousuo</enumerationValue>
+                        <enumerationValue key= "dashang">dashang</enumerationValue>
+                        <enumerationValue key= "xiangmu">xiangmu</enumerationValue>
+                        <enumerationValue key= "fuzhidaima1">fuzhidaima1</enumerationValue>
+                        <enumerationValue key= "wofaqi">wofaqi</enumerationValue>
+                        <enumerationValue key= "xiangmuchengyuan">xiangmuchengyuan</enumerationValue>
+                        <enumerationValue key= "gengduo">gengduo</enumerationValue>
+                        <enumerationValue key= "wocanyu">wocanyu</enumerationValue>
+                        <enumerationValue key= "lishi">lishi</enumerationValue>
+                        <enumerationValue key= "piliang">piliang</enumerationValue>
+                        <enumerationValue key= "shijian">shijian</enumerationValue>
+                        <enumerationValue key= "gonggao">gonggao</enumerationValue>
+                        <enumerationValue key= "weixin">weixin</enumerationValue>
+                        <enumerationValue key= "weibo">weibo</enumerationValue>
+                        <enumerationValue key= "gerenzhanghu">gerenzhanghu</enumerationValue>
+                        <enumerationValue key= "tianjiachengyuan">tianjiachengyuan</enumerationValue>
+                        <enumerationValue key= "soutubiao">soutubiao</enumerationValue>
+                        <enumerationValue key= "souren">souren</enumerationValue>
+                        <enumerationValue key= "yuzhanghao">yuzhanghao</enumerationValue>
+                        <enumerationValue key= "biaoqing">biaoqing</enumerationValue>
+                        <enumerationValue key= "qq">qq</enumerationValue>
+                        <enumerationValue key= "weibo1">weibo1</enumerationValue>
+                        <enumerationValue key= "zuoxuan">zuoxuan</enumerationValue>
+                        <enumerationValue key= "fangda2">fangda2</enumerationValue>
+                        <enumerationValue key= "zuo2">zuo2</enumerationValue>
+                        <enumerationValue key= "suoxiao">suoxiao</enumerationValue>
+                        <enumerationValue key= "you2">you2</enumerationValue>
+                        <enumerationValue key= "suoxiao2">suoxiao2</enumerationValue>
+                        <enumerationValue key= "youxuan2">youxuan2</enumerationValue>
+                        <enumerationValue key= "zuo">zuo</enumerationValue>
+                        <enumerationValue key= "zuoxuan2">zuoxuan2</enumerationValue>
+                        <enumerationValue key= "shang">shang</enumerationValue>
+                        <enumerationValue key= "shang2">shang2</enumerationValue>
+                        <enumerationValue key= "youxuan">youxuan</enumerationValue>
+                        <enumerationValue key= "xia2">xia2</enumerationValue>
+                        <enumerationValue key= "fangda">fangda</enumerationValue>
+                        <enumerationValue key= "xia">xia</enumerationValue>
+                        <enumerationValue key= "you">you</enumerationValue>
+                        <enumerationValue key= "zhuanrang">zhuanrang</enumerationValue>
+                        <enumerationValue key= "dianzan">dianzan</enumerationValue>
+                        <enumerationValue key= "huifu">huifu</enumerationValue>
+                        <enumerationValue key= "saoyisao">saoyisao</enumerationValue>
+                        <enumerationValue key= "shuoming">shuoming</enumerationValue>
+                        <enumerationValue key= "jinggao">jinggao</enumerationValue>
+                        <enumerationValue key= "jieshi">jieshi</enumerationValue>
+                        <enumerationValue key= "youxiang">youxiang</enumerationValue>
+                        <enumerationValue key= "guanbi">guanbi</enumerationValue>
+                        <enumerationValue key= "qunzhu">qunzhu</enumerationValue>
+                        <enumerationValue key= "fuzhichenggong">fuzhichenggong</enumerationValue>
+                        <enumerationValue key= "weijiaru">weijiaru</enumerationValue>
+                        <enumerationValue key= "daishenhe">daishenhe</enumerationValue>
+                        <enumerationValue key= "shenhetongguo">shenhetongguo</enumerationValue>
+                        <enumerationValue key= "shenhejujue">shenhejujue</enumerationValue>
+                        <enumerationValue key= "xinjiantubiaoku">xinjiantubiaoku</enumerationValue>
+                        <enumerationValue key= "tubiaoku">tubiaoku</enumerationValue>
+                        <enumerationValue key= "gouwuche">gouwuche</enumerationValue>
+                        <enumerationValue key= "huidingbu">huidingbu</enumerationValue>
+                        <enumerationValue key= "dianzan1">dianzan1</enumerationValue>
+                        <enumerationValue key= "morentouxiang">morentouxiang</enumerationValue>
+                        <enumerationValue key= "paixu">paixu</enumerationValue>
+                        <enumerationValue key= "wenjian">wenjian</enumerationValue>
+                        <enumerationValue key= "github">github</enumerationValue>
+                        <enumerationValue key= "yuzhanghao1">yuzhanghao1</enumerationValue>
+                        <enumerationValue key= "weibo2">weibo2</enumerationValue>
+                        <enumerationValue key= "you1">you1</enumerationValue>
+                        <enumerationValue key= "zuo1">zuo1</enumerationValue>
+                        <enumerationValue key= "shang1">shang1</enumerationValue>
+                        <enumerationValue key= "iconfont1">iconfont1</enumerationValue>
+                        <enumerationValue key= "gonggaodayi">gonggaodayi</enumerationValue>
+                        <enumerationValue key= "gongnengjieshao">gongnengjieshao</enumerationValue>
+                        <enumerationValue key= "tubiaohuizhi">tubiaohuizhi</enumerationValue>
+                        <enumerationValue key= "daimayingyong">daimayingyong</enumerationValue>
+                        <enumerationValue key= "zhifubao">zhifubao</enumerationValue>
+                        <enumerationValue key= "alibaba">alibaba</enumerationValue>
+                        <enumerationValue key= "xiaomi">xiaomi</enumerationValue>
+                        <enumerationValue key= "zhongguodianxin">zhongguodianxin</enumerationValue>
+                        <enumerationValue key= "tianmao">tianmao</enumerationValue>
+                        <enumerationValue key= "alimama">alimama</enumerationValue>
+                        <enumerationValue key= "zhubajie">zhubajie</enumerationValue>
+                        <enumerationValue key= "tengxunwang">tengxunwang</enumerationValue>
+                        <enumerationValue key= "aliyun">aliyun</enumerationValue>
+                        <enumerationValue key= "taobaowang">taobaowang</enumerationValue>
+                        <enumerationValue key= "anzhuo">anzhuo</enumerationValue>
+                        <enumerationValue key= "ios">ios</enumerationValue>
+                        <enumerationValue key= "pcduan">pcduan</enumerationValue>
+                        <enumerationValue key= "qingchu">qingchu</enumerationValue>
+                        <enumerationValue key= "huizhiguize">huizhiguize</enumerationValue>
+                        <enumerationValue key= "zhizuoliucheng">zhizuoliucheng</enumerationValue>
+                        <enumerationValue key= "fuzhidaima">fuzhidaima</enumerationValue>
+                        <enumerationValue key= "fankui1">fankui1</enumerationValue>
+                        <enumerationValue key= "weitijiao">weitijiao</enumerationValue>
+                        <enumerationValue key= "chexiao2">chexiao2</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="value" type="string" required="false" multiline="false">
+                    <caption>图标代码</caption>
+                    <description></description>
+                </property>
+                <property key="valueAttribute" type="attribute" required="false">
+                    <caption>图标代码</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="图标源">
+                <property key="iconSourceList" type="object" isList="true" required="false">
+                    <caption>图标源</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="url" type="string" required="true" multiline="false">
+                                <caption>url</caption>
+                                <description>//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js</description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

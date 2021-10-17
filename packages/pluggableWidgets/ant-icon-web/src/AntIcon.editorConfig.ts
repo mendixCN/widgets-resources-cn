@@ -1,15 +1,17 @@
 import {
-    /*     changePropertyIn,
+    changePropertyIn,
     Problem,
     Properties,
     Property,
-    transformGroupsIntoTabs, */
+    transformGroupsIntoTabs,
     RowLayoutProps,
-    StructurePreviewProps
+    StructurePreviewProps,
+    hidePropertyIn,
+    hidePropertiesIn
 } from "@mendix-cn/piw-utils-internal";
 import { AntIconPreviewProps } from "../typings/AntIconProps";
 
-/* export function getProperties(
+export function getProperties(
     values: AntIconPreviewProps,
     defaultProperties: Properties,
     platform: "web" | "desktop"
@@ -22,11 +24,16 @@ import { AntIconPreviewProps } from "../typings/AntIconProps";
         },
         "buildInIcon"
     );
+    if (values.datasourceType === "addon") {
+        hidePropertyIn(defaultProperties, values, "buildInIcon");
+    } else {
+        hidePropertiesIn(defaultProperties, values, ["value", "iconSourceList"]);
+    }
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
     return defaultProperties;
-} */
+}
 
 export const getPreview = (values: AntIconPreviewProps): StructurePreviewProps => {
     console.log(values);
@@ -51,7 +58,7 @@ export const getPreview = (values: AntIconPreviewProps): StructurePreviewProps =
             },
             {
                 type: "Text",
-                content: values.buildInIcon
+                content: values.datasourceType === "addon" ? values.value : values.buildInIcon
             }
         ]
     };
@@ -60,13 +67,14 @@ export const getPreview = (values: AntIconPreviewProps): StructurePreviewProps =
         children: [titleHeader]
     };
 };
-/* 
-export function check(values: AntIconPreviewProps): Problem[] {
-    console.log(values);
 
+export function check(values: AntIconPreviewProps): Problem[] {
     const errors: Problem[] = [];
-   
+    if (values.datasourceType === "addon" && values.value === "") {
+        errors.push({
+            message: "图标代码不能为空"
+        });
+    }
 
     return errors;
 }
- */

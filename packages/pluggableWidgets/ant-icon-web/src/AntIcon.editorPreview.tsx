@@ -8,7 +8,13 @@ declare function require(name: string): string;
 export function preview(props: AntIconPreviewProps) {
     console.log(parseStyle(props.style));
 
-    return <AntIconComponent icon={props.buildInIcon} class={props.class} style={parseStyle(props.style)} />;
+    return (
+        <AntIconComponent
+            icon={props.datasourceType === "addon" ? props.value : props.buildInIcon}
+            class={props.class}
+            style={parseStyle(props.style)}
+        />
+    );
 }
 
 export function getPreviewCss(): string {
