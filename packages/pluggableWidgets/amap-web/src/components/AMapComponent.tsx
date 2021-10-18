@@ -1,7 +1,9 @@
-import { createElement, Ref, useRef } from "react";
-import { Map, ScaleControl, ToolBarControl, ControlBarControl, MapProps, Marker } from "@uiw/react-amap";
+import { createElement, CSSProperties, Ref, useRef } from "react";
+import { Map, ScaleControl, ToolBarControl, ControlBarControl, MapProps, Marker, Geolocation } from "@uiw/react-amap";
 
 import "../../vendor/AMapSDK";
+import classNames from "classnames";
+import { useSize } from "ahooks";
 
 export interface AMarker {
     title: string;
@@ -9,20 +11,34 @@ export interface AMarker {
     lng: number;
 }
 export interface AMapComponentProps {
+    // mx
+    name: string;
+    class: string;
+    style?: CSSProperties;
+    tabIndex?: number;
+
     onDblClick?: (event: AMap.MapsEvent, idx: number) => void;
     change?: (lat: number, lng: number) => void;
     zoom: number;
+    /**
+     * 坐标拾取模式
+     */
+    enableLocationMode?: boolean;
     lat: number;
     lng: number;
+    autoFocus: boolean;
     marks: AMarker[];
     onZoomChange?: (zoom: number) => void;
 }
 
 export const AMapComponent = (props: AMapComponentProps) => {
+    const ref = useRef<any>();
     const mapRef: Ref<MapProps & { map?: any | undefined }> | undefined = useRef(null);
 
+    const size = useSize(ref);
+
     return (
-        <div style={{ width: "100%", height: 600 }}>
+        <div ref={ref} className={classNames(props.class, "mx-amap")} tabIndex={props.tabIndex} style={props.style}>
             <Map
                 ref={mapRef}
                 zoom={props.zoom}
@@ -39,6 +55,30 @@ export const AMapComponent = (props: AMapComponentProps) => {
                     }
                 }}
             >
+                {props.enableLocationMode ? null : (
+                    <Geolocation
+                        // 是否使用高精度定位，默认:true
+                        enableHighAccuracy
+                        // 超过10秒后停止定位，默认：5s
+                        timeout={10000}
+                        // 定位按钮的停靠位置
+                        // 官方 v2 不再支持
+                        // buttonPosition="RB"
+
+                        // 定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                        // 官方 v2 不再支持
+                        // buttonOffset={new AMap.Pixel(10, 20)}
+
+                        // 定位成功后是否自动调整地图视野到定位点
+                        zoomToAccuracy={props.autoFocus}
+                        onComplete={data => {
+                            console.log("返回数据：", data);
+                        }}
+                        onError={data => {
+                            console.log("错误返回数据：", data);
+                        }}
+                    />
+                )}
                 <ScaleControl offset={[16, 30]} position="LB" />
                 <ToolBarControl offset={[16, 10]} position="RB" />
                 <ControlBarControl offset={[16, 180]} position="RB" />
@@ -56,6 +96,20 @@ export const AMapComponent = (props: AMapComponentProps) => {
                     />
                 ))}
             </Map>
+            {props.enableLocationMode ? (
+                <div
+                    style={{
+                        position: "absolute",
+                        top: size.height ? size.height / 2 + 10 : undefined,
+                        left: size.width ? size.width / 2 : undefined
+                    }}
+                >
+                    <img
+                        className="amap-geolocation-marker"
+                        src="https://a.amap.com/jsapi/static/image/plugin/point.png"
+                    ></img>
+                </div>
+            ) : null}
         </div>
     );
 };

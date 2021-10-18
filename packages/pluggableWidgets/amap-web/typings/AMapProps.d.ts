@@ -12,6 +12,7 @@ export interface AMapContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    enableAutoFocus: boolean;
     enableLocationMode: boolean;
     latCenter?: EditableValue<Big>;
     lngCenter?: EditableValue<Big>;
@@ -29,6 +30,7 @@ export interface AMapContainerProps {
 export interface AMapPreviewProps {
     class: string;
     style: string;
+    enableAutoFocus: boolean;
     enableLocationMode: boolean;
     latCenter: string;
     lngCenter: string;

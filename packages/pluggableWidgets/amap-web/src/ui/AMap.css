@@ -1,6 +1,7 @@
 /*
 Place your custom CSS here
 */
-.widget-hello-world {
-
+.mx-amap .amap-container {
+    min-width: 300px;
+    min-height: 350px;
 }

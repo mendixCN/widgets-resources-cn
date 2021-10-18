@@ -71,8 +71,6 @@ export function AMap(props: AMapContainerProps) {
         }
     }, [props.markers, props.latMarker, props.lngMarker, props.titleMarker]);
 
-    console.log(marks);
-
     const onDblClick = useCallback(
         (event: AMap.MapsEvent, idx: number) => {
             console.log(event);
@@ -93,7 +91,14 @@ export function AMap(props: AMapContainerProps) {
             zoom={zoom}
             lat={lat}
             lng={lng}
+            enableLocationMode={props.enableLocationMode}
             change={onChange}
+            autoFocus={props.enableAutoFocus}
+            // mx
+            name={props.name}
+            style={props.style}
+            tabIndex={props.tabIndex}
+            class={props.class}
         />
     );
 }
