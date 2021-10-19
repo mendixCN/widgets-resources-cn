@@ -1,4 +1,4 @@
-import { createElement, useCallback, useMemo, useState } from "react";
+import { createElement, useCallback, useEffect, useMemo, useState } from "react";
 import { AMapComponent, AMarker } from "./components/AMapComponent";
 import { ValueStatus } from "mendix";
 import { executeAction, debounce } from "@mendix-cn/piw-utils-internal";
@@ -10,6 +10,23 @@ import Big from "big.js";
 
 export function AMap(props: AMapContainerProps) {
     const [isLoading, setIsLoading] = useState(false);
+    const [centerLat, setCenterLat] = useState(22.268233);
+    const [centerLng, setCenterLng] = useState(113.515943);
+    if (props.centerType == "dynamicValue") {
+        useEffect(() => {
+            if (props.lngCenter && props.lngCenter.status === ValueStatus.Available) {
+                setCenterLng(props.lngCenter.value!.toNumber());
+            }
+            if (props.latCenter && props.latCenter.status === ValueStatus.Available) {
+                setCenterLat(props.latCenter.value!.toNumber());
+            }
+        }, [props.latCenter, props.lngCenter]);
+    } else {
+        useEffect(() => {
+            setCenterLat(props.latCenterStatic.toNumber());
+            setCenterLng(props.lngCenterStatic.toNumber());
+        }, [props.latCenterStatic, props.lngCenterStatic]);
+    }
     const zoom = useMemo(() => {
         if (props.zoomAttribute === undefined) {
             return props.zoomConst.toNumber();
@@ -22,22 +39,10 @@ export function AMap(props: AMapContainerProps) {
         return 15;
     }, [props.zoomAttribute]);
 
-    const lng = useMemo(() => {
-        if (props.lngCenter && props.lngCenter.status === ValueStatus.Available) {
-            return props.lngCenter.value!.toNumber();
-        }
-        return 0;
-    }, [props.lngCenter]);
-
-    const lat = useMemo(() => {
-        if (props.latCenter && props.latCenter.status === ValueStatus.Available) {
-            return props.latCenter.value!.toNumber();
-        }
-        return 0;
-    }, [props.latCenter]);
-
-    const onChange = useCallback(
+    const onCenterChange = useCallback(
         (lat: number, lng: number) => {
+            setCenterLat(lat);
+            setCenterLng(lng);
             // setTimeout(() => {
             //     executeAction(props.onChangeCenter);
             // }, 500);
@@ -89,10 +94,10 @@ export function AMap(props: AMapContainerProps) {
             marks={marks}
             onZoomChange={onZoomChange}
             zoom={zoom}
-            lat={lat}
-            lng={lng}
+            lat={centerLat}
+            lng={centerLng}
             enableLocationMode={props.enableLocationMode}
-            change={onChange}
+            change={onCenterChange}
             autoFocus={props.enableAutoFocus}
             // mx
             name={props.name}

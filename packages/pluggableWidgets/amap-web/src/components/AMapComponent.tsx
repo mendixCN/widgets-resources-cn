@@ -1,9 +1,9 @@
-import { createElement, CSSProperties, Ref, useRef } from "react";
+import { createElement, CSSProperties, Ref, useRef, useState } from "react";
 import { Map, ScaleControl, ToolBarControl, ControlBarControl, MapProps, Marker, Geolocation } from "@uiw/react-amap";
 
 import "../../vendor/AMapSDK";
 import classNames from "classnames";
-import { useSize } from "ahooks";
+import { useSize, useWhyDidYouUpdate } from "ahooks";
 
 export interface AMarker {
     title: string;
@@ -34,21 +34,31 @@ export interface AMapComponentProps {
 export const AMapComponent = (props: AMapComponentProps) => {
     const ref = useRef<any>();
     const mapRef: Ref<MapProps & { map?: any | undefined }> | undefined = useRef(null);
+    const [isMoving, setIsMoving] = useState(false);
 
     const size = useSize(ref);
+
+    useWhyDidYouUpdate(props.name, { ...props });
 
     return (
         <div ref={ref} className={classNames(props.class, "mx-amap")} tabIndex={props.tabIndex} style={props.style}>
             <Map
                 ref={mapRef}
                 zoom={props.zoom}
+                onMoveStart={() => setIsMoving(true)}
+                onMoveEnd={() => setIsMoving(false)}
+                onMapMove={() => {
+                    if (props.change) {
+                        props.change(mapRef.current?.map.getCenter().lat, mapRef.current?.map.getCenter().lng);
+                    }
+                }}
                 onZoomChange={() => {
                     if (props.change) {
                         props.change(mapRef.current?.map.getCenter().lat, mapRef.current?.map.getCenter().lng);
                     }
                     return props.onZoomChange && props.onZoomChange(mapRef.current?.map.getZoom());
                 }}
-                center={[props.lng, props.lat]}
+                center={isMoving ? undefined : [props.lng, props.lat]}
                 onDblClick={(event: AMap.MapsEvent) => {
                     if (props.change) {
                         props.change(event.lnglat.getLat!(), event.lnglat.getLng!());
@@ -79,9 +89,9 @@ export const AMapComponent = (props: AMapComponentProps) => {
                         }}
                     />
                 )}
-                <ScaleControl offset={[16, 30]} position="LB" />
-                <ToolBarControl offset={[16, 10]} position="RB" />
-                <ControlBarControl offset={[16, 180]} position="RB" />
+                <ScaleControl offset={[16, 20]} position="LB" />
+                <ToolBarControl offset={[16, 60]} position="RB" />
+                <ControlBarControl position="RT" />
                 {props.marks.map((mark, idx) => (
                     <Marker
                         key={idx}

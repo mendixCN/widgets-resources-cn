@@ -7,6 +7,8 @@ import { CSSProperties } from "react";
 import { EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
 import { Big } from "big.js";
 
+export type CenterTypeEnum = "staticValue" | "dynamicValue";
+
 export interface AMapContainerProps {
     name: string;
     class: string;
@@ -14,6 +16,9 @@ export interface AMapContainerProps {
     tabIndex?: number;
     enableAutoFocus: boolean;
     enableLocationMode: boolean;
+    centerType: CenterTypeEnum;
+    latCenterStatic: Big;
+    lngCenterStatic: Big;
     latCenter?: EditableValue<Big>;
     lngCenter?: EditableValue<Big>;
     zoomAttribute?: EditableValue<Big>;
@@ -32,6 +37,9 @@ export interface AMapPreviewProps {
     style: string;
     enableAutoFocus: boolean;
     enableLocationMode: boolean;
+    centerType: CenterTypeEnum;
+    latCenterStatic: number | null;
+    lngCenterStatic: number | null;
     latCenter: string;
     lngCenter: string;
     zoomAttribute: string;

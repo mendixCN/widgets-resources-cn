@@ -18,6 +18,24 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="中心位置">
+                <property key="centerType" type="enumeration" defaultValue="staticValue" required="true">
+                    <caption>中心位置类型</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="staticValue">固定指定</enumerationValue>
+                        <enumerationValue key="dynamicValue">属性绑定</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <!-- 静态-->
+                <property key="latCenterStatic" type="decimal" defaultValue="22.5" required="true">
+                    <caption>地理纬度</caption>
+                    <description></description>
+                </property>
+                <property key="lngCenterStatic" type="decimal" defaultValue="113.5" required="true">
+                    <caption>地理经度</caption>
+                    <description></description>
+                </property>
+                <!-- 动态-->
                 <property key="latCenter" type="attribute" required="false">
                     <caption>地理纬度</caption>
                     <description></description>
