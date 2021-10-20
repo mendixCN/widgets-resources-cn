@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
+import { DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
 import { Big } from "big.js";
 
 export type CenterTypeEnum = "staticValue" | "dynamicValue";
@@ -14,6 +14,7 @@ export interface AMapContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    amapKey: DynamicValue<string>;
     enableAutoFocus: boolean;
     enableLocationMode: boolean;
     centerType: CenterTypeEnum;
@@ -35,6 +36,7 @@ export interface AMapContainerProps {
 export interface AMapPreviewProps {
     class: string;
     style: string;
+    amapKey: string;
     enableAutoFocus: boolean;
     enableLocationMode: boolean;
     centerType: CenterTypeEnum;

@@ -13,7 +13,7 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    if (values.centerType == "dynamicValue") {
+    if (values.centerType === "dynamicValue") {
         hidePropertiesIn(defaultProperties, values, ["latCenterStatic", "lngCenterStatic"]);
     } else {
         hidePropertiesIn(defaultProperties, values, ["latCenter", "lngCenter"]);

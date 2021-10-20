@@ -12,7 +12,7 @@ export function AMap(props: AMapContainerProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [centerLat, setCenterLat] = useState(22.268233);
     const [centerLng, setCenterLng] = useState(113.515943);
-    if (props.centerType == "dynamicValue") {
+    if (props.centerType === "dynamicValue") {
         useEffect(() => {
             if (props.lngCenter && props.lngCenter.status === ValueStatus.Available) {
                 setCenterLng(props.lngCenter.value!.toNumber());
@@ -86,10 +86,18 @@ export function AMap(props: AMapContainerProps) {
         },
         [props.markerSelect, props.markers]
     );
+
+    const keystring = useMemo(() => {
+        if (props.amapKey.status === ValueStatus.Available) {
+            return props.amapKey.value;
+        }
+    }, [props.amapKey]);
+
     return isLoading ? (
         <span>isLoading</span>
     ) : (
         <AMapComponent
+            amapKey={keystring}
             onDblClick={onDblClick}
             marks={marks}
             onZoomChange={onZoomChange}

@@ -8,6 +8,10 @@
     <properties>
         <propertyGroup caption="通用">
             <propertyGroup caption="开关">
+                <property key="amapKey" type="textTemplate" required="true" multiline="false">
+                    <caption>高德地图webapi key</caption>
+                    <description></description>
+                </property>
                 <property key="enableAutoFocus" type="boolean" defaultValue="true">
                     <caption>自动定位到当前位置</caption>
                     <description></description>
