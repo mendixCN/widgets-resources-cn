@@ -68,14 +68,14 @@ export function LocationSelectPoint(p: any) {
 }
 
 export const AMapComponent = (props: AMapComponentProps) => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingApi, setIsLoadingApi] = useState(true);
     const ref = useRef<any>();
     const mapRef: Ref<MapProps & { map?: any | undefined }> | undefined = useRef(null);
     const [isMoving, setIsMoving] = useState(false);
     const [keyIsInvalid, setKeyIsInvalid] = useState(false);
 
     useEffect(() => {
-        if (isLoading && props.amapKey && !window.AMap) {
+        if (isLoadingApi && props.amapKey && !window.AMap) {
             (window.require as any)(
                 [`https://webapi.amap.com/maps?v=2.0&key=${props.amapKey}&plugin=AMap.Adaptor`],
                 (_AMap: any) => {
@@ -89,11 +89,14 @@ export const AMapComponent = (props: AMapComponentProps) => {
                             window.AMap = lastValidAMap;
                         }
                     }
-                    setIsLoading(false);
+                    setIsLoadingApi(false);
                 }
             );
         }
-    }, [isLoading, props.amapKey]);
+        if (window.AMap) {
+            setIsLoadingApi(false);
+        }
+    }, [isLoadingApi, props.amapKey]);
 
     useWhyDidYouUpdate(props.name, { ...props });
 
@@ -103,7 +106,7 @@ export const AMapComponent = (props: AMapComponentProps) => {
 
     return (
         <div ref={ref} className={classNames(props.class, "mx-amap")} tabIndex={props.tabIndex} style={props.style}>
-            {isLoading ? (
+            {isLoadingApi ? (
                 <span>loading</span>
             ) : (
                 <Map

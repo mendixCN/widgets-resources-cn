@@ -29,6 +29,7 @@ export function AMap(props: AMapContainerProps) {
     }
     const zoom = useMemo(() => {
         if (props.zoomAttribute === undefined) {
+            setIsLoading(false);
             return props.zoomConst.toNumber();
         }
         if (props.zoomAttribute && props.zoomAttribute.status === ValueStatus.Available) {
