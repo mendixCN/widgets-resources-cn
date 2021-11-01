@@ -12,6 +12,19 @@
                     <caption>高德地图webapi key</caption>
                     <description></description>
                 </property>
+                <property key="mode" type="enumeration" defaultValue="nav" required="true">
+                    <caption>模式</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="nav">导航</enumerationValue>
+                        <enumerationValue key="marker">ROI</enumerationValue>
+                        <enumerationValue key="location">定位</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="定位">
+            <propertyGroup caption="中心位置">
                 <property key="enableAutoFocus" type="boolean" defaultValue="true">
                     <caption>自动定位到当前位置</caption>
                     <description></description>
@@ -20,8 +33,6 @@
                     <caption>坐标拾取模式开关</caption>
                     <description></description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="中心位置">
                 <property key="centerType" type="enumeration" defaultValue="staticValue" required="true">
                     <caption>中心位置类型</caption>
                     <description></description>
@@ -71,7 +82,7 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="点标记">
+        <propertyGroup caption="ROI">
             <propertyGroup caption="General">
                 <property key="enableMarker" type="boolean" defaultValue="false">
                     <caption>启用标记</caption>
@@ -113,6 +124,59 @@
                 <property key="markerSelect" type="action" dataSource="markers">
                     <caption>标记选择事件</caption>
                     <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="导航">
+            <propertyGroup caption="General">
+                <property key="navMethod" type="enumeration" defaultValue="driving" required="true">
+                    <caption>导航方式</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="driving">驾车</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="policy" type="enumeration" defaultValue="LEAST_TIME" required="true">
+                    <caption>导航策略</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="LEAST_TIME">最快捷模式</enumerationValue>
+                        <enumerationValue key="LEAST_FEE">最经济模式</enumerationValue>
+                        <enumerationValue key="LEAST_DISTANCE">最短距离模式</enumerationValue>
+                        <enumerationValue key="REAL_TRAFFIC">考虑实时路况</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="起始位置">
+                <property key="startLng" type="attribute" required="false">
+                    <caption>起始经度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="startLat" type="attribute" required="false">
+                    <caption>起始维度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="结束位置">
+                <property key="endLng" type="attribute" required="false">
+                    <caption>结束经度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+                <property key="endLat" type="attribute" required="false">
+                    <caption>结束维度</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>

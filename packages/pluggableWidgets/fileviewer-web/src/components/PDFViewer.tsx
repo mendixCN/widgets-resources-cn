@@ -1,4 +1,4 @@
-import { createElement, useRef, useEffect, useState, CSSProperties } from "react";
+import { createElement, useRef, useEffect, useState, CSSProperties, forwardRef } from "react";
 import viewer, { WebViewerInstance } from "@pdftron/webviewer";
 
 export interface InputProps {
@@ -7,8 +7,8 @@ export interface InputProps {
     filePath?: string;
 }
 
-const PDFViewer: React.FC<InputProps> = (props: InputProps) => {
-    const viewerRef = useRef<HTMLDivElement>(null);
+export default forwardRef<HTMLDivElement, InputProps>((props, ref) => {
+    const innerRef = useRef<any>();
     const [instance, setInstance] = useState<null | WebViewerInstance>(null);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const PDFViewer: React.FC<InputProps> = (props: InputProps) => {
             {
                 path: "/widgets/resources/lib"
             },
-            viewerRef.current as HTMLDivElement
+            innerRef.current
         ).then(instance => {
             setInstance(instance);
         });
@@ -31,7 +31,20 @@ const PDFViewer: React.FC<InputProps> = (props: InputProps) => {
         }
     }, [instance, props.fileName, props.filePath]);
 
-    return <div className="webviewer" ref={viewerRef} style={props.style}></div>;
-};
-
-export default PDFViewer;
+    return (
+        <div
+            className="webviewer"
+            ref={e => {
+                if (ref) {
+                    if (typeof ref == "function") {
+                        ref(e);
+                    } else {
+                        ref.current = e;
+                    }
+                }
+                innerRef.current = e;
+            }}
+            style={props.style}
+        ></div>
+    );
+});

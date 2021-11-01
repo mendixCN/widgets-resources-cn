@@ -1,5 +1,4 @@
-import { createElement, CSSProperties, Ref, useEffect, useRef, useState } from "react";
-import { Map, ScaleControl, ToolBarControl, ControlBarControl, MapProps, Marker, Geolocation } from "@uiw/react-amap";
+import { createElement, CSSProperties, useEffect, useRef, useState } from "react";
 
 // @ts-ignore
 window._jsload_ = () => {
@@ -9,12 +8,11 @@ import classNames from "classnames";
 import { useSize, useWhyDidYouUpdate } from "ahooks";
 import { useMapCenter } from "../hooks/useMapCenter";
 import { Alert } from "@mendix-cn/piw-utils-internal";
+import { ModeEnum } from "../../typings/AMapProps";
+import LocationMode from "./LocationMode";
+import RoiMode, { AMarker } from "./RoiMode";
+import NavMode from "./NavMode";
 let lastValidAMap: any;
-export interface AMarker {
-    title: string;
-    lat: number;
-    lng: number;
-}
 export interface AMapComponentProps {
     // mx
     name: string;
@@ -22,9 +20,12 @@ export interface AMapComponentProps {
     style?: CSSProperties;
     tabIndex?: number;
 
+    mode: ModeEnum;
+    startAndEnd?: [number, number, number, number];
+
     amapKey?: string;
     onDblClick?: (event: AMap.MapsEvent, idx: number) => void;
-    change?: (lat: number, lng: number) => void;
+    onCenterChange?: (lat: number, lng: number) => void;
     zoom: number;
     /**
      * 坐标拾取模式
@@ -70,8 +71,6 @@ export function LocationSelectPoint(p: any) {
 export const AMapComponent = (props: AMapComponentProps) => {
     const [isLoadingApi, setIsLoadingApi] = useState(true);
     const ref = useRef<any>();
-    const mapRef: Ref<MapProps & { map?: any | undefined }> | undefined = useRef(null);
-    const [isMoving, setIsMoving] = useState(false);
     const [keyIsInvalid, setKeyIsInvalid] = useState(false);
 
     useEffect(() => {
@@ -105,76 +104,37 @@ export const AMapComponent = (props: AMapComponentProps) => {
     }
 
     return (
-        <div ref={ref} className={classNames(props.class, "mx-amap")} tabIndex={props.tabIndex} style={props.style}>
+        <div
+            ref={ref}
+            className={classNames(props.class, "mx-amap", "flexcontainer")}
+            tabIndex={props.tabIndex}
+            style={props.style}
+        >
             {isLoadingApi ? (
                 <span>loading</span>
-            ) : (
-                <Map
-                    ref={mapRef}
+            ) : props.mode === "location" ? (
+                <LocationMode
+                    enableLocationMode={props.enableLocationMode}
+                    autoFocus={props.autoFocus}
+                    onCenterChange={props.onCenterChange}
                     zoom={props.zoom}
-                    onMoveStart={() => setIsMoving(true)}
-                    onMoveEnd={() => setIsMoving(false)}
-                    onMapMove={() => {
-                        if (props.change) {
-                            props.change(mapRef.current?.map.getCenter().lat, mapRef.current?.map.getCenter().lng);
-                        }
-                    }}
-                    onZoomChange={() => {
-                        if (props.change) {
-                            props.change(mapRef.current?.map.getCenter().lat, mapRef.current?.map.getCenter().lng);
-                        }
-                        return props.onZoomChange && props.onZoomChange(mapRef.current?.map.getZoom());
-                    }}
-                    center={isMoving ? undefined : [props.lng, props.lat]}
-                    onDblClick={(event: AMap.MapsEvent) => {
-                        if (props.change) {
-                            props.change(event.lnglat.getLat!(), event.lnglat.getLng!());
-                        }
-                    }}
-                >
-                    {props.enableLocationMode ? (
-                        <LocationSelectPoint></LocationSelectPoint>
-                    ) : (
-                        <Geolocation
-                            // 是否使用高精度定位，默认:true
-                            enableHighAccuracy
-                            // 超过10秒后停止定位，默认：5s
-                            timeout={10000}
-                            // 定位按钮的停靠位置
-                            // 官方 v2 不再支持
-                            // buttonPosition="RB"
-
-                            // 定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-                            // 官方 v2 不再支持
-                            // buttonOffset={new AMap.Pixel(10, 20)}
-
-                            // 定位成功后是否自动调整地图视野到定位点
-                            zoomToAccuracy={props.autoFocus}
-                            onComplete={data => {
-                                console.log("返回数据：", data);
-                            }}
-                            onError={data => {
-                                console.log("错误返回数据：", data);
-                            }}
-                        />
-                    )}
-                    <ScaleControl offset={[16, 20]} position="LB" />
-                    <ToolBarControl offset={[16, 60]} position="RB" />
-                    <ControlBarControl position="RT" />
-                    {props.marks.map((mark, idx) => (
-                        <Marker
-                            key={idx}
-                            onDblClick={(e: any) => {
-                                if (props.onDblClick) {
-                                    props.onDblClick(e, idx);
-                                }
-                            }}
-                            visiable
-                            title={mark.title}
-                            position={new AMap.LngLat(mark.lng, mark.lat)}
-                        />
-                    ))}
-                </Map>
+                    onZoomChange={props.onZoomChange}
+                    lat={props.lat}
+                    lng={props.lng}
+                ></LocationMode>
+            ) : props.mode === "marker" ? (
+                <RoiMode
+                    change={props.onCenterChange}
+                    marks={props.marks}
+                    onCenterChange={props.onCenterChange}
+                    zoom={props.zoom}
+                    onZoomChange={props.onZoomChange}
+                    lat={props.lat}
+                    lng={props.lng}
+                    onDblClick={props.onDblClick}
+                ></RoiMode>
+            ) : (
+                <NavMode startAndEnd={props.startAndEnd}></NavMode>
             )}
         </div>
     );

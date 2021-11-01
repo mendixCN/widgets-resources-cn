@@ -13,6 +13,62 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
+    switch (values.mode) {
+        case "location":
+            hidePropertiesIn(defaultProperties, values, [
+                // nav
+                "policy",
+                "startLat",
+                "startLng",
+                "endLat",
+                "endLng",
+                "navMethod",
+                // roi
+                "markers",
+                "enableMarker",
+                "displayMarker"
+            ]);
+            break;
+        case "marker":
+            hidePropertiesIn(defaultProperties, values, [
+                // nav
+                "policy",
+                "startLat",
+                "startLng",
+                "endLat",
+                "endLng",
+                "navMethod",
+                // location
+                "enableLocationMode",
+                "enableAutoFocus"
+                // "centerType",
+                // "latCenter",
+                // "lngCenter",
+                // "zoomAttribute",
+                // "latCenterStatic",
+                // "lngCenterStatic",
+                // "zoomConst"
+            ]);
+            break;
+        case "nav":
+            hidePropertiesIn(defaultProperties, values, [
+                "enableMarker",
+                "displayMarker",
+                "markers",
+                "enableLocationMode",
+                "enableAutoFocus",
+                "centerType",
+                "latCenter",
+                "lngCenter",
+                "latCenterStatic",
+                "lngCenterStatic",
+                "zoomAttribute",
+                "zoomConst"
+            ]);
+
+            break;
+    }
+
     if (values.centerType === "dynamicValue") {
         hidePropertiesIn(defaultProperties, values, ["latCenterStatic", "lngCenterStatic"]);
     } else {

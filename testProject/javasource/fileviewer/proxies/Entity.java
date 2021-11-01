@@ -4,12 +4,8 @@
 
 package fileviewer.proxies;
 
-public class Entity
+public class Entity extends system.proxies.FileDocument
 {
-	private final com.mendix.systemwideinterfaces.core.IMendixObject entityMendixObject;
-
-	private final com.mendix.systemwideinterfaces.core.IContext context;
-
 	/**
 	 * Internal name of this entity
 	 */
@@ -21,7 +17,13 @@ public class Entity
 	public enum MemberNames
 	{
 		Attribute("Attribute"),
-		Attribute_2("Attribute_2");
+		Attribute_2("Attribute_2"),
+		FileID("FileID"),
+		Name("Name"),
+		DeleteAfterDownload("DeleteAfterDownload"),
+		Contents("Contents"),
+		HasContents("HasContents"),
+		Size("Size");
 
 		private java.lang.String metaName;
 
@@ -44,13 +46,9 @@ public class Entity
 
 	protected Entity(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject entityMendixObject)
 	{
-		if (entityMendixObject == null)
-			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
+		super(context, entityMendixObject);
 		if (!com.mendix.core.Core.isSubClassOf("FileViewer.Entity", entityMendixObject.getType()))
 			throw new java.lang.IllegalArgumentException("The given object is not a FileViewer.Entity");
-
-		this.entityMendixObject = entityMendixObject;
-		this.context = context;
 	}
 
 	/**
@@ -85,37 +83,6 @@ public class Entity
 		return result;
 	}
 
-	/**
-	 * Commit the changes made on this proxy object.
-	 */
-	public final void commit() throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Commit the changes made on this proxy object using the specified context.
-	 */
-	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		com.mendix.core.Core.commit(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object.
-	 */
-	public final void delete()
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
-
-	/**
-	 * Delete the object using the specified context.
-	 */
-	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		com.mendix.core.Core.delete(context, getMendixObject());
-	}
 	/**
 	 * @return value of Attribute
 	 */
@@ -188,22 +155,6 @@ public class Entity
 		getMendixObject().setValue(context, MemberNames.Attribute_2.toString(), attribute_2);
 	}
 
-	/**
-	 * @return the IMendixObject instance of this proxy for use in the Core interface.
-	 */
-	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
-	{
-		return entityMendixObject;
-	}
-
-	/**
-	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
-	 */
-	public final com.mendix.systemwideinterfaces.core.IContext getContext()
-	{
-		return context;
-	}
-
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
@@ -236,6 +187,7 @@ public class Entity
 	 * @return String GUID from this object, format: ID_0000000000
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
+	@java.lang.Override
 	@java.lang.Deprecated
 	public java.lang.String getGUID()
 	{

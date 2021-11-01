@@ -2,6 +2,7 @@ node_modules
 packages/**/node_modules
 packages/*/*/dist
 testProject/deployment
+testProject/widgets
 
 docker-mendix-buildpack
 testProject8x/deployment

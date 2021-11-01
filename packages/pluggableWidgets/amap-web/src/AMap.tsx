@@ -1,5 +1,5 @@
 import { createElement, useCallback, useEffect, useMemo, useState } from "react";
-import { AMapComponent, AMarker } from "./components/AMapComponent";
+import { AMapComponent } from "./components/AMapComponent";
 import { ValueStatus } from "mendix";
 import { executeAction, debounce } from "@mendix-cn/piw-utils-internal";
 
@@ -7,6 +7,7 @@ import { AMapContainerProps } from "../typings/AMapProps";
 
 import "./ui/AMap.css";
 import Big from "big.js";
+import { AMarker } from "./components/RoiMode";
 
 export function AMap(props: AMapContainerProps) {
     const [isLoading, setIsLoading] = useState(false);
@@ -94,10 +95,33 @@ export function AMap(props: AMapContainerProps) {
         }
     }, [props.amapKey]);
 
+    const [startAndEnd, setStartAndEnd] = useState<[number, number, number, number] | undefined>();
+    useEffect(() => {
+        if (
+            props.startLng &&
+            props.startLat &&
+            props.endLng &&
+            props.endLat &&
+            props.startLng.status === ValueStatus.Available &&
+            props.startLat.status === ValueStatus.Available &&
+            props.endLng.status === ValueStatus.Available &&
+            props.endLat.status === ValueStatus.Available
+        ) {
+            setStartAndEnd([
+                props.startLng.value!.toNumber(),
+                props.startLat.value!.toNumber(),
+                props.endLng.value!.toNumber(),
+                props.endLat.value!.toNumber()
+            ]);
+        }
+    }, [props.startLng, props.startLat, props.endLng, props.endLat]);
+
     return isLoading ? (
         <span>isLoading</span>
     ) : (
         <AMapComponent
+            startAndEnd={startAndEnd}
+            mode={props.mode}
             amapKey={keystring}
             onDblClick={onDblClick}
             marks={marks}
@@ -106,7 +130,7 @@ export function AMap(props: AMapContainerProps) {
             lat={centerLat}
             lng={centerLng}
             enableLocationMode={props.enableLocationMode}
-            change={onCenterChange}
+            onCenterChange={onCenterChange}
             autoFocus={props.enableAutoFocus}
             // mx
             name={props.name}

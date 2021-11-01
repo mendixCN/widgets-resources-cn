@@ -10,18 +10,6 @@ public class Constants
 {
 	// These are the constants for the MyFirstModule module
 
-	/**
-	* https://console.amap.com/dev/key/app
-	* 
-	* 官方demo  a7a90e05a37d3f6bf76d4a9032fc9129
-	* 
-	* my bfe31f4e0fb231d29e1d3ce951e2c780
-	*/
-	public static java.lang.String getAMapKey()
-	{
-		return (java.lang.String)Core.getConfiguration().getConstantValue("MyFirstModule.AMapKey");
-	}
-
 	public static java.lang.String getConstant()
 	{
 		return (java.lang.String)Core.getConfiguration().getConstantValue("MyFirstModule.Constant");
