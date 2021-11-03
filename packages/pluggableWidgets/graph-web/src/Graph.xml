@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.graph.Graph" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+<widget id="mendixcn.graph.Graph" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
     xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Graph</name>
@@ -7,106 +7,51 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="bg" type="image" required="false">
-                <caption>背景</caption>
-                <description></description>
-            </property>
-            <property key="isEditable" type="attribute" required="false">
-                <caption>编辑模式</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Boolean" />
-                </attributeTypes>
-            </property>
-        </propertyGroup>
-        <propertyGroup caption="编辑">
-            <property key="labelSelected" type="attribute">
-                <caption>label</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="String" />
-                </attributeTypes>
-            </property>
-            <property key="xSelected" type="attribute">
-                <caption>x</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Decimal" />
-                </attributeTypes>
-            </property>
-            <property key="ySelected" type="attribute">
-                <caption>y</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Decimal" />
-                </attributeTypes>
-            </property>
-            <property key="widthSelected" type="attribute">
-                <caption>width</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Decimal" />
-                </attributeTypes>
-            </property>
-            <property key="heightSelected" type="attribute">
-                <caption>height</caption>
-                <description></description>
-                <attributeTypes>
-                    <attributeType name="Decimal" />
-                </attributeTypes>
-            </property>
-
-        </propertyGroup>
-        <propertyGroup caption="节点">
-            <propertyGroup caption="配置">
-                <property key="datasource" type="datasource" required="true" isList="true">
-                    <caption>节点数据源</caption>
+            <propertyGroup caption="节点">
+                <property key="nodes" type="datasource" required="false" isList="true">
+                    <caption>节点</caption>
                     <description></description>
                 </property>
-                <property key="label" type="attribute" required="true" dataSource="datasource">
-                    <caption>label</caption>
+                <property key="_key" type="attribute" required="false" dataSource="nodes">
+                    <caption>Id</caption>
                     <description></description>
                     <attributeTypes>
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
-                <property key="x" type="attribute" required="true" dataSource="datasource">
-                    <caption>x</caption>
+                <property key="labelNode" type="attribute" required="false" dataSource="nodes">
+                    <caption>标签</caption>
                     <description></description>
                     <attributeTypes>
-                        <attributeType name="Decimal" />
-                    </attributeTypes>
-                </property>
-                <property key="y" type="attribute" required="true" dataSource="datasource">
-                    <caption>y</caption>
-                    <description></description>
-                    <attributeTypes>
-                        <attributeType name="Decimal" />
-                    </attributeTypes>
-                </property>
-                <property key="width" type="attribute" required="true" dataSource="datasource">
-                    <caption>width</caption>
-                    <description></description>
-                    <attributeTypes>
-                        <attributeType name="Decimal" />
-                    </attributeTypes>
-                </property>
-                <property key="height" type="attribute" required="true" dataSource="datasource">
-                    <caption>height</caption>
-                    <description></description>
-                    <attributeTypes>
-                        <attributeType name="Decimal" />
+                        <attributeType name="String" />
                     </attributeTypes>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="事件">
-                <property key="onSelect" type="action" dataSource="datasource">
-                    <caption>选择事件</caption>
+            <propertyGroup caption="边">
+                <property key="edges" type="datasource" required="false" isList="true">
+                    <caption>边</caption>
                     <description></description>
                 </property>
-                <property key="onChange" type="action" dataSource="datasource">
-                    <caption>节点变化事件</caption>
+                <property key="labelEdge" type="attribute" required="false" dataSource="edges">
+                    <caption>标签</caption>
                     <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="From" type="attribute" required="false" dataSource="edges">
+                    <caption>从</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="To" type="attribute" required="false" dataSource="edges">
+                    <caption>到</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>

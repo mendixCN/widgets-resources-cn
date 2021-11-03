@@ -1,14 +1,13 @@
-import { Component, ReactNode, createElement } from "react";
+import { parseStyle } from "@mendix-cn/piw-utils-internal";
+import { createElement } from "react";
 import { GraphPreviewProps } from "../typings/GraphProps";
 
 declare function require(name: string): string;
 
-export class preview extends Component<GraphPreviewProps> {
-    render(): ReactNode {
-        return <span>1</span>;
-    }
+export function preview(props: GraphPreviewProps) {
+    return <div style={parseStyle(props.style)}></div>;
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Graph.css");
+    return require("./ui/index.scss");
 }

@@ -4,47 +4,30 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, WebImage } from "mendix";
-import { Big } from "big.js";
+import { ListValue, ListAttributeValue } from "mendix";
 
 export interface GraphContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    bg?: DynamicValue<WebImage>;
-    isEditable?: EditableValue<boolean>;
-    labelSelected: EditableValue<string>;
-    xSelected: EditableValue<Big>;
-    ySelected: EditableValue<Big>;
-    widthSelected: EditableValue<Big>;
-    heightSelected: EditableValue<Big>;
-    datasource: ListValue;
-    label: ListAttributeValue<string>;
-    x: ListAttributeValue<Big>;
-    y: ListAttributeValue<Big>;
-    width: ListAttributeValue<Big>;
-    height: ListAttributeValue<Big>;
-    onSelect?: ListActionValue;
-    onChange?: ListActionValue;
+    nodes?: ListValue;
+    _key?: ListAttributeValue<string>;
+    labelNode?: ListAttributeValue<string>;
+    edges?: ListValue;
+    labelEdge?: ListAttributeValue<string>;
+    From?: ListAttributeValue<string>;
+    To?: ListAttributeValue<string>;
 }
 
 export interface GraphPreviewProps {
     class: string;
     style: string;
-    bg: string;
-    isEditable: string;
-    labelSelected: string;
-    xSelected: string;
-    ySelected: string;
-    widthSelected: string;
-    heightSelected: string;
-    datasource: {} | { type: string } | null;
-    label: string;
-    x: string;
-    y: string;
-    width: string;
-    height: string;
-    onSelect: {} | null;
-    onChange: {} | null;
+    nodes: {} | { type: string } | null;
+    _key: string;
+    labelNode: string;
+    edges: {} | { type: string } | null;
+    labelEdge: string;
+    From: string;
+    To: string;
 }

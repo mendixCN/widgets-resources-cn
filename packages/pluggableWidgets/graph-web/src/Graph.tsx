@@ -1,97 +1,113 @@
-import { createElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createElement, useEffect, useMemo, useRef, useState } from "react";
 import "./components/Trick";
-import { Graph as Graph2 } from "@antv/x6";
+import { EdgeConfig, Graph as Graph2, NodeConfig } from "@antv/g6";
 import { ValueStatus } from "mendix";
-import { executeAction, debounce } from "@mendix-cn/piw-utils-internal";
 
 import { GraphContainerProps } from "../typings/GraphProps";
 
-import "./ui/Graph.css";
-import { Big } from "big.js";
+import "./ui/index.scss";
+import classNames from "classnames";
+import { useSize } from "ahooks";
 
 export default function Graph(props: GraphContainerProps) {
     const refContainer = useRef<HTMLDivElement>(null);
+    const size = useSize(refContainer);
     const [graph, setGraph] = useState<Graph2>();
 
-    const nodes = useMemo(() => {
-        if (graph && props.datasource && props.datasource.status === ValueStatus.Available) {
-            return props.datasource.items?.map(item => ({
-                data: item.id.toString(),
-                label: props.label.get(item).value!,
-                x: props.x.get(item).value?.toNumber(),
-                y: props.y.get(item).value?.toNumber(),
-                width: props.width.get(item).value?.toNumber(),
-                height: props.height.get(item).value?.toNumber()
-            }));
+    useEffect(() => {
+        if (size.width && size.height) {
+            graph?.changeSize(size.width, size.height);
+            graph?.fitView(10);
         }
-    }, [props.datasource, props.label, props.x, props.y, props.width, props.height]);
+    }, [size, graph]);
+
+    const edges = useMemo(() => {
+        if (graph && props.edges && props.edges.status === ValueStatus.Available) {
+            return props.edges.items?.map(
+                item =>
+                    ({
+                        data: item.id.toString(),
+                        source: props.From?.get(item).value?.toString(),
+                        target: props.To?.get(item).value?.toString(),
+                        label: props.labelEdge?.get(item).value?.toString()
+                    } as EdgeConfig)
+            );
+        }
+        return [];
+    }, [graph, props.edges, props.labelEdge]);
+    const nodes = useMemo(() => {
+        if (graph && props.nodes && props.nodes.status === ValueStatus.Available) {
+            return props.nodes.items?.map(
+                item =>
+                    ({
+                        id: props._key?.get(item).value?.toString(),
+                        data: item.id.toString(),
+                        label: props.labelNode?.get(item).value,
+                        width: 100,
+                        height: 100
+                    } as NodeConfig)
+            );
+        }
+        return [];
+    }, [graph, props.nodes, props.labelNode, props._key]);
 
     useEffect(() => {
         if (refContainer.current) {
-            if (graph && !graph.disposed) {
-                graph.dispose();
-            }
-            if (props.isEditable) {
-                if (props.isEditable.status === ValueStatus.Available) {
-                    const myGraph = new Graph2({
-                        container: refContainer.current,
-                        grid: { visible: false },
-                        background: { color: "#f0f0f0" },
-                        resizing: {
-                            enabled: props.isEditable.value!
+            const myGraph = new Graph2({
+                container: refContainer.current,
+                layout: {
+                    type: "gForce",
+                    center: [200, 200], // 可选，默认为图的中心
+                    linkDistance: 50, // 可选，边长
+                    nodeStrength: 30, // 可选
+                    edgeStrength: 0.1, // 可选
+                    nodeSize: 30, // 可选
+                    onTick: () => {
+                        // 可选
+                        console.log("ticking");
+                    },
+                    onLayoutEnd: () => {
+                        // 可选
+                        console.log("force layout done");
+                    },
+                    workerEnabled: true, // 可选，开启 web-worker
+                    gpuEnabled: true // 可选，开启 GPU 并行计算，G6 4.0 支持
+                },
+                defaultNode: {
+                    size: 30,
+                    style: {
+                        lineWidth: 2,
+                        stroke: "#5B8FF9",
+                        fill: "#C6E5FF"
+                    }
+                },
+                defaultEdge: {
+                    size: 1,
+                    color: "#e2e2e2",
+                    style: {
+                        endArrow: {
+                            path: "M 0,0 L 8,4 L 8,-4 Z",
+                            fill: "#e2e2e2"
                         }
-                    });
-
-                    setGraph(myGraph);
+                    }
+                },
+                animate: true,
+                // fitView: true,
+                // fitCenter: true,
+                // fitViewPadding: 10,
+                modes: {
+                    default: ["drag-canvas", "zoom-canvas", "drag-node"]
                 }
-            } else {
-                const myGraph = new Graph2({
-                    container: refContainer.current,
-                    grid: { visible: false },
-                    background: { color: "#f0f0f0" }
-                });
+            });
 
-                setGraph(myGraph);
-            }
+            setGraph(myGraph);
         }
-    }, [refContainer, props.isEditable]);
 
-    const onChange = useCallback(
-        debounce(({ /* e, x, y,  */ node /* , view */ }) => {
-            console.log(node, "xx");
-
-            if (
-                props.onChange &&
-                props.label &&
-                props.xSelected &&
-                props.ySelected &&
-                props.widthSelected &&
-                props.heightSelected &&
-                props.datasource.status === ValueStatus.Available
-            ) {
-                const idx = node.data;
-                const objectItem = props.datasource.items![idx];
-                const { x, y } = node.getPosition();
-                const { width, height } = node.getSize();
-                props.xSelected.setValue(Big(x).round(7));
-                props.ySelected.setValue(Big(y).round(7));
-                props.widthSelected.setValue(Big(width).round(7));
-                props.heightSelected.setValue(Big(height).round(7));
-
-                executeAction(props.onChange?.get(objectItem));
-            }
-        }, 500),
-        [
-            props.datasource,
-            props.onChange,
-            props.label,
-            props.xSelected,
-            props.ySelected,
-            props.widthSelected,
-            props.heightSelected
-        ]
-    );
-
+        return () => {
+            graph?.destroy();
+        };
+    }, []);
+    /*
     useEffect(() => {
         if (graph && props.datasource.status === ValueStatus.Available) {
             if (props.onSelect) {
@@ -109,6 +125,7 @@ export default function Graph(props: GraphContainerProps) {
             }
         }
     }, [graph, props.datasource]);
+    */
 
     // graph.on('node:click', ({ e, x, y, node, view }) => { })
     // { e: JQuery.MouseUpEvent; x: number; y: number; node: Node; view: NodeView }
@@ -116,26 +133,29 @@ export default function Graph(props: GraphContainerProps) {
     // graph.on('node:moved', ({ e, x, y, node, view }) => { })
     // graph.on('node:resized', ({ e, x, y, node, view }) => { })
 
+    /*
     useEffect(() => {
         if (props.bg && props.bg.status === ValueStatus.Available) {
             console.log(props.bg.value.uri);
             graph?.drawBackground({ image: props.bg.value.uri, size: "contain" });
         }
     }, [graph, props.bg]);
+    */
 
     useEffect(() => {
-        graph?.getNodes().forEach(node => graph.removeNode(node));
-        nodes?.forEach((node, idx) => {
-            graph?.addNode({
-                label: node.label,
-                x: node.x,
-                y: node.y,
-                width: node.width,
-                height: node.height,
-                data: idx
-            });
+        // @ts-ignore
+        graph?.read({
+            nodes,
+            edges
         });
-    }, [graph, nodes]);
+    }, [graph, nodes, edges]);
 
-    return <div className="app-content" ref={refContainer} />;
+    return (
+        <div
+            style={props.style}
+            tabIndex={props.tabIndex}
+            className={classNames(props.class, "mxcn-graph")}
+            ref={refContainer}
+        />
+    );
 }
