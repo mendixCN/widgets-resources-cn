@@ -12,6 +12,17 @@
                     <caption>节点</caption>
                     <description></description>
                 </property>
+                <property key="nodeTypeConst" type="string" required="false" multiline="false">
+                    <caption>节点类型</caption>
+                    <description></description>
+                </property>
+                <property key="nodeTypeAttribute" type="attribute" required="false" dataSource="nodes">
+                    <caption>节点类型</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
                 <property key="_key" type="attribute" required="false" dataSource="nodes">
                     <caption>Id</caption>
                     <description></description>
@@ -26,8 +37,58 @@
                         <attributeType name="String" />
                     </attributeTypes>
                 </property>
+                <property key="customNodes" type="object" isList="true" required="false">
+                    <caption>自定义节点</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="nodeType" type="string" required="true" multiline="false">
+                                <caption>节点类型</caption>
+                                <description></description>
+                            </property>
+                            <property key="templateString" type="string" required="true" multiline="true">
+                                <caption>模板</caption>
+                                <description></description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="customNodeAttributes" type="object" isList="true" required="false">
+                    <caption>自定义节点属性</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="valueKey" type="string" required="true" multiline="false">
+                                <caption>键</caption>
+                                <description></description>
+                            </property>
+                            <property key="valueAttribute" type="attribute" required="true" dataSource="../nodes">
+                                <caption>绑定值</caption>
+                                <description></description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
             </propertyGroup>
             <propertyGroup caption="边">
+                <property key="edgeTypeConst" type="enumeration" defaultValue="extraShapeEdge" required="true">
+                    <caption>边类型</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="extraShapeEdge">曲线</enumerationValue>
+                        <enumerationValue key="lineArrow">双向箭头</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="edgeTypeAttribute" type="attribute" required="false" dataSource="edges">
+                    <caption>边类型</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
                 <property key="edges" type="datasource" required="false" isList="true">
                     <caption>边</caption>
                     <description></description>
@@ -52,6 +113,77 @@
                     <attributeTypes>
                         <attributeType name="String" />
                     </attributeTypes>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="图例">
+            <propertyGroup caption="Data Source">
+                <property key="edgeLegend" type="attribute" required="false" dataSource="edges">
+                    <caption>边</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="nodeLegend" type="attribute" required="false" dataSource="nodes">
+                    <caption>节点</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="配置">
+                <property key="legendConfigs" type="object" isList="true" required="false">
+                    <caption>配置</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <propertyGroup caption="General">
+                                <property key="legendType" type="enumeration" defaultValue="edge" required="true">
+                                    <caption>类型</caption>
+                                    <description></description>
+                                    <enumerationValues>
+                                        <enumerationValue key="edge">边</enumerationValue>
+                                        <enumerationValue key="node">节点</enumerationValue>
+                                        <enumerationValue key="all">所有</enumerationValue>
+                                    </enumerationValues>
+                                </property>
+                                <property key="legendName" type="string" required="true" multiline="false">
+                                    <caption>名称</caption>
+                                    <description></description>
+                                </property>
+                                <property key="label" type="string" required="true" multiline="false">
+                                    <caption>显示</caption>
+                                    <description></description>
+                                </property>
+                                <property key="content" type="widgets" required="false">
+                                    <caption>图标</caption>
+                                    <description></description>
+                                </property>
+                            </propertyGroup>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="样式">
+            <propertyGroup caption="边的条件样式">
+                <property key="styleForEdge" type="object" isList="true" required="false">
+                    <caption>样式</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="cluster" type="string" required="true" multiline="false">
+                                <caption>Cluster</caption>
+                                <description></description>
+                            </property>
+                            <property key="styleString" type="string" required="true" multiline="true">
+                                <caption>样式</caption>
+                                <description></description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
                 </property>
             </propertyGroup>
         </propertyGroup>

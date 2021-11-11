@@ -1,13 +1,96 @@
-import { createElement, useEffect, useMemo, useRef, useState } from "react";
+import { createElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./components/Trick";
-import { EdgeConfig, Graph as Graph2, NodeConfig } from "@antv/g6";
+import { EdgeConfig, Graph as Graph2, NodeConfig, registerEdge, registerNode } from "@antv/g6";
 import { ValueStatus } from "mendix";
+import { set, template } from "lodash-es";
 
-import { GraphContainerProps } from "../typings/GraphProps";
+import { GraphContainerProps, LegendConfigsType } from "../typings/GraphProps";
 
 import "./ui/index.scss";
 import classNames from "classnames";
 import { useSize } from "ahooks";
+
+registerEdge("lineArrow", {
+    options: {
+        style: {
+            stroke: "#ccc"
+        }
+    },
+    draw: function draw(cfg, group) {
+        if (!cfg?.startPoint || !cfg.style || !cfg.endPoint || !group) {
+            throw new Error("data error");
+        }
+        const startPoint = cfg.startPoint;
+        const endPoint = cfg.endPoint;
+
+        const stroke = (cfg.style && cfg.style.stroke) || "#F6BD16";
+        const startArrow = (cfg.style && cfg.style.startArrow) || undefined;
+        const endArrow = (cfg.style && cfg.style.endArrow) || undefined;
+
+        const keyShape = group.addShape("path", {
+            attrs: {
+                path: [
+                    ["M", startPoint.x, startPoint.y],
+                    ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, startPoint.y],
+                    ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, endPoint.y],
+                    ["L", endPoint.x, endPoint.y]
+                ],
+                stroke,
+                lineWidth: 1,
+                startArrow,
+                endArrow
+            },
+            className: "edge-shape",
+            name: "edge-shape"
+        });
+        return keyShape;
+    }
+});
+
+registerEdge(
+    "extraShapeEdge",
+    {
+        afterDraw(cfg, group) {
+            // get the first shape in the graphics group of this edge, it is the path of the edge here
+            // 获取图形组中的第一个图形，在这里就是边的路径图形
+            const shape = group?.get("children")[0];
+            // get the coordinate of the mid point on the path
+            // 获取路径图形的中点坐标
+            const midPoint = shape.getPoint(0.5);
+            const rectColor = (cfg?.midPointColor as string) || "#333";
+            // add a rect on the mid point of the path. note that the origin of a rect shape is on its lefttop
+            // 在中点增加一个矩形，注意矩形的原点在其左上角
+            group?.addShape("rect", {
+                attrs: {
+                    width: 10,
+                    height: 10,
+                    fill: rectColor || "#333",
+                    // x and y should be minus width / 2 and height / 2 respectively to translate the center of the rect to the midPoint
+                    // x 和 y 分别减去 width / 2 与 height / 2，使矩形中心在 midPoint 上
+                    x: midPoint.x - 5,
+                    y: midPoint.y - 5
+                }
+            });
+
+            // get the coordinate of the quatile on the path
+            // 获取路径上的四分位点坐标
+            const quatile = shape.getPoint(0.25);
+            const quatileColor = (cfg?.quatileColor as string) || "#333";
+            // add a circle on the quatile of the path
+            // 在四分位点上放置一个圆形
+            group?.addShape("circle", {
+                attrs: {
+                    r: 5,
+                    fill: quatileColor || "#333",
+                    x: quatile.x,
+                    y: quatile.y
+                }
+            });
+        },
+        update: undefined
+    },
+    "cubic"
+);
 
 export default function Graph(props: GraphContainerProps) {
     const refContainer = useRef<HTMLDivElement>(null);
@@ -23,45 +106,86 @@ export default function Graph(props: GraphContainerProps) {
 
     const edges = useMemo(() => {
         if (graph && props.edges && props.edges.status === ValueStatus.Available) {
-            return props.edges.items?.map(
-                item =>
-                    ({
-                        data: item.id.toString(),
-                        source: props.From?.get(item).value?.toString(),
-                        target: props.To?.get(item).value?.toString(),
-                        label: props.labelEdge?.get(item).value?.toString()
-                    } as EdgeConfig)
-            );
+            return props.edges.items?.map(item => {
+                const cluster = props.edgeLegend?.get(item).value?.toString();
+                const styleConfig = props.styleForEdge.find(cfg => cfg.cluster === cluster);
+                const style = styleConfig ? JSON.parse(styleConfig.styleString.replaceAll("\r\n", "")) : undefined;
+                return {
+                    data: item.id.toString(),
+                    source: props.From?.get(item).value?.toString(),
+                    target: props.To?.get(item).value?.toString(),
+                    cluster: props.edgeLegend?.get(item).value?.toString(),
+                    type: props.edgeTypeAttribute
+                        ? props.edgeTypeAttribute.get(item).value?.toString()
+                        : props.edgeTypeConst,
+                    label: props.labelEdge?.get(item).value?.toString(),
+                    style
+                } as EdgeConfig;
+            });
         }
         return [];
     }, [graph, props.edges, props.labelEdge]);
     const nodes = useMemo(() => {
         if (graph && props.nodes && props.nodes.status === ValueStatus.Available) {
-            return props.nodes.items?.map(
-                item =>
-                    ({
-                        id: props._key?.get(item).value?.toString(),
-                        data: item.id.toString(),
-                        label: props.labelNode?.get(item).value,
-                        width: 100,
-                        height: 100
-                    } as NodeConfig)
-            );
+            return props.nodes.items?.map(item => {
+                const dataItem = {
+                    id: props._key?.get(item).value?.toString(),
+                    data: item.id.toString(),
+                    label: props.labelNode?.get(item).value,
+                    cluster: props.nodeLegend?.get(item).value?.toString(),
+                    type: props.nodeTypeAttribute
+                        ? props.nodeTypeAttribute.get(item).value?.toString()
+                        : props.nodeTypeConst
+                } as NodeConfig;
+                props.customNodeAttributes.forEach(cna => {
+                    set(dataItem, cna.valueKey, cna.valueAttribute?.get(item).value?.toString());
+                });
+                return dataItem;
+            });
         }
         return [];
-    }, [graph, props.nodes, props.labelNode, props._key]);
+    }, [graph, props.nodes, props.labelNode, props._key, props.nodeTypeAttribute]);
 
     useEffect(() => {
+        // registerNode
+        props.customNodes.forEach(item => {
+            registerNode(item.nodeType, (cfg: any) => template(item.templateString)(cfg));
+        });
+
         if (refContainer.current) {
+            const nodes: NodeConfig[] = [];
+            const edges: EdgeConfig[] = [];
+            const filterFunctions: any = {};
+            props.legendConfigs.forEach(item => {
+                if (item.legendType === "edge") {
+                    edges.push({ id: item.legendName, label: item.label });
+                } else {
+                    nodes.push({ id: item.legendName, label: item.label });
+                }
+                filterFunctions[item.legendName] = (d: any) => {
+                    if (d.cluster === item.legendName) {
+                        return true;
+                    }
+                    return false;
+                };
+            });
+
             const myGraph = new Graph2({
+                plugins: [],
                 container: refContainer.current,
+                // renderer: 'svg',
                 layout: {
-                    type: "gForce",
+                    type: "force",
                     center: [200, 200], // 可选，默认为图的中心
-                    linkDistance: 50, // 可选，边长
-                    nodeStrength: 30, // 可选
-                    edgeStrength: 0.1, // 可选
-                    nodeSize: 30, // 可选
+                    linkDistance: 400, // 可选，边长
+                    preventOverlap: true,
+                    nodeStrength: -500, // 可选 节点间引力
+                    collideStrength: 0.8, // 可选
+                    nodeSize: 300, // 可选
+                    alpha: 0.3, // 可选
+                    alphaDecay: 0.028, // 可选
+                    alphaMin: 0.01, // 可选
+                    forceSimulation: null, // 可选
                     onTick: () => {
                         // 可选
                         console.log("ticking");
@@ -69,12 +193,9 @@ export default function Graph(props: GraphContainerProps) {
                     onLayoutEnd: () => {
                         // 可选
                         console.log("force layout done");
-                    },
-                    workerEnabled: true, // 可选，开启 web-worker
-                    gpuEnabled: true // 可选，开启 GPU 并行计算，G6 4.0 支持
+                    }
                 },
                 defaultNode: {
-                    size: 30,
                     style: {
                         lineWidth: 2,
                         stroke: "#5B8FF9",
@@ -82,12 +203,16 @@ export default function Graph(props: GraphContainerProps) {
                     }
                 },
                 defaultEdge: {
-                    size: 1,
                     color: "#e2e2e2",
                     style: {
+                        stroke: "#F6BD16",
+                        startArrow: {
+                            path: "M 0,0 L 12,6 L 9,0 L 12,-6 Z",
+                            fill: "#F6BD16"
+                        },
                         endArrow: {
-                            path: "M 0,0 L 8,4 L 8,-4 Z",
-                            fill: "#e2e2e2"
+                            path: "M 0,0 L 12,6 L 9,0 L 12,-6 Z",
+                            fill: "#F6BD16"
                         }
                     }
                 },
@@ -97,6 +222,19 @@ export default function Graph(props: GraphContainerProps) {
                 // fitViewPadding: 10,
                 modes: {
                     default: ["drag-canvas", "zoom-canvas", "drag-node"]
+                },
+                nodeStateStyles: {
+                    activeByLegend: {
+                        opacity: 1
+                    },
+                    inactiveByLegend: {
+                        opacity: 0.2
+                    }
+                },
+                edgeStateStyles: {
+                    activeByLegend: {
+                        stroke: "#999"
+                    }
                 }
             });
 
@@ -107,40 +245,6 @@ export default function Graph(props: GraphContainerProps) {
             graph?.destroy();
         };
     }, []);
-    /*
-    useEffect(() => {
-        if (graph && props.datasource.status === ValueStatus.Available) {
-            if (props.onSelect) {
-                graph.on("node:dblclick", ({ e, x, y, node, view }) => {
-                    console.log(e, x, y, node, view);
-
-                    const idx = node.data;
-                    const item = props.datasource.items![idx];
-                    executeAction(props.onSelect!.get(item));
-                });
-            }
-            if (props.isEditable?.value && props.onChange) {
-                graph.on("node:moved", onChange);
-                graph.on("node:resized", onChange);
-            }
-        }
-    }, [graph, props.datasource]);
-    */
-
-    // graph.on('node:click', ({ e, x, y, node, view }) => { })
-    // { e: JQuery.MouseUpEvent; x: number; y: number; node: Node; view: NodeView }
-    // node:resized node:moved
-    // graph.on('node:moved', ({ e, x, y, node, view }) => { })
-    // graph.on('node:resized', ({ e, x, y, node, view }) => { })
-
-    /*
-    useEffect(() => {
-        if (props.bg && props.bg.status === ValueStatus.Available) {
-            console.log(props.bg.value.uri);
-            graph?.drawBackground({ image: props.bg.value.uri, size: "contain" });
-        }
-    }, [graph, props.bg]);
-    */
 
     useEffect(() => {
         // @ts-ignore
@@ -150,12 +254,50 @@ export default function Graph(props: GraphContainerProps) {
         });
     }, [graph, nodes, edges]);
 
+    const onHoverLegend = useCallback(
+        (cfg: LegendConfigsType, isHover: boolean) => {
+            if (cfg.legendType === "edge" || cfg.legendType === "all") {
+                graph?.getEdges().forEach(edge => {
+                    graph.clearItemStates(edge, ["inactiveByLegend", "activeByLegend"]);
+                    if (isHover) {
+                        graph.setItemState(edge, "activeByLegend", edge.get("model").cluster === cfg.legendName);
+                        graph.setItemState(edge, "inactiveByLegend", edge.get("model").cluster !== cfg.legendName);
+                    }
+                });
+            }
+            if (cfg.legendType === "node" || cfg.legendType === "all") {
+                graph?.getNodes().forEach(node => {
+                    graph.clearItemStates(node, ["inactiveByLegend", "activeByLegend"]);
+                    if (isHover) {
+                        graph.setItemState(node, "activeByLegend", node.get("model").cluster === cfg.legendName);
+                        graph.setItemState(node, "inactiveByLegend", node.get("model").cluster !== cfg.legendName);
+                    }
+                });
+            }
+        },
+        [graph]
+    );
+
     return (
-        <div
-            style={props.style}
-            tabIndex={props.tabIndex}
-            className={classNames(props.class, "mxcn-graph")}
-            ref={refContainer}
-        />
+        <div style={props.style} tabIndex={props.tabIndex} className={classNames(props.class, "mxcn-graph")}>
+            <div className="legend-container">
+                {props.legendConfigs.map(cfg => (
+                    <div
+                        key={cfg.legendName}
+                        onMouseLeave={() => {
+                            onHoverLegend(cfg, false);
+                        }}
+                        onMouseEnter={() => {
+                            onHoverLegend(cfg, true);
+                        }}
+                        className="legend-item"
+                    >
+                        {cfg.content}
+                        <span>{cfg.label}</span>
+                    </div>
+                ))}
+            </div>
+            <div className="canvas-container" ref={refContainer}></div>
+        </div>
     );
 }
