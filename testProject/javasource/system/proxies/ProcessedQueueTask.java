@@ -24,6 +24,8 @@ public class ProcessedQueueTask
 		Status("Status"),
 		QueueId("QueueId"),
 		QueueName("QueueName"),
+		ContextType("ContextType"),
+		ContextData("ContextData"),
 		MicroflowName("MicroflowName"),
 		UserActionName("UserActionName"),
 		Arguments("Arguments"),
@@ -277,6 +279,86 @@ public class ProcessedQueueTask
 	public final void setQueueName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String queuename)
 	{
 		getMendixObject().setValue(context, MemberNames.QueueName.toString(), queuename);
+	}
+
+	/**
+	 * Set value of ContextType
+	 * @param contexttype
+	 */
+	public final system.proxies.ContextType getContextType()
+	{
+		return getContextType(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ContextType
+	 */
+	public final system.proxies.ContextType getContextType(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		Object obj = getMendixObject().getValue(context, MemberNames.ContextType.toString());
+		if (obj == null)
+			return null;
+
+		return system.proxies.ContextType.valueOf((java.lang.String) obj);
+	}
+
+	/**
+	 * Set value of ContextType
+	 * @param contexttype
+	 */
+	public final void setContextType(system.proxies.ContextType contexttype)
+	{
+		setContextType(getContext(), contexttype);
+	}
+
+	/**
+	 * Set value of ContextType
+	 * @param context
+	 * @param contexttype
+	 */
+	public final void setContextType(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.ContextType contexttype)
+	{
+		if (contexttype != null)
+			getMendixObject().setValue(context, MemberNames.ContextType.toString(), contexttype.toString());
+		else
+			getMendixObject().setValue(context, MemberNames.ContextType.toString(), null);
+	}
+
+	/**
+	 * @return value of ContextData
+	 */
+	public final java.lang.String getContextData()
+	{
+		return getContextData(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ContextData
+	 */
+	public final java.lang.String getContextData(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ContextData.toString());
+	}
+
+	/**
+	 * Set value of ContextData
+	 * @param contextdata
+	 */
+	public final void setContextData(java.lang.String contextdata)
+	{
+		setContextData(getContext(), contextdata);
+	}
+
+	/**
+	 * Set value of ContextData
+	 * @param context
+	 * @param contextdata
+	 */
+	public final void setContextData(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String contextdata)
+	{
+		getMendixObject().setValue(context, MemberNames.ContextData.toString(), contextdata);
 	}
 
 	/**

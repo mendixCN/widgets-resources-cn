@@ -4,6 +4,10 @@
 
 package system.proxies;
 
+/**
+ * A built-in entity type that represents a file. Its attributes contain the metadata of a file.
+ * The underlying file may be stored in various ways, for example, on disk or in the cloud.
+ */
 public class FileDocument
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject fileDocumentMendixObject;
