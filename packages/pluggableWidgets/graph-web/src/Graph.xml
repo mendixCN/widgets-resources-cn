@@ -74,12 +74,15 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="边">
-                <property key="edgeTypeConst" type="enumeration" defaultValue="extraShapeEdge" required="true">
+                <property key="edgeTypeConst" type="enumeration" defaultValue="cubic" required="true">
                     <caption>边类型</caption>
-                    <description></description>
+                    <description>https://antv-g6.gitee.io/zh/docs/manual/middle/elements/edges/built-in/line</description>
                     <enumerationValues>
-                        <enumerationValue key="extraShapeEdge">曲线</enumerationValue>
-                        <enumerationValue key="lineArrow">双向箭头</enumerationValue>
+                        <enumerationValue key="line">Line</enumerationValue>
+                        <enumerationValue key="polyline">Polyline</enumerationValue>
+                        <enumerationValue key="quadratic">Quadratic</enumerationValue>
+                        <enumerationValue key="cubic">Cubic</enumerationValue>
+                        <enumerationValue key="arc">Arc</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="edgeTypeAttribute" type="attribute" required="false" dataSource="edges">
