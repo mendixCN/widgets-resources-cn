@@ -22,8 +22,7 @@ public class WorkflowDefinition
 	{
 		Name("Name"),
 		Title("Title"),
-		IsObsolete("IsObsolete"),
-		WorkflowDefinition_CurrentWorkflowVersion("System.WorkflowDefinition_CurrentWorkflowVersion");
+		IsObsolete("IsObsolete");
 
 		private java.lang.String metaName;
 
@@ -224,49 +223,6 @@ public class WorkflowDefinition
 	public final void setIsObsolete(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean isobsolete)
 	{
 		getMendixObject().setValue(context, MemberNames.IsObsolete.toString(), isobsolete);
-	}
-
-	/**
-	 * @return value of WorkflowDefinition_CurrentWorkflowVersion
-	 */
-	public final system.proxies.WorkflowVersion getWorkflowDefinition_CurrentWorkflowVersion() throws com.mendix.core.CoreException
-	{
-		return getWorkflowDefinition_CurrentWorkflowVersion(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of WorkflowDefinition_CurrentWorkflowVersion
-	 */
-	public final system.proxies.WorkflowVersion getWorkflowDefinition_CurrentWorkflowVersion(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		system.proxies.WorkflowVersion result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.WorkflowDefinition_CurrentWorkflowVersion.toString());
-		if (identifier != null)
-			result = system.proxies.WorkflowVersion.load(context, identifier);
-		return result;
-	}
-
-	/**
-	 * Set value of WorkflowDefinition_CurrentWorkflowVersion
-	 * @param workflowdefinition_currentworkflowversion
-	 */
-	public final void setWorkflowDefinition_CurrentWorkflowVersion(system.proxies.WorkflowVersion workflowdefinition_currentworkflowversion)
-	{
-		setWorkflowDefinition_CurrentWorkflowVersion(getContext(), workflowdefinition_currentworkflowversion);
-	}
-
-	/**
-	 * Set value of WorkflowDefinition_CurrentWorkflowVersion
-	 * @param context
-	 * @param workflowdefinition_currentworkflowversion
-	 */
-	public final void setWorkflowDefinition_CurrentWorkflowVersion(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.WorkflowVersion workflowdefinition_currentworkflowversion)
-	{
-		if (workflowdefinition_currentworkflowversion == null)
-			getMendixObject().setValue(context, MemberNames.WorkflowDefinition_CurrentWorkflowVersion.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.WorkflowDefinition_CurrentWorkflowVersion.toString(), workflowdefinition_currentworkflowversion.getMendixObject().getId());
 	}
 
 	/**

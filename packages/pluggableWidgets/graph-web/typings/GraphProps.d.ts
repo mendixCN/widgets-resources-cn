@@ -16,7 +16,7 @@ export interface CustomNodeAttributesType {
     valueAttribute?: ListAttributeValue<string>;
 }
 
-export type EdgeTypeConstEnum = "extraShapeEdge" | "lineArrow";
+export type EdgeTypeConstEnum = "line" | "polyline" | "quadratic" | "cubic" | "arc";
 
 export type LegendTypeEnum = "edge" | "node" | "all";
 

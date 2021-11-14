@@ -4,6 +4,9 @@
 
 package system.proxies;
 
+/**
+ * An entity that inherits from the System.FileDocument entity. Used to store images. The content of the file is verified to be an image. In some places, thumbnails are generated.
+ */
 public class Image extends system.proxies.FileDocument
 {
 	/**

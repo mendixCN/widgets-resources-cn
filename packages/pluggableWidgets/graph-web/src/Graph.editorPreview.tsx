@@ -5,7 +5,11 @@ import { GraphPreviewProps } from "../typings/GraphProps";
 declare function require(name: string): string;
 
 export function preview(props: GraphPreviewProps) {
-    return <div style={parseStyle(props.style)}></div>;
+    return (
+        <div style={parseStyle(props.style)}>
+            <span>Graph</span>
+        </div>
+    );
 }
 
 export function getPreviewCss(): string {

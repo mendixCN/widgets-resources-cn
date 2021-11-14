@@ -10,6 +10,50 @@ import "./ui/index.scss";
 import classNames from "classnames";
 import { useSize } from "ahooks";
 
+registerEdge(
+    "singleLineArrow",
+    {
+        options: {
+            style: {
+                stroke: "#ccc"
+            }
+        },
+        // afterDraw: function draw(cfg, group) {
+        //     group?.removeChild(group?.getFirst(), true);
+        //     if (!cfg?.startPoint || !cfg.style || !cfg.endPoint || !group) {
+        //         throw new Error("data error");
+        //     }
+        //     const startPoint = cfg.startPoint;
+        //     const endPoint = cfg.endPoint;
+
+        //     const stroke = (cfg.style && cfg.style.stroke) || "#F6BD16";
+        //     // const startArrow = (cfg.style && cfg.style.startArrow) || undefined;
+        //     const endArrow = (cfg.style && cfg.style.endArrow) || undefined;
+
+        //     const keyShape = group.addShape("path", {
+        //         attrs: {
+        //             path: [
+        //                 ["M", startPoint.x, startPoint.y],
+        //                 ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, startPoint.y],
+        //                 ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, endPoint.y],
+        //                 ["L", endPoint.x, endPoint.y]
+        //             ],
+        //             stroke,
+        //             lineWidth: 1,
+        //             startArrow: false,
+        //             endArrow
+        //         },
+        //         className: "edge-shape",
+        //         name: "edge-shape",
+        //         style: cfg.style
+        //     });
+        //     return keyShape;
+        // },
+        update: undefined
+    },
+    "cubic"
+);
+
 registerEdge("lineArrow", {
     options: {
         style: {
@@ -41,7 +85,8 @@ registerEdge("lineArrow", {
                 endArrow
             },
             className: "edge-shape",
-            name: "edge-shape"
+            name: "edge-shape",
+            style: cfg.style
         });
         return keyShape;
     }
@@ -114,11 +159,11 @@ export default function Graph(props: GraphContainerProps) {
                     data: item.id.toString(),
                     source: props.From?.get(item).value?.toString(),
                     target: props.To?.get(item).value?.toString(),
+                    label: props.labelEdge?.get(item).value?.toString(),
                     cluster: props.edgeLegend?.get(item).value?.toString(),
                     type: props.edgeTypeAttribute
                         ? props.edgeTypeAttribute.get(item).value?.toString()
                         : props.edgeTypeConst,
-                    label: props.labelEdge?.get(item).value?.toString(),
                     style
                 } as EdgeConfig;
             });
@@ -233,7 +278,10 @@ export default function Graph(props: GraphContainerProps) {
                 },
                 edgeStateStyles: {
                     activeByLegend: {
-                        stroke: "#999"
+                        opacity: 1
+                    },
+                    inactiveByLegend: {
+                        opacity: 0.2
                     }
                 }
             });
@@ -256,24 +304,31 @@ export default function Graph(props: GraphContainerProps) {
 
     const onHoverLegend = useCallback(
         (cfg: LegendConfigsType, isHover: boolean) => {
-            if (cfg.legendType === "edge" || cfg.legendType === "all") {
-                graph?.getEdges().forEach(edge => {
-                    graph.clearItemStates(edge, ["inactiveByLegend", "activeByLegend"]);
-                    if (isHover) {
+            graph?.getEdges().forEach(edge => {
+                graph.clearItemStates(edge, ["inactiveByLegend", "activeByLegend"]);
+                if (isHover) {
+                    if (cfg.legendType === "edge" || cfg.legendType === "all") {
                         graph.setItemState(edge, "activeByLegend", edge.get("model").cluster === cfg.legendName);
                         graph.setItemState(edge, "inactiveByLegend", edge.get("model").cluster !== cfg.legendName);
+                    } else {
+                        graph.setItemState(edge, "inactiveByLegend", true);
+                        graph.setItemState(edge, "activeByLegend", false);
                     }
-                });
-            }
-            if (cfg.legendType === "node" || cfg.legendType === "all") {
-                graph?.getNodes().forEach(node => {
-                    graph.clearItemStates(node, ["inactiveByLegend", "activeByLegend"]);
-                    if (isHover) {
+                } else {
+                    edge.refresh();
+                }
+            });
+            graph?.getNodes().forEach(node => {
+                graph.clearItemStates(node, ["inactiveByLegend", "activeByLegend"]);
+                if (isHover) {
+                    if (cfg.legendType === "node" || cfg.legendType === "all") {
                         graph.setItemState(node, "activeByLegend", node.get("model").cluster === cfg.legendName);
                         graph.setItemState(node, "inactiveByLegend", node.get("model").cluster !== cfg.legendName);
+                    } else {
+                        graph.setItemState(node, "inactiveByLegend", true);
                     }
-                });
-            }
+                }
+            });
         },
         [graph]
     );
