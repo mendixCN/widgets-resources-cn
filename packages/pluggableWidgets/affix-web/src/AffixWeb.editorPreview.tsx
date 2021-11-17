@@ -1,15 +1,13 @@
-import { Component, ReactNode, createElement } from "react";
-import { HelloWorldSample } from "./components/HelloWorldSample";
+import { parseStyle } from "@mendix-cn/piw-utils-internal";
+import { createElement } from "react";
 import { AffixWebPreviewProps } from "../typings/AffixWebProps";
 
 declare function require(name: string): string;
 
-export class preview extends Component<AffixWebPreviewProps> {
-    render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText} />;
-    }
+export function preview(props: AffixWebPreviewProps) {
+    return <div style={parseStyle(props.style)}></div>;
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/AffixWeb.css");
+    return require("./ui/index.scss");
 }
