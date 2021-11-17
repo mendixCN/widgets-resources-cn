@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendixcn.affixweb.AffixWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Affix Web</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="stickPosition" type="enumeration" defaultValue="top" required="true">
+                <caption>停靠位置</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="top">顶部</enumerationValue>
+                    <enumerationValue key="bottom">底部</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="offsetBottom" type="integer" defaultValue="1" required="true">
+                <caption>距离窗口底部达到指定偏移量后触发</caption>
+                <description></description>
+            </property>
+            <property key="offsetTop" type="integer" defaultValue="0" required="true">
+                <caption>距离窗口顶部达到指定偏移量后触发</caption>
+                <description></description>
+            </property>
+            <property key="target" type="string" required="true" multiline="false" defaultValue=".mx-scrollcontainer-wrapper">
+                <caption>需要监听其滚动事件的元素</caption>
+                <description></description>
+            </property>
+            <property key="onChange" type="action">
+                <caption>固定状态改变</caption>
+                <description></description>
+            </property>
+            <property key="content" type="widgets" required="true">
+                <caption>内容</caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

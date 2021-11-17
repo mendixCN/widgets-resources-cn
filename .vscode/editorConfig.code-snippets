@@ -28,6 +28,7 @@
 			"    platform: \"web\" | \"desktop\"",
 			"): Properties {",
 			"$2",
+			"    console.log(values);",
 			"    if (platform === \"web\") {",
 			"        transformGroupsIntoTabs(defaultProperties);",
 			"    }",
