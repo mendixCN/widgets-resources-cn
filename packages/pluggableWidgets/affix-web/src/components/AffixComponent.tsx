@@ -17,7 +17,7 @@ export interface AffixComponentProps {
 export default function AffixComponent(props: AffixComponentProps) {
     const [target, setTarget] = useState<HTMLElement | null>(null);
     const ref = useRef<any>();
-    // mx-scrollcontainer-wrapper
+
     useMount(() => {
         setTarget(ref.current.closest(".mx-scrollcontainer-wrapper"));
     });
