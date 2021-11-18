@@ -35,6 +35,7 @@
 			"    return defaultProperties;",
 			"}",
 			"export function getPreview(values: $1PreviewProps): StructurePreviewProps | null {",
+			"    console.log(values);",
 			"    return null;",
 			"}",
 		],
