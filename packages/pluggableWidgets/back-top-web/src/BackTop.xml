@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendixcn.backtop.BackTop" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Back Top</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="duration" type="integer" defaultValue="450" required="true">
+                <caption>回到顶部所需时间（ms）</caption>
+                <description></description>
+            </property>
+            <property key="visibilityHeight" type="integer" defaultValue="400" required="true">
+                <caption>滚动高度达到此参数值才出现</caption>
+                <description></description>
+            </property>
+            <property key="content" type="widgets" required="false">
+                <caption>内容</caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
