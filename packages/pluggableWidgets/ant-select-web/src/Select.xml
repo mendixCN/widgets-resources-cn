@@ -8,17 +8,6 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="options" type="datasource" required="true" isList="true">
-                    <caption>选项数据源</caption>
-                    <description></description>
-                </property>
-                <property key="value" type="attribute" required="false">
-                    <caption>所选值</caption>
-                    <description></description>
-                    <attributeTypes>
-                        <attributeType name="String" />
-                    </attributeTypes>
-                </property>
                 <property key="optionValue" type="attribute" required="true" dataSource="options">
                     <caption>选项值</caption>
                     <description></description>
@@ -35,9 +24,38 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Data Source">
+                <property key="options" type="datasource" required="true" isList="true">
+                    <caption>待选项数据源</caption>
+                    <description></description>
+                </property>
+                <property key="selectList" type="datasource" required="false" isList="true">
+                    <caption>已选项数据源</caption>
+                    <description></description>
+                </property>
+                <property key="optionValueM" type="attribute" required="false" dataSource="selectList">
+                    <caption>选项值</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
+                <property key="value" type="attribute" required="false">
+                    <caption>所选值</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Behavior">
-                <property key="onChange" type="action" dataSource="options">
-                    <caption>所选值变化</caption>
+                <property key="onSelect" type="action" dataSource="options">
+                    <caption>被选中</caption>
+                    <description></description>
+                </property>
+                <property key="onDeselect" type="action" dataSource="options">
+                    <caption>取消选中</caption>
                     <description></description>
                 </property>
             </propertyGroup>
@@ -48,12 +66,11 @@
                     <caption>多选</caption>
                     <description></description>
                 </property>
-                <property key="isMutiAttribute" type="attribute" required="false">
-                    <caption>多选</caption>
+            </propertyGroup>
+            <propertyGroup caption="即时创建">
+                <property key="onCreate" type="action">
+                    <caption>即时创建</caption>
                     <description></description>
-                    <attributeTypes>
-                        <attributeType name="Boolean" />
-                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>
