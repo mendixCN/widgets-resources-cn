@@ -58,6 +58,10 @@
                     <caption>取消选中</caption>
                     <description></description>
                 </property>
+                <property key="onDeselectM" type="action" dataSource="selectList">
+                    <caption>取消选中M</caption>
+                    <description></description>
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="高级">

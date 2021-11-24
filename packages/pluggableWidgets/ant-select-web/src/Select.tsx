@@ -5,17 +5,21 @@ import { Button, Select } from "antd";
 import { SelectContainerProps } from "../typings/SelectProps";
 
 import "./ui/index.scss";
-import { useDebounceFn, useMount, usePrevious } from "ahooks";
+import { useDebounceFn, useInterval, useMount, usePrevious, useWhyDidYouUpdate } from "ahooks";
 
 const LOADING_STRING = "_-_";
+const PAGE_SIZE = 50;
+const POLLING_TIME = 100;
 export interface SelectOption {
     label: string;
     value: string;
 }
 export default function SelectMX(props: SelectContainerProps) {
+    const [showCreate, setShowCreate] = useState(false);
+    const [searchValue, setSearchValue] = useState<string>("");
     const [dropdownVisible, setDropdownVisible] = useState(false);
     useMount(() => {
-        props.options.setLimit(50);
+        props.options.setLimit(PAGE_SIZE);
         props.options.requestTotalCount(true);
     });
     const onChange = useCallback(
@@ -62,6 +66,9 @@ export default function SelectMX(props: SelectContainerProps) {
                 value: props.optionValue.get(item).value!.toString()
             }));
 
+            const existOption = page?.some(d => d.value === searchValue);
+            setShowCreate((existOption === undefined ? false : !existOption) && !!searchValue);
+
             const leftOptions = Array(props.options.offset).fill(loadingOption);
 
             const rightOptions = Array(
@@ -103,21 +110,64 @@ export default function SelectMX(props: SelectContainerProps) {
 
     const { run } = useDebounceFn(
         (offset, _) => {
-            props.options.setOffset(Math.max(0, offset - 1));
+            if (Math.abs(offset - props.options.offset) % 50 > 15) {
+                props.options.setOffset(Math.max(0, offset - 1));
+            }
         },
         { wait: 300 }
     );
 
-    const [searchValue, setSearchValue] = useState<string>("");
+    useEffect(() => {
+        if (searchValue) {
+            // https://docs.mendix.com/apidocs-mxsdk/apidocs/pluggable-widgets-client-apis-list-values#4-3-string-conditions
+            // https://forum.mendix.tencent-cloud.com/info/4dcaab5a99584bfd9f2bb81e70352fa5
+            // @ts-ignore
+            window.require(["mendix/filters/builders"], ({ attribute, literal, contains }) => {
+                const attrStr = attribute(props.optionValue.id); // string attribute
+                const subStr = literal(searchValue);
+                const filterCondition1 = contains(attrStr, subStr);
+
+                props.options.setFilter(filterCondition1);
+            });
+        } else {
+            props.options.setFilter(undefined);
+        }
+    }, [searchValue]);
+
     const [open, setOpen] = useState(false);
+
+    const [interval, setInterval] = useState<number>();
+
+    useInterval(
+        () => {
+            if (props.selectList?.status === ValueStatus.Available) {
+                const obj = props.selectList.items![0];
+                if (obj) {
+                    props.onDeselectM?.get(obj).execute();
+                } else {
+                    setInterval(undefined);
+                }
+            }
+        },
+        interval,
+        { immediate: true }
+    );
+
+    useWhyDidYouUpdate(props.name, { ...props, options, showCreate });
+
     return (
         <Select
+            loading={props.options.status === ValueStatus.Loading}
             className="mxcn-select"
             allowClear
+            maxTagCount="responsive"
             open={open}
             value={value}
             listItemHeight={32}
             onChange={onChange}
+            // filterOption={(inputValue, option)=>{
+            // return true;
+            // }}
             onSelect={(_value, option) => {
                 const obj = props.options?.items?.find(d => d.id === option.id);
                 if (obj) {
@@ -128,17 +178,22 @@ export default function SelectMX(props: SelectContainerProps) {
                 }
             }}
             onDeselect={(_value, option) => {
-                const obj = props.options?.items?.find(d => d.id === option.id);
+                const obj = props.selectList?.items?.find(d => d.id === option.id);
                 if (obj) {
-                    props.onDeselect?.get(obj).execute();
+                    props.onDeselectM?.get(obj).execute();
                 }
             }}
             onClear={() => {
-                const obj = props.options?.items?.find(d => props.optionValue.get(d).value === props.value?.value);
-                props.value?.setTextValue("");
-                if (obj) {
-                    props.onDeselect?.get(obj).execute();
+                if (props.isMultiConst) {
+                    setInterval(POLLING_TIME);
+                } else {
+                    const obj = props.options?.items?.find(d => props.optionValue.get(d).value === props.value?.value);
+                    if (obj) {
+                        props.onDeselect?.get(obj).execute();
+                    }
                 }
+                props.value?.setTextValue("");
+                setSearchValue("");
             }}
             onDropdownVisibleChange={o => {
                 setOpen(o);
@@ -152,7 +207,7 @@ export default function SelectMX(props: SelectContainerProps) {
             onSearch={setSearchValue}
             showSearch
             dropdownRender={menu =>
-                searchValue ? (
+                showCreate ? (
                     <div className="mxcn-select-dropdown">
                         {menu}
                         <div aria-selected="false" className="ant-select-item ant-select-item-option">

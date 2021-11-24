@@ -20,6 +20,7 @@ export interface SelectContainerProps {
     value?: EditableValue<string>;
     onSelect?: ListActionValue;
     onDeselect?: ListActionValue;
+    onDeselectM?: ListActionValue;
     isMultiConst: boolean;
     onCreate?: ActionValue;
 }
@@ -35,6 +36,7 @@ export interface SelectPreviewProps {
     value: string;
     onSelect: {} | null;
     onDeselect: {} | null;
+    onDeselectM: {} | null;
     isMultiConst: boolean;
     onCreate: {} | null;
 }
