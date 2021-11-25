@@ -12,9 +12,9 @@ export interface SelectContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    options: ListValue;
     optionValue: ListAttributeValue<string | Big>;
     optionLabel: ListAttributeValue<string>;
-    options: ListValue;
     selectList?: ListValue;
     optionValueM?: ListAttributeValue<string | Big>;
     value?: EditableValue<string>;
@@ -28,9 +28,9 @@ export interface SelectContainerProps {
 export interface SelectPreviewProps {
     class: string;
     style: string;
+    options: {} | { type: string } | null;
     optionValue: string;
     optionLabel: string;
-    options: {} | { type: string } | null;
     selectList: {} | { type: string } | null;
     optionValueM: string;
     value: string;
