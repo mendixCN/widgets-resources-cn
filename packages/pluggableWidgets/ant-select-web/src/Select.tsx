@@ -1,23 +1,30 @@
 import { createElement, useCallback, useEffect, useMemo, useState } from "react";
 import { ValueStatus } from "mendix";
+import { Button, Select } from "antd";
 
 import { SelectContainerProps } from "../typings/SelectProps";
-import SelectComponent, { SelectOption } from "./components/SelectComponent";
 
-import "./ui/Select.css";
-import { useDebounceFn, useMount, usePrevious } from "ahooks";
+import "./ui/index.scss";
+import { useDebounceFn, useInterval, useMount, usePrevious, useWhyDidYouUpdate } from "ahooks";
 
 const LOADING_STRING = "_-_";
-
-export default function Select(props: SelectContainerProps) {
+const PAGE_SIZE = 50;
+const POLLING_TIME = 100;
+export interface SelectOption {
+    label: string;
+    value: string;
+}
+export default function SelectMX(props: SelectContainerProps) {
+    const [showCreate, setShowCreate] = useState(false);
+    const [searchValue, setSearchValue] = useState<string>("");
     const [dropdownVisible, setDropdownVisible] = useState(false);
     useMount(() => {
-        props.options.setLimit(100);
+        props.options.setLimit(PAGE_SIZE);
         props.options.requestTotalCount(true);
     });
     const onChange = useCallback(
         (value: string) => {
-            if (value.startsWith(LOADING_STRING)) {
+            if (props.isMultiConst) {
                 return;
             }
             const selectedObjectItem = props.options.items?.find(d => d.id === value);
@@ -25,24 +32,29 @@ export default function Select(props: SelectContainerProps) {
                 if (props.value && props.value.status === ValueStatus.Available) {
                     props.value.setValue(props.optionValue.get(selectedObjectItem).value?.toString());
                 }
-                if (props.onChange && props.options.status === ValueStatus.Available) {
-                    props.onChange?.get(selectedObjectItem).execute();
+                if (props.onSelect && props.options.status === ValueStatus.Available) {
+                    props.onSelect?.get(selectedObjectItem).execute();
                 }
             }
         },
         [props.value, props.options]
     );
 
-    const isMulti = useMemo(() => {
-        if (props.isMutiAttribute) {
-            if (props.isMutiAttribute.status === ValueStatus.Available) {
-                return props.isMutiAttribute.value!;
+    const [onCreateLoading, setOnCreateLoading] = useState(false);
+
+    useEffect(() => {
+        setOnCreateLoading(props.onCreate?.isExecuting ?? false);
+    }, [props.onCreate]);
+
+    const onCreate = useCallback(
+        (value: string) => {
+            if (props.onCreate?.canExecute) {
+                props.value?.setValue(value);
+                props.onCreate?.execute();
             }
-        } else {
-            return props.isMultiConst;
-        }
-        return undefined;
-    }, [props.isMutiAttribute]);
+        },
+        [props.onCreate]
+    );
 
     const options = useMemo(() => {
         if (props.options.status === ValueStatus.Available) {
@@ -50,8 +62,12 @@ export default function Select(props: SelectContainerProps) {
 
             const page = props.options.items?.map<SelectOption>(item => ({
                 label: props.optionLabel.get(item).value!,
-                value: item.id
+                id: item.id,
+                value: props.optionValue.get(item).value!.toString()
             }));
+
+            const existOption = page?.some(d => d.value === searchValue);
+            setShowCreate((existOption === undefined ? false : !existOption) && !!searchValue);
 
             const leftOptions = Array(props.options.offset).fill(loadingOption);
 
@@ -64,7 +80,7 @@ export default function Select(props: SelectContainerProps) {
                 .concat(rightOptions)
                 .map((v, i) => {
                     if (v.value === LOADING_STRING) {
-                        return { label: v.label, value: LOADING_STRING + i.toString() };
+                        return { label: v.label, value: LOADING_STRING + i.toString(), disabled: true };
                     } else {
                         return v;
                     }
@@ -74,29 +90,154 @@ export default function Select(props: SelectContainerProps) {
 
     const preOptions = usePrevious(options);
 
-    const [value, setValue] = useState<string>();
+    const [value, setValue] = useState<string | string[]>();
 
     useEffect(() => {
-        if (props.value && props.value.status === ValueStatus.Available) {
+        if (props.isMultiConst && props.selectList && props.optionValueM) {
+            if (props.selectList && props.selectList.status === ValueStatus.Available) {
+                const listValue = props.selectList.items?.map(obj => props.optionValueM!.get(obj).value!.toString());
+                setValue(listValue ?? []);
+                props.value?.setValue((listValue ?? []).join(","));
+            }
+        }
+    }, [props.selectList]);
+
+    useEffect(() => {
+        if (!props.isMultiConst && props.value && props.value.status === ValueStatus.Available) {
             setValue(props.value.value);
         }
     }, [props.value]);
 
     const { run } = useDebounceFn(
         (offset, _) => {
-            props.options.setOffset(Math.max(0, offset - 1));
+            if (Math.abs(offset - props.options.offset) % 50 > 15) {
+                props.options.setOffset(Math.max(0, offset - 1));
+            }
         },
         { wait: 300 }
     );
 
+    useEffect(() => {
+        if (searchValue) {
+            // https://docs.mendix.com/apidocs-mxsdk/apidocs/pluggable-widgets-client-apis-list-values#4-3-string-conditions
+            // https://forum.mendix.tencent-cloud.com/info/4dcaab5a99584bfd9f2bb81e70352fa5
+            // @ts-ignore
+            window.require(["mendix/filters/builders"], ({ attribute, literal, contains }) => {
+                const attrStr = attribute(props.optionValue.id); // string attribute
+                const subStr = literal(searchValue);
+                const filterCondition1 = contains(attrStr, subStr);
+
+                props.options.setFilter(filterCondition1);
+            });
+        } else {
+            props.options.setFilter(undefined);
+        }
+    }, [searchValue]);
+
+    const [open, setOpen] = useState(false);
+
+    const [interval, setInterval] = useState<number>();
+
+    useInterval(
+        () => {
+            if (props.selectList?.status === ValueStatus.Available) {
+                const obj = props.selectList.items![0];
+                if (obj) {
+                    props.onDeselectM?.get(obj).execute();
+                } else {
+                    setInterval(undefined);
+                }
+            }
+        },
+        interval,
+        { immediate: true }
+    );
+
+    useWhyDidYouUpdate(props.name, { ...props, options, showCreate });
+
     return (
-        <SelectComponent
-            isMulti={isMulti}
+        <Select
+            loading={props.options.status === ValueStatus.Loading}
+            className="mxcn-select"
+            allowClear
+            maxTagCount="responsive"
+            open={open}
             value={value}
-            options={dropdownVisible ? (options ? options : preOptions) : options}
-            onPopupScroll={run}
-            onDropdownVisibleChange={setDropdownVisible}
+            listItemHeight={32}
             onChange={onChange}
-        ></SelectComponent>
+            // filterOption={(inputValue, option)=>{
+            // return true;
+            // }}
+            onSelect={(_value, option) => {
+                const obj = props.options?.items?.find(d => d.id === option.id);
+                if (obj) {
+                    props.onSelect?.get(obj).execute();
+                }
+                if (!props.isMultiConst) {
+                    props.value?.setValue(_value);
+                }
+            }}
+            onDeselect={(_value, option) => {
+                const obj = props.selectList?.items?.find(d => d.id === option.id);
+                if (obj) {
+                    props.onDeselectM?.get(obj).execute();
+                }
+            }}
+            onClear={() => {
+                if (props.isMultiConst) {
+                    setInterval(POLLING_TIME);
+                } else {
+                    const obj = props.options?.items?.find(d => props.optionValue.get(d).value === props.value?.value);
+                    if (obj) {
+                        props.onDeselect?.get(obj).execute();
+                    }
+                }
+                props.value?.setTextValue("");
+                setSearchValue("");
+            }}
+            onDropdownVisibleChange={o => {
+                setOpen(o);
+                setDropdownVisible(o);
+            }}
+            onPopupScroll={e => {
+                run(Math.floor(e.currentTarget.scrollTop / 32), e.currentTarget.clientHeight / 32);
+            }}
+            mode={props.isMultiConst ? "multiple" : undefined}
+            options={dropdownVisible ? (options ? options : preOptions) : options}
+            onSearch={setSearchValue}
+            showSearch
+            dropdownRender={menu =>
+                showCreate ? (
+                    <div className="mxcn-select-dropdown">
+                        {menu}
+                        <div aria-selected="false" className="ant-select-item ant-select-item-option">
+                            <div className="ant-select-item-option-content">
+                                <Button
+                                    loading={onCreateLoading}
+                                    block
+                                    type="text"
+                                    onClick={() => {
+                                        onCreate(searchValue);
+                                    }}
+                                >
+                                    创建并选择&nbsp;
+                                    <span title={searchValue} className="on-create-text">
+                                        {searchValue}
+                                    </span>
+                                </Button>
+                            </div>
+                            <span
+                                className="ant-select-item-option-state"
+                                unselectable="on"
+                                aria-hidden="true"
+                                style={{ userSelect: "none" }}
+                            ></span>
+                        </div>
+                    </div>
+                ) : (
+                    menu
+                )
+            }
+        ></Select>
     );
 }

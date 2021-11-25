@@ -6,18 +6,11 @@
     <description>My widget description</description>
     <icon/>
     <properties>
-        <propertyGroup caption="General">
-            <propertyGroup caption="General">
+        <propertyGroup caption="数据源">
+            <propertyGroup caption="待选">
                 <property key="options" type="datasource" required="true" isList="true">
-                    <caption>选项数据源</caption>
+                    <caption>待选项数据源</caption>
                     <description></description>
-                </property>
-                <property key="value" type="attribute" required="false">
-                    <caption>所选值</caption>
-                    <description></description>
-                    <attributeTypes>
-                        <attributeType name="String" />
-                    </attributeTypes>
                 </property>
                 <property key="optionValue" type="attribute" required="true" dataSource="options">
                     <caption>选项值</caption>
@@ -35,9 +28,42 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Behavior">
-                <property key="onChange" type="action" dataSource="options">
-                    <caption>所选值变化</caption>
+            <propertyGroup caption="已选">
+                <property key="selectList" type="datasource" required="false" isList="true">
+                    <caption>已选项数据源</caption>
+                    <description></description>
+                </property>
+                <property key="optionValueM" type="attribute" required="false" dataSource="selectList">
+                    <caption>选项值</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="常规">
+            <propertyGroup caption="常规">
+                <property key="value" type="attribute" required="false">
+                    <caption>所选值</caption>
+                    <description>选中选项后会把值赋值到此属性</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="事件">
+                <property key="onSelect" type="action" dataSource="options">
+                    <caption>被选中</caption>
+                    <description></description>
+                </property>
+                <property key="onDeselect" type="action" dataSource="options">
+                    <caption>取消选中</caption>
+                    <description></description>
+                </property>
+                <property key="onDeselectM" type="action" dataSource="selectList">
+                    <caption>取消选中</caption>
                     <description></description>
                 </property>
             </propertyGroup>
@@ -48,12 +74,11 @@
                     <caption>多选</caption>
                     <description></description>
                 </property>
-                <property key="isMutiAttribute" type="attribute" required="false">
-                    <caption>多选</caption>
-                    <description></description>
-                    <attributeTypes>
-                        <attributeType name="Boolean" />
-                    </attributeTypes>
+            </propertyGroup>
+            <propertyGroup caption="即时创建">
+                <property key="onCreate" type="action">
+                    <caption>即时创建</caption>
+                    <description>即时创建一个不存在的选项</description>
                 </property>
             </propertyGroup>
         </propertyGroup>

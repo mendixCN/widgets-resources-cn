@@ -10,5 +10,5 @@ export class preview extends Component<SelectPreviewProps> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Select.css");
+    return require("./ui/index.scss");
 }

@@ -7,6 +7,7 @@
     "infeng.vscode-react-typescript",
     "redhat.vscode-xml",
     "dotjoshjohnson.xml",
-    "dsznajder.es7-react-js-snippets"
+    "dsznajder.es7-react-js-snippets",
+    "fabiospampinato.vscode-open-in-application"
   ]
 }
