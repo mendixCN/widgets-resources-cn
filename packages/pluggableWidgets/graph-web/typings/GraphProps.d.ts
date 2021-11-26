@@ -46,7 +46,7 @@ export interface LegendConfigsPreviewType {
     legendType: LegendTypeEnum;
     legendName: string;
     label: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }
 
 export interface StyleForEdgePreviewType {
