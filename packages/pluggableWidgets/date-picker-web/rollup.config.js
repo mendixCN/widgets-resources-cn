@@ -14,7 +14,6 @@ export default args => {
 
       if (warning.code === 'CIRCULAR_DEPENDENCY') return;
 
-      // console.log(warning);
       onwarn(warning);
     };
   });

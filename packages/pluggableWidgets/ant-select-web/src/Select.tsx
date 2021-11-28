@@ -95,7 +95,7 @@ export default function SelectMX(props: SelectContainerProps) {
 
     useEffect(() => {
         if (
-            !searchValue /*搜索中不应该变更值，以免失去输入焦点*/ &&
+            !searchValue /* 搜索中不应该变更值，以免失去输入焦点*/ &&
             props.isMultiConst &&
             props.selectList &&
             props.optionValueM

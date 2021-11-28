@@ -9,7 +9,7 @@ import "./ui/index.scss";
 import { DatePickerContainerProps } from "../typings/DatePickerProps";
 import { useWhyDidYouUpdate } from "ahooks";
 
-export function getDefaultFormat(format: string, picker: string, showTime: boolean, use12Hours: boolean) {
+function getDefaultFormat(format: string, picker: string, showTime: boolean, use12Hours: boolean) {
     let mergedFormat = format;
 
     if (!mergedFormat) {
