@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendixcn.datepicker.DatePicker" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Date Picker</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="mode" type="enumeration" defaultValue="date" required="true">
+                <caption>模式</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="date">日期</enumerationValue>
+                    <enumerationValue key="range">范围</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="picker" type="enumeration" defaultValue="date" required="true">
+                <caption>选择</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="date">日</enumerationValue>
+                    <enumerationValue key="week">周</enumerationValue>
+                    <enumerationValue key="month">月</enumerationValue>
+                    <enumerationValue key="quarter">季</enumerationValue>
+                    <enumerationValue key="year">年</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="dateFormat" type="string" required="false" multiline="false">
+                <caption>格式</caption>
+                <description></description>
+            </property>
+            <property key="onChange" type="action">
+                <caption>完成选择</caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Data Source">
+            <property key="valueFrom" type="attribute" required="false">
+                <caption>开始日期</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="DateTime" />
+                </attributeTypes>
+            </property>
+            <property key="valueTo" type="attribute" required="false">
+                <caption>结束日期</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="DateTime" />
+                </attributeTypes>
+            </property>
+            <property key="value" type="attribute" required="false">
+                <caption>所选日期</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                    <attributeType name="DateTime" />
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="高级">
+            <property key="showTime" type="boolean" defaultValue="false">
+                <caption>显示时间</caption>
+                <description></description>
+            </property>
+            <property key="size" type="enumeration" defaultValue="large" required="true">
+                <caption>大小</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="large">大</enumerationValue>
+                    <enumerationValue key="middle">中</enumerationValue>
+                    <enumerationValue key="small">小</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="border" type="boolean" defaultValue="true">
+                <caption>边界</caption>
+                <description></description>
+            </property>
+            <!-- <property key="ranges" type="object" isList="true" required="false">
+                <caption>日期范围</caption>
+                <description></description>
+                <properties>
+                    <propertyGroup caption="General">
+                        <property key="title" type="string" required="true" multiline="false">
+                            <caption>标题</caption>
+                            <description></description>
+                        </property>
+
+                    </propertyGroup>
+                </properties>
+            </property> -->
+        </propertyGroup>
+    </properties>
+</widget>
