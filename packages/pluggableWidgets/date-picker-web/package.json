@@ -1,10 +1,10 @@
 {
-  "name": "ant-select-web",
-  "widgetName": "Select",
-  "version": "1.1.1",
+  "name": "date-picker-web",
+  "widgetName": "DatePicker",
+  "version": "1.0.0",
   "description": "My widget description",
   "copyright": "2020 Mendix Technology BV",
-  "author": "John",
+  "author": "Jason",
   "engines": {
     "node": ">=12"
   },
@@ -13,7 +13,7 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
-  "packagePath": "mendix",
+  "packagePath": "mendixcn",
   "scripts": {
     "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
@@ -31,10 +31,9 @@
     "@types/react-dom": "~17.0.1"
   },
   "dependencies": {
-    "ahooks": "^2.10.9",
-    "antd": "^4.16.13",
+    "classnames": "^2.2.6",
     "@mendix-cn/piw-utils-internal": "^1.0.0",
-    "@mendix-cn/pluggable-widget-utils": "^1.0.0",
-    "classnames": "^2.2.6"
+    "ahooks": "^2.10.9",
+    "antd": "^4.16.13"
   }
 }

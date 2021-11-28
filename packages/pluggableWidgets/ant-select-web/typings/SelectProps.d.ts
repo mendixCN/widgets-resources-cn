@@ -12,6 +12,7 @@ export interface SelectContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    searchValue: EditableValue<string>;
     options: ListValue;
     optionValue: ListAttributeValue<string | Big>;
     optionLabel: ListAttributeValue<string>;
@@ -28,6 +29,7 @@ export interface SelectContainerProps {
 export interface SelectPreviewProps {
     class: string;
     style: string;
+    searchValue: string;
     options: {} | { type: string } | null;
     optionValue: string;
     optionLabel: string;
