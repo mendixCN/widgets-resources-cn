@@ -14,7 +14,7 @@ export function getProperties(
     if (values.isMultiConst === false) {
         hidePropertiesIn(defaultProperties, values, ["selectList", "optionValueM", "onDeselectM"]);
     } else {
-        hidePropertiesIn(defaultProperties, values, ["onDeselect", "optionValue"]);
+        hidePropertiesIn(defaultProperties, values, ["onDeselect"]);
     }
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);

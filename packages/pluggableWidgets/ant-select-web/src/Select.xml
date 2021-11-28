@@ -7,6 +7,15 @@
     <icon/>
     <properties>
         <propertyGroup caption="数据源">
+            <propertyGroup caption="搜索值">
+                <property key="searchValue" type="attribute" required="true">
+                    <caption>搜索值</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="待选">
                 <property key="options" type="datasource" required="true" isList="true">
                     <caption>待选项数据源</caption>

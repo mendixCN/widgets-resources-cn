@@ -1,7 +1,7 @@
 {
   "name": "ant-select-web",
   "widgetName": "Select",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "My widget description",
   "copyright": "2020 Mendix Technology BV",
   "author": "John",

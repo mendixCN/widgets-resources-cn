@@ -16,45 +16,12 @@ export interface SelectOption {
 }
 export default function SelectMX(props: SelectContainerProps) {
     const [showCreate, setShowCreate] = useState(false);
+    const [value, setValue] = useState<string | string[]>();
     const [searchValue, setSearchValue] = useState<string>("");
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    useMount(() => {
-        props.options.setLimit(PAGE_SIZE);
-        props.options.requestTotalCount(true);
-    });
-    const onChange = useCallback(
-        (value: string) => {
-            if (props.isMultiConst) {
-                return;
-            }
-            const selectedObjectItem = props.options.items?.find(d => d.id === value);
-            if (selectedObjectItem) {
-                if (props.value && props.value.status === ValueStatus.Available) {
-                    props.value.setValue(props.optionValue.get(selectedObjectItem).value?.toString());
-                }
-                if (props.onSelect && props.options.status === ValueStatus.Available) {
-                    props.onSelect?.get(selectedObjectItem).execute();
-                }
-            }
-        },
-        [props.value, props.options]
-    );
-
+    const [open, setOpen] = useState(false);
     const [onCreateLoading, setOnCreateLoading] = useState(false);
-
-    useEffect(() => {
-        setOnCreateLoading(props.onCreate?.isExecuting ?? false);
-    }, [props.onCreate]);
-
-    const onCreate = useCallback(
-        (value: string) => {
-            if (props.onCreate?.canExecute) {
-                props.value?.setValue(value);
-                props.onCreate?.execute();
-            }
-        },
-        [props.onCreate]
-    );
+    const [interval, setInterval] = useState<number>();
 
     const options = useMemo(() => {
         if (props.options.status === ValueStatus.Available) {
@@ -87,26 +54,35 @@ export default function SelectMX(props: SelectContainerProps) {
                 });
         }
     }, [props.options]);
-
     const preOptions = usePrevious(options);
 
-    const [value, setValue] = useState<string | string[]>();
-
-    useEffect(() => {
-        if (props.isMultiConst && props.selectList && props.optionValueM) {
-            if (props.selectList && props.selectList.status === ValueStatus.Available) {
-                const listValue = props.selectList.items?.map(obj => props.optionValueM!.get(obj).value!.toString());
-                setValue(listValue ?? []);
-                props.value?.setValue((listValue ?? []).join(","));
+    const onChange = useCallback(
+        (value: string) => {
+            if (props.isMultiConst) {
+                return;
             }
-        }
-    }, [props.selectList]);
+            const selectedObjectItem = props.options.items?.find(d => d.id === value);
+            if (selectedObjectItem) {
+                if (props.value && props.value.status === ValueStatus.Available) {
+                    props.value.setValue(props.optionValue.get(selectedObjectItem).value?.toString());
+                }
+                if (props.onSelect && props.options.status === ValueStatus.Available) {
+                    props.onSelect?.get(selectedObjectItem).execute();
+                }
+            }
+        },
+        [props.value, props.options]
+    );
 
-    useEffect(() => {
-        if (!props.isMultiConst && props.value && props.value.status === ValueStatus.Available) {
-            setValue(props.value.value);
-        }
-    }, [props.value]);
+    const onCreate = useCallback(
+        (value: string) => {
+            if (props.onCreate?.canExecute) {
+                props.searchValue?.setValue(value);
+                props.onCreate?.execute();
+            }
+        },
+        [props.onCreate]
+    );
 
     const { run } = useDebounceFn(
         (offset, _) => {
@@ -116,6 +92,33 @@ export default function SelectMX(props: SelectContainerProps) {
         },
         { wait: 300 }
     );
+
+    useEffect(() => {
+        if (
+            !searchValue /*搜索中不应该变更值，以免失去输入焦点*/ &&
+            props.isMultiConst &&
+            props.selectList &&
+            props.optionValueM
+        ) {
+            if (props.selectList && props.selectList.status === ValueStatus.Available) {
+                const listValue = props.selectList.items?.map(obj => props.optionValueM!.get(obj).value!.toString());
+                setValue(listValue ?? []);
+                props.value?.setValue((listValue ?? []).join(","));
+            }
+        }
+    }, [props.selectList]);
+
+    /* useEffect(() => {
+        if (props.searchValue && props.searchValue.status === ValueStatus.Available) {
+            setSearchValue(props.searchValue.value ?? '')
+        }
+    }, [props.searchValue]); */
+
+    useEffect(() => {
+        if (!props.isMultiConst && props.value && props.value.status === ValueStatus.Available) {
+            setValue(props.value.value);
+        }
+    }, [props.value]);
 
     useEffect(() => {
         if (searchValue) {
@@ -134,9 +137,9 @@ export default function SelectMX(props: SelectContainerProps) {
         }
     }, [searchValue]);
 
-    const [open, setOpen] = useState(false);
-
-    const [interval, setInterval] = useState<number>();
+    useEffect(() => {
+        setOnCreateLoading(props.onCreate?.isExecuting ?? false);
+    }, [props.onCreate]);
 
     useInterval(
         () => {
@@ -153,7 +156,12 @@ export default function SelectMX(props: SelectContainerProps) {
         { immediate: true }
     );
 
-    useWhyDidYouUpdate(props.name, { ...props, options, showCreate });
+    useMount(() => {
+        props.options.setLimit(PAGE_SIZE);
+        props.options.requestTotalCount(true);
+    });
+
+    useWhyDidYouUpdate(props.name, { ...props, _options: options, showCreate, searchValue });
 
     return (
         <Select
@@ -165,9 +173,6 @@ export default function SelectMX(props: SelectContainerProps) {
             value={value}
             listItemHeight={32}
             onChange={onChange}
-            // filterOption={(inputValue, option)=>{
-            // return true;
-            // }}
             onSelect={(_value, option) => {
                 const obj = props.options?.items?.find(d => d.id === option.id);
                 if (obj) {
@@ -196,6 +201,9 @@ export default function SelectMX(props: SelectContainerProps) {
                 setSearchValue("");
             }}
             onDropdownVisibleChange={o => {
+                if (!o) {
+                    setSearchValue("");
+                }
                 setOpen(o);
                 setDropdownVisible(o);
             }}
@@ -206,10 +214,10 @@ export default function SelectMX(props: SelectContainerProps) {
             options={dropdownVisible ? (options ? options : preOptions) : options}
             onSearch={setSearchValue}
             showSearch
-            dropdownRender={menu =>
-                showCreate ? (
-                    <div className="mxcn-select-dropdown">
-                        {menu}
+            dropdownRender={menu => (
+                <div className="mxcn-select-dropdown">
+                    {menu}
+                    {showCreate ? (
                         <div aria-selected="false" className="ant-select-item ant-select-item-option">
                             <div className="ant-select-item-option-content">
                                 <Button
@@ -233,11 +241,9 @@ export default function SelectMX(props: SelectContainerProps) {
                                 style={{ userSelect: "none" }}
                             ></span>
                         </div>
-                    </div>
-                ) : (
-                    menu
-                )
-            }
+                    ) : null}
+                </div>
+            )}
         ></Select>
     );
 }
