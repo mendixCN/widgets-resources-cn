@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendixcn.tabs.Tabs" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Tabs</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="通用">
+            <propertyGroup caption="数据源">
+                <property key="activeKey" type="attribute" required="false">
+                    <caption>活动tab页</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="tabs">
+                <property key="tabs" type="object" isList="true" required="true">
+                    <caption>tabs</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="caption" type="textTemplate" required="false" multiline="false">
+                                <caption>标题</caption>
+                                <description></description>
+                                <translations>
+                                    <translation lang="en_US">defaultValue</translation>
+                                </translations>
+                            </property>
+                            <property key="headContent" type="widgets" required="false">
+                                <caption>自定义头</caption>
+                                <description></description>
+                            </property>
+                            <property key="tabKey" type="string" required="true" multiline="false">
+                                <caption>Key</caption>
+                                <description></description>
+                            </property>
+                            <property key="content" type="widgets" required="true">
+                                <caption>内容</caption>
+                                <description></description>
+                            </property>
+                            <property key="disabled" type="expression" defaultValue="false">
+                                <caption>禁用</caption>
+                                <description></description>
+                                <returnType type="Boolean" />
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="高级">
+            <propertyGroup caption="外观">
+                <property key="customHeader" type="boolean" defaultValue="false">
+                    <caption>自定义头</caption>
+                    <description></description>
+                </property>
+                <property key="centered" type="boolean" defaultValue="false">
+                    <caption>居中</caption>
+                    <description></description>
+                </property>
+                <property key="tabPosition" type="enumeration" defaultValue="top" required="true">
+                    <caption>Tab位置</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="top">顶部</enumerationValue>
+                        <enumerationValue key="left">左侧</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
