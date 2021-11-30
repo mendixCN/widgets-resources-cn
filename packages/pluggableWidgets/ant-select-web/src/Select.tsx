@@ -1,5 +1,6 @@
 import { createElement, useCallback, useEffect, useMemo, useState } from "react";
 import { ValueStatus } from "mendix";
+import { attribute, literal, contains } from "mendix/filters/builders";
 import { Button, Select } from "antd";
 
 import { SelectContainerProps } from "../typings/SelectProps";
@@ -108,12 +109,6 @@ export default function SelectMX(props: SelectContainerProps) {
         }
     }, [props.selectList]);
 
-    /* useEffect(() => {
-        if (props.searchValue && props.searchValue.status === ValueStatus.Available) {
-            setSearchValue(props.searchValue.value ?? '')
-        }
-    }, [props.searchValue]); */
-
     useEffect(() => {
         if (!props.isMultiConst && props.value && props.value.status === ValueStatus.Available) {
             setValue(props.value.value);
@@ -122,16 +117,11 @@ export default function SelectMX(props: SelectContainerProps) {
 
     useEffect(() => {
         if (searchValue) {
-            // https://docs.mendix.com/apidocs-mxsdk/apidocs/pluggable-widgets-client-apis-list-values#4-3-string-conditions
-            // https://forum.mendix.tencent-cloud.com/info/4dcaab5a99584bfd9f2bb81e70352fa5
-            // @ts-ignore
-            window.require(["mendix/filters/builders"], ({ attribute, literal, contains }) => {
-                const attrStr = attribute(props.optionValue.id); // string attribute
-                const subStr = literal(searchValue);
-                const filterCondition1 = contains(attrStr, subStr);
+            const attrStr = attribute(props.optionValue.id);
+            const subStr = literal(searchValue);
+            const filterCondition1 = contains(attrStr, subStr);
 
-                props.options.setFilter(filterCondition1);
-            });
+            props.options.setFilter(filterCondition1);
         } else {
             props.options.setFilter(undefined);
         }
