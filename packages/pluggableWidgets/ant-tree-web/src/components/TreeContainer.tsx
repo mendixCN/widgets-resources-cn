@@ -2,7 +2,6 @@ import { useControllableValue, useWhyDidYouUpdate } from "ahooks";
 import { Tree } from "antd";
 import { DataNode, EventDataNode } from "antd/lib/tree";
 import { createElement, Key, ReactElement } from "react";
-import "../ui/antd.css";
 
 export interface TreeNode {
     title: string;

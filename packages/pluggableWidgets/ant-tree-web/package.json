@@ -1,7 +1,7 @@
 {
   "name": "ant-tree-web",
   "widgetName": "Tree",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "My widget description",
   "copyright": "2020 Mendix Technology BV",
   "author": "John",
@@ -20,7 +20,8 @@
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",
     "prerelease": "npm run lint",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "tar": "tar -a -c -f demo-tree-960.zip tests/testProject"
   },
   "license": "Apache-2.0",
   "devDependencies": {

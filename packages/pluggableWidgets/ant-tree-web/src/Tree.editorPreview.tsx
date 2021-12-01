@@ -48,5 +48,5 @@ export class preview extends Component<TreePreviewProps> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/antd.css");
+    return require("./ui/index.scss");
 }

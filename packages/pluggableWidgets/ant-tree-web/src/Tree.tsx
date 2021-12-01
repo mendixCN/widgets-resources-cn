@@ -4,7 +4,7 @@ import { useDebounceFn, useWhyDidYouUpdate } from "ahooks";
 
 import { TreeContainerProps } from "../typings/TreeProps";
 
-import "./ui/Tree.css";
+import "./ui/index.scss";
 import { TreeContainer } from "./components/TreeContainer";
 import { DataNode } from "antd/lib/tree";
 import useMxWidget from "./useMxWidget";
