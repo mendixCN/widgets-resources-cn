@@ -1,0 +1,3 @@
+[submodule "packages/pluggableWidgets/fileviewer-web/tests/testProject"]
+	path = packages/pluggableWidgets/fileviewer-web/tests/testProject
+	url = git@github.com:engalar/mendix-testproject-960.git
