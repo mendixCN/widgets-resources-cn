@@ -28,6 +28,6 @@ jobs:
           # Gitee 用户名，用于登录。
           username: engalar
           # Gitee 密码，用于登录。
-          # password: ${{ gitee.password }}
+          # password: ${{ secrets.gitee_password }}
           # GitHub 令牌，用于私有仓库的拉取。
-          token: ${{ gitee_token }}# optional, default is ${{ github.token }}
+          token: ${{ secrets.gitee_token }}# optional, default is ${{ github.token }}
