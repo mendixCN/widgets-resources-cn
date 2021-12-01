@@ -21,7 +21,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: sync-gitee-mirror
-        uses: abersheeran/sync-gitee-mirror@v1-beta
+        uses: engalar/sync-gitee-mirror@54f950d78c7e6cb32c00222fe262d5ac67e1384c
         with:
           # Gitee 仓库，例如 abersheeran/gitee-mirror
           repository: engalar/widgets-resources-cn
