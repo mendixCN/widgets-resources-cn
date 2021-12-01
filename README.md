@@ -1,4 +1,7 @@
 # mendix 中国区 前端组件代码库
+# 镜像站点
+- [github](https://github.com/mendixCN/widgets-resources-cn)
+- [gitee](https://gitee.com/engalar/widgets-resources-cn)
 # 联系我
 - 15819806324
 - wengao.liu@siemens.com
