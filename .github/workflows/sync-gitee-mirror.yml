@@ -30,4 +30,4 @@ jobs:
           # Gitee 密码，用于登录。
           # password: ${{ gitee.password }}
           # GitHub 令牌，用于私有仓库的拉取。
-          token: ${{ gitee.token }}# optional, default is ${{ github.token }}
+          token: ${{ gitee_token }}# optional, default is ${{ github.token }}
