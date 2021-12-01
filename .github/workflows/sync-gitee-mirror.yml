@@ -26,8 +26,8 @@ jobs:
           # Gitee 仓库，例如 abersheeran/gitee-mirror
           repository: engalar/widgets-resources-cn
           # Gitee 用户名，用于登录。
-          username: engalar
+          username: ${{ secrets.gitee_name }}
           # Gitee 密码，用于登录。
-          # password: ${{ secrets.gitee_password }}
+          password: ${{ secrets.gitee_password }}
           # GitHub 令牌，用于私有仓库的拉取。
           token: ${{ secrets.gitee_token }}# optional, default is ${{ github.token }}
