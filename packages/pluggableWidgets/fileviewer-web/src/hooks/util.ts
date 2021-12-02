@@ -25,7 +25,8 @@ function getEnclosingWidget(registry: any, ele: any) {
             pendingDataView.forEach(dv => {
                 //@ts-ignore
                 if (mx.version.split(".")[0] === "9") {
-                    objs.push(w1._storeBackend.get$(`${pre}.${dv}`, `object`, "*;"));
+                    // objs.push(w1._storeBackend.get$(`${pre}.${dv}`, `object`, "*;"));
+                    objs.push(w1._storeBackend.recordGroups.get(`object»${pre}.${dv}`));
                 }
                 //@ts-ignore
                 else if (mx.version.split(".")[0] === "8") {

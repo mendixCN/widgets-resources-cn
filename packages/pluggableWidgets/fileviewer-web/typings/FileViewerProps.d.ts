@@ -4,20 +4,17 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { EditableValue } from "mendix";
 
 export interface FileViewerContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    urlAttribute: EditableValue<string>;
-    fileName: EditableValue<string>;
+
 }
 
 export interface FileViewerPreviewProps {
     class: string;
     style: string;
-    urlAttribute: string;
-    fileName: string;
+
 }

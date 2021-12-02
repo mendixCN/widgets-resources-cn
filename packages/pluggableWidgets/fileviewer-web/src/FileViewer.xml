@@ -7,21 +7,5 @@
     <description>My widget description</description>
     <icon/>
     <properties>
-        <propertyGroup caption="General">
-             <property key="urlAttribute" type="attribute">
-                <caption>File URL</caption>
-                <description/>
-                <attributeTypes>
-                    <attributeType name="String"/>
-                </attributeTypes>
-            </property>
-             <property key="fileName" type="attribute">
-                <caption>FileName</caption>
-                <description>Should choose System.FileDocument/Name if inherited from that</description>
-                <attributeTypes>
-                    <attributeType name="String"/>
-                </attributeTypes>
-            </property>
-        </propertyGroup>
     </properties>
 </widget>

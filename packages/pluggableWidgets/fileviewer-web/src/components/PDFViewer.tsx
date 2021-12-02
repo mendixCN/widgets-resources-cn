@@ -25,9 +25,8 @@ export default forwardRef<HTMLDivElement, InputProps>((props, ref) => {
     // load document coming from the URL attribute
     useEffect(() => {
         if (instance && props.fileName && props.filePath) {
-            const fileName = props.fileName.substring(props.fileName.lastIndexOf(".") + 1);
-            // alert('extension: '+ fileName);
-            instance.loadDocument(props.filePath, { extension: fileName });
+            const extension = props.fileName.substring(props.fileName.lastIndexOf(".") + 1);
+            instance.loadDocument(props.filePath, { extension });
         }
     }, [instance, props.fileName, props.filePath]);
 
