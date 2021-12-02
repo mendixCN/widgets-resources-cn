@@ -30,9 +30,13 @@ export default function FileViewer(props: FileViewerContainerProps) {
         }
     }, 500);
 
-    return errorMessage ? (
-        <span>{errorMessage}</span>
-    ) : (
-        <PDFViewer ref={ref} fileName={fileName} filePath={path} style={props.style} />
+    return (
+        <div style={props.style} className={props.class} tabIndex={props.tabIndex}>
+            {errorMessage ? (
+                <span>{errorMessage}</span>
+            ) : (
+                <PDFViewer ref={ref} fileName={fileName} filePath={path} style={props.style} />
+            )}
+        </div>
     );
 }
