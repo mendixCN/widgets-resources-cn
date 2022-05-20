@@ -1,3 +1,6 @@
+组件的使用文档请参考 [示例项目](https://github.com/engalar/widgets-resources-testproject)
+
+
 # mendix 中国区 前端组件代码库
 # 镜像站点
 - [github](https://github.com/mendixCN/widgets-resources-cn)
